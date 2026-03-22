@@ -34,7 +34,7 @@ function init() {
         });
         html.lang = lang === 'tr' ? 'tr' : 'en';
         if (t.pageTitle) document.title = t.pageTitle;
-        // CV indirme: dile göre doğru dosya (TR: cv_tr.docx, EN: cv_en.docx)
+        // CV indirme: dile göre doğru dosya (TR: Ahmet Arınç Akyıldız CV.pdf, EN: cv_en.pdf)
         if (t.cv?.file) {
             document.querySelectorAll('.cv-download-link').forEach(link => {
                 link.href = t.cv.file;
@@ -71,6 +71,25 @@ function init() {
         applyTranslations(saved);
     };
     initLang();
+
+    const skillsCard = document.getElementById('skillsCard');
+    if (skillsCard) {
+        skillsCard.querySelectorAll('.skill-chip').forEach((chip, i) => {
+            chip.style.setProperty('--skill-i', String(i));
+        });
+        const skillsIo = new IntersectionObserver(
+            (entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        skillsCard.classList.add('skills-in-view');
+                        obs.unobserve(skillsCard);
+                    }
+                });
+            },
+            { root: null, threshold: 0.08, rootMargin: '0px 0px -5% 0px' }
+        );
+        skillsIo.observe(skillsCard);
+    }
 
     // ========== SMOOTH SCROLL (About, CV, Projects) ==========
     document.querySelectorAll('a[href^="#"]').forEach(link => {

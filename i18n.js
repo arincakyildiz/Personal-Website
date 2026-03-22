@@ -20,6 +20,7 @@ const translations = {
             languagesLabel: 'Diller',
             langEnglish: 'İngilizce – B2 Orta-Üst Seviye',
             skillsLabel: 'Teknik Yetenekler',
+            skillsIntro: 'Kullandığım teknolojiler ve araçlar — üzerine gelince ikonlar hafifçe hareket eder.',
             skillProg: 'Programlama Dilleri',
             skillFrontend: 'Frontend',
             skillBackend: 'Backend',
@@ -30,8 +31,8 @@ const translations = {
             title: 'Özgeçmiş',
             desc: "CV'mi indirerek eğitim, deneyim ve becerilerim hakkında detaylı bilgi edinebilirsiniz.",
             btn: 'CV İndir (PDF)',
-            file: 'assets/cv_tr.pdf',
-            filename: 'Ahmet_Arinc_Akyildiz_CV_TR.pdf'
+            file: 'assets/Ahmet Arınç Akyıldız CV.pdf',
+            filename: 'Ahmet Arınç Akyıldız CV.pdf'
         },
         projects: {
             title: 'Projelerim',
@@ -46,7 +47,7 @@ const translations = {
             title: 'İletişim',
             desc: 'Projeler, iş birlikleri veya merak ettikleriniz için benimle iletişime geçebilirsiniz.'
         },
-        footer: '© 2025 — Ahmet Arınç Akyıldız',
+        footer: '© 2026 — Ahmet Arınç Akyıldız',
             contactComment: '// contact — tıklayarak aç',
             pageTitle: 'Ahmet Arınç Akyıldız — Portföy'
     },
@@ -71,6 +72,7 @@ const translations = {
             languagesLabel: 'Languages',
             langEnglish: 'English – B2 Upper-Intermediate',
             skillsLabel: 'Technical Skills',
+            skillsIntro: 'Technologies and tools I use — icons gently animate on hover.',
             skillProg: 'Programming Languages',
             skillFrontend: 'Frontend',
             skillBackend: 'Backend',
@@ -97,7 +99,7 @@ const translations = {
             title: 'Contact',
             desc: 'Feel free to reach out for projects, collaborations, or any questions.'
         },
-        footer: '© 2025 — Ahmet Arınç Akyıldız',
+        footer: '© 2026 — Ahmet Arınç Akyıldız',
             contactComment: '// contact — click to open',
             pageTitle: 'Ahmet Arınç Akyıldız — Portfolio'
     }

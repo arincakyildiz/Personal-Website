@@ -78,7 +78,7 @@
                 <h1 class="hero-name animate-fade-in animate-delay-2"><span class="hero-greeting" data-i18n="hero.greeting">Merhaba, ben</span> <span class="gradient-text" data-i18n="hero.name">Ahmet Arınç Akyıldız</span></h1>
                 <p class="hero-desc animate-fade-in animate-delay-3" data-i18n="hero.desc">Kod yazmayı ve yeni teknolojileri keşfetmeyi seviyorum.</p>
                 <div class="hero-buttons animate-fade-in animate-delay-4">
-                    <a href="assets/cv_tr.pdf" class="btn btn-primary cv-download-link" data-i18n="hero.btnCv">CV İndir</a>
+                    <a href="assets/Ahmet Arınç Akyıldız CV.pdf" class="btn btn-primary cv-download-link" data-i18n="hero.btnCv">CV İndir</a>
                     <a href="#projeler" class="btn btn-secondary" data-i18n="hero.btnProjects">Projeleri Gör</a>
                 </div>
             </div>
@@ -127,17 +127,18 @@
                     </div>
                 </div>
                 <div class="about-right">
-                    <div class="about-card about-skills-card">
+                    <div class="about-card about-skills-card" id="skillsCard">
                         <span class="about-block-label" data-i18n="about.skillsLabel">Teknik Yetenekler</span>
-                        <div class="skill-categories">
+                        <p class="skills-intro" data-i18n="about.skillsIntro">Kullandığım teknolojiler ve araçlar — üzerine gelince ikonlar hafifçe hareket eder.</p>
+                        <div class="skill-categories skill-categories--visual">
                             <div class="skill-category">
                                 <div class="skill-category-header" data-i18n="about.skillProg">Programlama Dilleri</div>
                                 <div class="skill-category-items">
                                     <div class="skill-category-items-inner">
-                                        <span class="skill-pill">Java</span>
-                                        <span class="skill-pill">JavaScript</span>
-                                        <span class="skill-pill">Dart</span>
-                                        <span class="skill-pill">Python</span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Java</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">JavaScript</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Dart</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Python</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -145,9 +146,9 @@
                                 <div class="skill-category-header" data-i18n="about.skillFrontend">Frontend</div>
                                 <div class="skill-category-items">
                                     <div class="skill-category-items-inner">
-                                        <span class="skill-pill">React</span>
-                                        <span class="skill-pill">HTML</span>
-                                        <span class="skill-pill">CSS</span>
+                                        <span class="skill-chip skill-chip--spotlight" title="React"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">React</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">HTML</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">CSS</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +156,8 @@
                                 <div class="skill-category-header" data-i18n="about.skillBackend">Backend</div>
                                 <div class="skill-category-items">
                                     <div class="skill-category-items-inner">
-                                        <span class="skill-pill">Node.js</span>
-                                        <span class="skill-pill">Express</span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Node.js</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Express</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -164,9 +165,9 @@
                                 <div class="skill-category-header" data-i18n="about.skillDb">Veritabanı</div>
                                 <div class="skill-category-items">
                                     <div class="skill-category-items-inner">
-                                        <span class="skill-pill">MySQL</span>
-                                        <span class="skill-pill">PostgreSQL</span>
-                                        <span class="skill-pill">Firebase</span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">MySQL</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">PostgreSQL</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Firebase</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -174,10 +175,10 @@
                                 <div class="skill-category-header" data-i18n="about.skillTools">Araçlar</div>
                                 <div class="skill-category-items">
                                     <div class="skill-category-items-inner">
-                                        <span class="skill-pill">Git</span>
-                                        <span class="skill-pill">GitHub</span>
-                                        <span class="skill-pill">VS Code</span>
-                                        <span class="skill-pill">Vite</span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Git</span></span>
+                                        <span class="skill-chip skill-chip--invert-dark"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">GitHub</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">VS Code</span></span>
+                                        <span class="skill-chip"><img class="skill-chip-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vite/vite-original.svg" width="22" height="22" alt="" loading="lazy"><span class="skill-chip-label">Vite</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +204,7 @@
                     </svg>
                 </div>
                 <p class="cv-desc" data-i18n="cv.desc">CV'mi indirerek eğitim, deneyim ve becerilerim hakkında detaylı bilgi edinebilirsiniz.</p>
-                <a href="assets/cv_tr.pdf" class="btn btn-download cv-download-link" data-i18n="cv.btn">CV İndir (PDF)</a>
+                <a href="assets/Ahmet Arınç Akyıldız CV.pdf" class="btn btn-download cv-download-link" data-i18n="cv.btn">CV İndir (PDF)</a>
             </div>
         </section>
 
@@ -287,7 +288,7 @@
 
     <footer>
         <div class="footer-content">
-            <p data-i18n="footer">© 2025 — Ahmet Arınç Akyıldız</p>
+            <p data-i18n="footer">© 2026 — Ahmet Arınç Akyıldız</p>
             <div class="footer-line"></div>
         </div>
     </footer>
