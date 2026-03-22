@@ -980,35 +980,6 @@ body {
     }
 }
 
-.skill-chip--spotlight {
-    position: relative;
-    z-index: 0;
-    border-color: rgba(0, 212, 170, 0.5);
-    background: linear-gradient(135deg, rgba(0, 212, 170, 0.14), rgba(124, 58, 237, 0.1));
-}
-
-.skill-chip--spotlight::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    z-index: -1;
-    background: linear-gradient(120deg, var(--accent), var(--accent-secondary), var(--accent-tertiary));
-    opacity: 0.35;
-    animation: spotlightShift 3.2s ease-in-out infinite;
-}
-
-@keyframes spotlightShift {
-    0%, 100% {
-        opacity: 0.28;
-        filter: hue-rotate(0deg);
-    }
-    50% {
-        opacity: 0.55;
-        filter: hue-rotate(12deg);
-    }
-}
-
 [data-theme="light"] .skill-chip {
     background: rgba(0, 0, 0, 0.04);
 }
@@ -1016,10 +987,6 @@ body {
 [data-theme="light"] .skill-chip:hover {
     background: rgba(0, 168, 132, 0.12);
     box-shadow: 0 6px 22px rgba(0, 168, 132, 0.18);
-}
-
-[data-theme="light"] .skill-chip--spotlight {
-    background: linear-gradient(135deg, rgba(0, 168, 132, 0.12), rgba(109, 40, 217, 0.08));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1031,11 +998,6 @@ body {
 
     .skill-chip:hover .skill-chip-icon {
         animation: none;
-    }
-
-    .skill-chip--spotlight::before {
-        animation: none;
-        opacity: 0.35;
     }
 
     .skill-chip:hover {
