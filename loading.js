@@ -114,15 +114,39 @@
     if (typeof ParticleSlider === "undefined") return;
     var isMobile = navigator.userAgent && navigator.userAgent.toLowerCase().indexOf("mobile") >= 0;
     var isSmall = window.innerWidth < 1000;
-    window._ps = new ParticleSlider({
-      ptlGap: isMobile || isSmall ? 3 : 0,
-      ptlSize: isMobile || isSmall ? 3 : 1,
-      width: 1e9,
-      height: 1e9,
-      showArrowControls: false,
-      mouseForce: 8000,
-      restless: true
-    });
+    var w = Math.max(window.innerWidth || 0, 0);
+    var h = Math.max(window.innerHeight || 0, 0);
+    // Prevent createImageData width/height zero crash on some mobile/resize states.
+    if (w < 320 || h < 320) return;
+    // On mobile/small screens black hole effect is enough; skip unstable particle slider.
+    if (isMobile || isSmall) return;
+    try {
+      window._ps = new ParticleSlider({
+        ptlGap: 0,
+        ptlSize: 1,
+        width: w,
+        height: h,
+        showArrowControls: false,
+        mouseForce: 8000,
+        restless: true
+      });
+    } catch (e) {
+      window._ps = null;
+    }
+  }
+
+  function cleanupPS() {
+    if (!window._ps) return;
+    try {
+      window._ps.mouseForce = 0;
+      window._ps.restless = false;
+      window._ps.nextFrame = function() {};
+      window._ps.drawParticles = function() {};
+      if (window._ps.$container && window._ps.$container.parentNode) {
+        window._ps.$container.parentNode.removeChild(window._ps.$container);
+      }
+    } catch (e) {}
+    window._ps = null;
   }
 
   var psScript = document.createElement("script");
@@ -186,6 +210,7 @@
     if (centerHover) centerHover.classList.add("open");
     explodePS();
     setTimeout(function() {
+      cleanupPS();
       loaderEl.classList.add("loader-hidden");
       window.scrollTo(0, 0);
       setTimeout(function() { loaderEl.remove(); bhRunning = false; }, 600);
