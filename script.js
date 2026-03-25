@@ -32,6 +32,11 @@ function init() {
             const value = getNested(t, key);
             if (value !== undefined) el.textContent = value;
         });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            const value = getNested(t, key);
+            if (value !== undefined) el.setAttribute('placeholder', value);
+        });
         document.querySelectorAll('[data-i18n-aria]').forEach(el => {
             const key = el.getAttribute('data-i18n-aria');
             const value = getNested(t, key);
@@ -82,6 +87,8 @@ function init() {
     const projectDrawerToggle = document.getElementById('projectDrawerToggle');
     const editorTabsEl = document.getElementById('editorTabs');
     const editorMainEl = document.getElementById('projectCodePanel');
+    const projectSearchInput = document.getElementById('projectSearchInput');
+    const projectSearchClear = document.getElementById('projectSearchClear');
     const applyProjectView = (view) => {
         if (!projectBlock) return;
         const nextView = view === 'code' ? 'code' : 'glass';
@@ -113,13 +120,23 @@ function init() {
     };
     const openProjectDrawer = () => {
         if (!projectBlock) return;
+        projectBlock.classList.add('tabs-opening');
         projectBlock.classList.add('tabs-open');
         projectDrawerToggle?.setAttribute('aria-expanded', 'true');
+        setTimeout(() => projectBlock.classList.remove('tabs-opening'), 320);
     };
     const syncProjectDrawerMetrics = () => {
         if (!projectBlock || !editorMainEl || !editorTabsEl || !isMobileProjects()) return;
         projectBlock.style.setProperty('--tabs-top', `${editorMainEl.offsetTop}px`);
         projectBlock.style.setProperty('--tabs-height', `calc(100% - ${editorMainEl.offsetTop}px)`);
+    };
+    const filterProjectTabs = (query) => {
+        const q = (query || '').trim().toLowerCase();
+        if (projectSearchClear) projectSearchClear.classList.toggle('visible', q.length > 0);
+        document.querySelectorAll('.editor-tab').forEach((tab) => {
+            const visible = !q || tab.textContent.toLowerCase().includes(q);
+            tab.classList.toggle('tab-hidden', !visible);
+        });
     };
 
     projectDrawerToggle?.addEventListener('click', () => {
@@ -129,7 +146,17 @@ function init() {
         else {
             syncProjectDrawerMetrics();
             openProjectDrawer();
+            projectSearchInput?.focus();
         }
+    });
+    projectSearchInput?.addEventListener('input', () => {
+        filterProjectTabs(projectSearchInput.value);
+    });
+    projectSearchClear?.addEventListener('click', () => {
+        if (!projectSearchInput) return;
+        projectSearchInput.value = '';
+        filterProjectTabs('');
+        projectSearchInput.focus();
     });
     window.addEventListener('resize', () => {
         if (isMobileProjects()) syncProjectDrawerMetrics();
@@ -143,6 +170,7 @@ function init() {
         }
     });
     syncProjectDrawerMetrics();
+    filterProjectTabs('');
 
     const skillsCard = document.getElementById('skillsCard');
     if (skillsCard) {

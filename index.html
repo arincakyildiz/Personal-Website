@@ -262,11 +262,21 @@
                     <p class="project-panel-summary" id="projectSummary"></p>
                 </div>
                 <div class="code-header">
-                    <button type="button" class="project-drawer-toggle" id="projectDrawerToggle" data-i18n="projects.openList" aria-controls="editorTabs" aria-expanded="false">Projeler</button>
+                    <button type="button" class="project-drawer-toggle" id="projectDrawerToggle" data-i18n-aria="projects.openList" aria-label="Projeleri aç" aria-controls="editorTabs" aria-expanded="false">
+                        <span class="visually-hidden" data-i18n="projects.openList">Projeler</span>
+                    </button>
                     <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
                     <span class="code-filename" id="editorFilename">roadnix.js</span>
                 </div>
                 <div class="editor-tabs" id="editorTabs" role="tablist" data-i18n-aria="a11y.projectTabs" aria-label="Proje sekmeleri">
+                    <div class="editor-tabs-head">
+                        <span class="editor-tabs-title" data-i18n="projects.filesTitle">Files</span>
+                        <div class="editor-tabs-search-wrap">
+                            <span class="editor-tabs-search-icon" aria-hidden="true">📄</span>
+                            <input type="text" class="editor-tabs-search" id="projectSearchInput" data-i18n-placeholder="projects.searchPlaceholder" placeholder="Projede ara..." autocomplete="off" />
+                            <button type="button" class="editor-tabs-search-clear" id="projectSearchClear" data-i18n-aria="projects.clearSearch" aria-label="Aramayı temizle">×</button>
+                        </div>
+                    </div>
                     <button type="button" class="editor-tab active" role="tab" aria-selected="true" aria-controls="projectCodePanel" id="tab-project-1" data-project="1">Roadnix</button>
                     <button type="button" class="editor-tab" role="tab" aria-selected="false" aria-controls="projectCodePanel" id="tab-project-2" data-project="2">Eventify</button>
                     <button type="button" class="editor-tab" role="tab" aria-selected="false" aria-controls="projectCodePanel" id="tab-project-3" data-project="3">Keyco</button>
