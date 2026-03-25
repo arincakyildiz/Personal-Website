@@ -10,17 +10,24 @@
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Ahmet Arınç Akyıldız">
     <meta property="og:locale" content="tr_TR">
+    <meta property="og:locale:alternate" content="en_US">
     <meta property="og:title" content="Ahmet Arınç Akyıldız — Yazılım Mühendisi Portföyü">
     <meta property="og:description" content="Projelerimi, özgeçmişimi ve iletişim bilgilerimi buradan inceleyebilirsiniz.">
     <meta property="og:url" content="https://arincakyildiz.com.tr">
-    <meta property="og:image" content="https://arincakyildiz.com.tr/assets/logo.png">
+    <meta property="og:image" content="https://arincakyildiz.com.tr/assets/og-preview.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Ahmet Arınç Akyıldız — Yazılım mühendisi portföyü">
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ahmet Arınç Akyıldız — Yazılım Mühendisi Portföyü">
     <meta name="twitter:description" content="Yazılım projelerimi ve özgeçmişimi inceleyin.">
-    <meta name="twitter:image" content="https://arincakyildiz.com.tr/assets/logo.png">
+    <meta name="twitter:image" content="https://arincakyildiz.com.tr/assets/og-preview.png">
+    <meta name="twitter:image:alt" content="Ahmet Arınç Akyıldız — Yazılım mühendisi portföyü">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://arincakyildiz.com.tr">
@@ -29,9 +36,38 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": "Ahmet Arınç Akyıldız",
+                "url": "https://arincakyildiz.com.tr/",
+                "description": "Yazılım mühendisliği öğrencisi portföyü — projeler, CV ve iletişim."
+            },
+            {
+                "@type": "Person",
+                "name": "Ahmet Arınç Akyıldız",
+                "url": "https://arincakyildiz.com.tr/",
+                "email": "ahmetarincakyildiz@gmail.com",
+                "sameAs": [
+                    "https://github.com/arincakyildiz",
+                    "https://www.linkedin.com/in/ahmetarincakyildiz"
+                ],
+                "jobTitle": "Software Engineering Student",
+                "alumniOf": {
+                    "@type": "CollegeOrUniversity",
+                    "name": "Eastern Mediterranean University"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
-    <div id="loader" class="loader">
+    <a href="#icerik" class="skip-link" data-i18n="a11y.skipToContent">İçeriğe geç</a>
+    <div id="loader" class="loader" role="dialog" aria-modal="true" aria-labelledby="loaderTitle" aria-describedby="loaderDesc">
         <div id="blackhole"></div>
         <div id="particle-slider">
             <div class="slides">
@@ -39,7 +75,10 @@
             </div>
             <canvas class="draw"></canvas>
         </div>
-        <div class="centerHover" id="centerHover"><span>ENTER</span></div>
+        <p id="loaderTitle" class="visually-hidden" data-i18n="a11y.loaderTitle">Karşılama ekranı</p>
+        <p id="loaderDesc" class="visually-hidden" data-i18n="a11y.loaderDesc">Devam etmek için Enter tuşuna basın, merkeze tıklayın veya aşağıdaki düğmeyi kullanın.</p>
+        <button type="button" id="loaderSkip" class="loader-skip" data-i18n="a11y.skipLoader">Animasyonu atla</button>
+        <div class="centerHover" id="centerHover" aria-hidden="true"><span>ENTER</span></div>
     </div>
     <div class="bg-gradient"></div>
     <div class="bg-grid"></div>
@@ -48,30 +87,30 @@
     <div class="blob blob-3"></div>
 
     <nav class="navbar">
-        <a href="#" class="logo"><img src="assets/logo.png" alt="" class="logo-img"><span class="logo-bracket">&lt;</span><span data-i18n="nav.logo">Portföy</span><span class="logo-bracket">/&gt;</span></a>
-        <ul class="nav-links">
+        <a href="#" class="logo"><img src="assets/logo.png" alt="Ahmet Arınç Akyıldız — ana sayfa" class="logo-img"><span class="logo-bracket">&lt;</span><span data-i18n="nav.logo">Portföy</span><span class="logo-bracket">/&gt;</span></a>
+        <ul class="nav-links" id="nav-menu">
             <li><a href="#hakkimda" data-i18n="nav.about">Hakkımda</a></li>
             <li><a href="#cv" data-i18n="nav.cv">CV</a></li>
             <li><a href="#projeler" data-i18n="nav.projects">Projeler</a></li>
             <li><a href="#iletisim" data-i18n="nav.contact">İletişim</a></li>
         </ul>
         <div class="nav-controls">
-            <button class="lang-toggle" aria-label="Dil değiştir" title="TR / EN">
+            <button type="button" class="lang-toggle" data-i18n-aria="a11y.langGroup" aria-label="Dil seçimi" title="TR / EN">
                 <span class="lang-option active" data-lang="tr">TR</span>
                 <span class="lang-sep">/</span>
                 <span class="lang-option" data-lang="en">EN</span>
             </button>
-            <button class="theme-toggle" aria-label="Tema değiştir" title="Dark / Light">
+            <button type="button" class="theme-toggle" data-i18n-aria="a11y.themeToggle" aria-label="Tema değiştir" title="Dark / Light">
                 <span class="theme-icon sun" aria-hidden="true">☀</span>
                 <span class="theme-icon moon" aria-hidden="true">☾</span>
             </button>
         </div>
-        <button class="menu-toggle" aria-label="Menü">
+        <button type="button" class="menu-toggle" data-i18n-aria="a11y.menuToggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menü">
             <span></span><span></span><span></span>
         </button>
     </nav>
 
-    <main>
+    <main id="icerik" tabindex="-1">
         <section class="hero">
             <div class="hero-content">
                 <p class="hero-badge animate-fade-in" data-i18n="hero.badge">Yazılım Mühendisliği Öğrencisi</p>
@@ -214,25 +253,30 @@
                 <h2 data-i18n="projects.title">Projelerim</h2>
             </div>
             <div class="code-block project-code-block">
+                <div class="project-panel">
+                    <p class="project-panel-label"><span data-i18n="projects.currentLabel">Seçili proje</span></p>
+                    <p class="project-panel-summary" id="projectSummary"></p>
+                </div>
                 <div class="code-header">
                     <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
                     <span class="code-filename" id="editorFilename">roadnix.js</span>
                 </div>
-                <div class="editor-tabs" id="editorTabs">
-                    <button class="editor-tab active" data-project="1">Roadnix</button>
-                    <button class="editor-tab" data-project="2">Eventify</button>
-                    <button class="editor-tab" data-project="3">Keyco</button>
-                    <button class="editor-tab" data-project="4">Emu Rebook</button>
-                    <button class="editor-tab" data-project="5">Köfteci</button>
+                <div class="editor-tabs" id="editorTabs" role="tablist" data-i18n-aria="a11y.projectTabs" aria-label="Proje sekmeleri">
+                    <button type="button" class="editor-tab active" role="tab" aria-selected="true" aria-controls="projectCodePanel" id="tab-project-1" data-project="1">Roadnix</button>
+                    <button type="button" class="editor-tab" role="tab" aria-selected="false" aria-controls="projectCodePanel" id="tab-project-2" data-project="2">Eventify</button>
+                    <button type="button" class="editor-tab" role="tab" aria-selected="false" aria-controls="projectCodePanel" id="tab-project-3" data-project="3">Keyco</button>
+                    <button type="button" class="editor-tab" role="tab" aria-selected="false" aria-controls="projectCodePanel" id="tab-project-4" data-project="4">Emu Rebook</button>
+                    <button type="button" class="editor-tab" role="tab" aria-selected="false" aria-controls="projectCodePanel" id="tab-project-5" data-project="5">Köfteci</button>
                 </div>
-                <div class="editor-main">
-                    <div class="editor-lines" id="editorLineNumbers"></div>
+                <div class="editor-main" id="projectCodePanel" role="tabpanel" aria-labelledby="tab-project-1">
+                    <div class="editor-lines" id="editorLineNumbers" aria-hidden="true"></div>
                     <div class="code-body project-code-body" id="editorCode"></div>
                     <div class="editor-minimap" id="editorMinimap"></div>
                 </div>
                 <div class="editor-terminal" id="editorTerminal"></div>
                 <div class="editor-footer">
-                    <a href="#" target="_blank" rel="noopener" class="editor-link" id="editorLink">GitHub'a Git →</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="editor-link editor-link--demo is-hidden" id="editorDemoLink"></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="editor-link" id="editorLink">Kaynak kodu</a>
                 </div>
                 <div class="editor-statusbar">
                     <span class="statusbar-item statusbar-branch" id="statusBranch">main</span>
@@ -289,6 +333,8 @@
     <footer>
         <div class="footer-content">
             <p data-i18n="footer">© 2026 — Ahmet Arınç Akyıldız</p>
+            <p class="footer-trust" data-i18n="trust.privacy">Bu sitede reklam veya analitik çerezi yok; yalnızca tarayıcınızda tema ve dil tercihiniz saklanır.</p>
+            <p class="footer-trust footer-trust--source" data-i18n="trust.source">Projeler ve bu sayfa GitHub üzerinden doğrulanabilir açık kaynak depolarla bağlantılıdır.</p>
             <div class="footer-line"></div>
         </div>
     </footer>

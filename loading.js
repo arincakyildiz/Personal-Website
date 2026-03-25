@@ -199,4 +199,9 @@
   document.addEventListener("keydown", function(e) {
     if (e.key === "Enter" && loaderEl.parentNode) triggerEnter();
   });
+
+  var loaderSkipBtn = document.getElementById("loaderSkip");
+  if (loaderSkipBtn) loaderSkipBtn.addEventListener("click", function() {
+    triggerEnter();
+  });
 })();

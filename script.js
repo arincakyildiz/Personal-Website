@@ -32,6 +32,11 @@ function init() {
             const value = getNested(t, key);
             if (value !== undefined) el.textContent = value;
         });
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria');
+            const value = getNested(t, key);
+            if (value !== undefined) el.setAttribute('aria-label', value);
+        });
         html.lang = lang === 'tr' ? 'tr' : 'en';
         if (t.pageTitle) document.title = t.pageTitle;
         // CV indirme: dile göre doğru dosya (TR: Ahmet Arınç Akyıldız CV.pdf, EN: cv_en.pdf)
@@ -93,13 +98,14 @@ function init() {
 
     // ========== SMOOTH SCROLL (About, CV, Projects) ==========
     document.querySelectorAll('a[href^="#"]').forEach(link => {
-        if (link.id === 'editorLink') return; // GitHub link – don't intercept
+        if (link.id === 'editorLink' || link.id === 'editorDemoLink') return;
         const href = link.getAttribute('href');
         if (href === '#') {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 document.querySelector('.nav-links')?.classList.remove('open');
+                document.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false');
             });
             return;
         }
@@ -108,15 +114,22 @@ function init() {
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (href === '#icerik' && typeof target.focus === 'function') {
+                    target.focus({ preventScroll: true });
+                }
             }
             document.querySelector('.nav-links')?.classList.remove('open');
+            document.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false');
         });
     });
 
     // ========== MOBILE MENU ==========
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    menuToggle?.addEventListener('click', () => navLinks?.classList.toggle('open'));
+    menuToggle?.addEventListener('click', () => {
+        const open = navLinks?.classList.toggle('open');
+        menuToggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
 
     // ========== SCROLL REVEAL ==========
     const revealElements = document.querySelectorAll('.reveal');
@@ -175,6 +188,9 @@ function init() {
         const lineNumEl = document.getElementById('editorLineNumbers');
         const filenameEl = document.getElementById('editorFilename');
         const linkEl = document.getElementById('editorLink');
+        const demoLinkEl = document.getElementById('editorDemoLink');
+        const summaryEl = document.getElementById('projectSummary');
+        const panelEl = document.getElementById('projectCodePanel');
         const minimapEl = document.getElementById('editorMinimap');
         const terminalEl = document.getElementById('editorTerminal');
         const branchEl = document.getElementById('statusBranch');
@@ -232,10 +248,28 @@ function init() {
         }
 
         if (filenameEl) filenameEl.textContent = name.toLowerCase().replace(/\s+/g, '-') + '.js';
-        if (linkEl) {
-            linkEl.textContent = proj.link;
+        const pt = t?.projects;
+        if (summaryEl) summaryEl.textContent = proj.summary || '';
+
+        if (demoLinkEl && pt) {
+            const demo = (proj.demoUrl || '').trim();
+            if (demo) {
+                demoLinkEl.href = demo;
+                demoLinkEl.textContent = pt.demoCta || 'Demo';
+                demoLinkEl.classList.remove('is-hidden');
+                demoLinkEl.removeAttribute('aria-hidden');
+            } else {
+                demoLinkEl.removeAttribute('href');
+                demoLinkEl.textContent = '';
+                demoLinkEl.classList.add('is-hidden');
+                demoLinkEl.setAttribute('aria-hidden', 'true');
+            }
+        }
+        if (linkEl && pt) {
+            linkEl.textContent = pt.sourceCta || 'GitHub';
             linkEl.href = proj.githubUrl || 'https://github.com/arincakyildiz';
         }
+        if (panelEl) panelEl.setAttribute('aria-labelledby', 'tab-project-' + id);
         if (branchEl) branchEl.textContent = proj.branch || 'main';
         if (commitsEl) commitsEl.textContent = Math.floor(Math.random() * 5 + 1) + ' commits ahead';
         if (langEl) langEl.textContent = proj.lang || 'JavaScript';
@@ -243,8 +277,12 @@ function init() {
 
     document.querySelectorAll('.editor-tab').forEach(tab => {
         tab.addEventListener('click', () => {
-            document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.editor-tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
             tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
             currentProjectId = tab.dataset.project;
             renderProject(currentProjectId, true);
         });
