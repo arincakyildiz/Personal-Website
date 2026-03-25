@@ -712,6 +712,7 @@ body {
     padding: 1rem 1.25rem;
     background: rgba(0, 0, 0, 0.3);
     border-bottom: 1px solid var(--border);
+    position: relative;
 }
 
 [data-theme="light"] .code-header {
@@ -737,6 +738,11 @@ body {
     .project-drawer-toggle {
         pointer-events: none;
         cursor: default;
+    }
+
+    /* Desktop: avoid duplicate red dot (use drawer toggle as red dot). */
+    .code-header .project-drawer-toggle + .code-dot {
+        display: none;
     }
 
     .project-drawer-toggle:hover,
@@ -2079,6 +2085,10 @@ footer {
         --tabs-height: 100%;
     }
     .project-drawer-toggle { display: inline-flex; }
+    /* Mobile: keep only one red dot (the functional drawer toggle). */
+    .code-header .project-drawer-toggle + .code-dot {
+        display: none;
+    }
     .project-drawer-tooltip {
         display: block;
         position: absolute;
