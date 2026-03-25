@@ -52,6 +52,7 @@ const translations = {
         projects: {
             title: 'Projelerim',
             currentLabel: 'Özet',
+            openList: 'Projeler',
             viewGlass: 'Glass',
             viewCode: 'Code',
             demoCta: 'Canlı demo',
@@ -124,6 +125,7 @@ const translations = {
         projects: {
             title: 'Projects',
             currentLabel: 'Summary',
+            openList: 'Projects',
             viewGlass: 'Glass',
             viewCode: 'Code',
             demoCta: 'Live demo',

@@ -79,6 +79,9 @@ function init() {
 
     const projectBlock = document.querySelector('.project-code-block');
     const viewButtons = document.querySelectorAll('.project-view-btn');
+    const projectDrawerToggle = document.getElementById('projectDrawerToggle');
+    const editorTabsEl = document.getElementById('editorTabs');
+    const editorMainEl = document.getElementById('projectCodePanel');
     const applyProjectView = (view) => {
         if (!projectBlock) return;
         const nextView = view === 'code' ? 'code' : 'glass';
@@ -101,6 +104,45 @@ function init() {
         btn.addEventListener('click', () => applyProjectView(btn.dataset.view));
     });
     initProjectView();
+
+    const isMobileProjects = () => window.matchMedia('(max-width: 768px)').matches;
+    const closeProjectDrawer = () => {
+        if (!projectBlock) return;
+        projectBlock.classList.remove('tabs-open');
+        projectDrawerToggle?.setAttribute('aria-expanded', 'false');
+    };
+    const openProjectDrawer = () => {
+        if (!projectBlock) return;
+        projectBlock.classList.add('tabs-open');
+        projectDrawerToggle?.setAttribute('aria-expanded', 'true');
+    };
+    const syncProjectDrawerMetrics = () => {
+        if (!projectBlock || !editorMainEl || !editorTabsEl || !isMobileProjects()) return;
+        projectBlock.style.setProperty('--tabs-top', `${editorMainEl.offsetTop}px`);
+        projectBlock.style.setProperty('--tabs-height', `calc(100% - ${editorMainEl.offsetTop}px)`);
+    };
+
+    projectDrawerToggle?.addEventListener('click', () => {
+        if (!isMobileProjects()) return;
+        const open = projectBlock?.classList.contains('tabs-open');
+        if (open) closeProjectDrawer();
+        else {
+            syncProjectDrawerMetrics();
+            openProjectDrawer();
+        }
+    });
+    window.addEventListener('resize', () => {
+        if (isMobileProjects()) syncProjectDrawerMetrics();
+        else closeProjectDrawer();
+    });
+    document.addEventListener('click', (e) => {
+        if (!isMobileProjects() || !projectBlock?.classList.contains('tabs-open')) return;
+        const target = e.target;
+        if (target instanceof Element && !target.closest('#editorTabs') && !target.closest('#projectDrawerToggle')) {
+            closeProjectDrawer();
+        }
+    });
+    syncProjectDrawerMetrics();
 
     const skillsCard = document.getElementById('skillsCard');
     if (skillsCard) {
@@ -310,6 +352,7 @@ function init() {
             tab.setAttribute('aria-selected', 'true');
             currentProjectId = tab.dataset.project;
             renderProject(currentProjectId, true);
+            closeProjectDrawer();
         });
     });
 
@@ -323,6 +366,7 @@ function init() {
             const proj = t?.projects?.['proj' + tab.dataset.project];
             if (proj?.title) tab.textContent = proj.title;
         });
+        syncProjectDrawerMetrics();
     });
 }
 
