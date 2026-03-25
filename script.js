@@ -77,6 +77,31 @@ function init() {
     };
     initLang();
 
+    const projectBlock = document.querySelector('.project-code-block');
+    const viewButtons = document.querySelectorAll('.project-view-btn');
+    const applyProjectView = (view) => {
+        if (!projectBlock) return;
+        const nextView = view === 'code' ? 'code' : 'glass';
+        projectBlock.classList.toggle('view-code', nextView === 'code');
+        projectBlock.classList.toggle('view-glass', nextView === 'glass');
+        viewButtons.forEach((btn) => {
+            const active = btn.dataset.view === nextView;
+            btn.classList.toggle('active', active);
+            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        localStorage.setItem('projectView', nextView);
+    };
+
+    const initProjectView = () => {
+        const saved = localStorage.getItem('projectView') || 'glass';
+        applyProjectView(saved);
+    };
+
+    viewButtons.forEach((btn) => {
+        btn.addEventListener('click', () => applyProjectView(btn.dataset.view));
+    });
+    initProjectView();
+
     const skillsCard = document.getElementById('skillsCard');
     if (skillsCard) {
         skillsCard.querySelectorAll('.skill-chip').forEach((chip, i) => {

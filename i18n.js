@@ -6,6 +6,7 @@ const translations = {
             loaderTitle: 'Karşılama ekranı',
             loaderDesc: 'Devam etmek için Enter tuşuna basın, ekranın ortasına tıklayın veya animasyonu atla düğmesini kullanın.',
             projectTabs: 'Proje sekmeleri',
+            projectViewSwitch: 'Proje görünüm seçici',
             langGroup: 'Dil seçimi',
             themeToggle: 'Koyu ve açık tema arasında geç',
             menuToggle: 'Menüyü aç veya kapat'
@@ -51,9 +52,11 @@ const translations = {
         projects: {
             title: 'Projelerim',
             currentLabel: 'Özet',
+            viewGlass: 'Glass',
+            viewCode: 'Code',
             demoCta: 'Canlı demo',
             sourceCta: 'Kaynak kodu (GitHub)',
-            proj1: { title: 'Roadnix', summary: 'Trafik işaretleri, quiz ve dikkat testleri sunan React + Vite arayüzü; eğitim odaklı tek sayfa uygulaması.', comment: '// Trafik eğitim platformu', name: '"Roadnix"', desc: '"Trafik işaretleri, quizler ve dikkat testleri içeren interaktif trafik eğitim platformu. React ve Vite ile geliştirildi."', tech: ['React', 'Vite'], githubUrl: 'https://github.com/arincakyildiz/roadnix', demoUrl: 'https://arincakyildiz.github.io/roadnix/', terminal: ['$ npm run build', '✓ Built in 1.2s — 47 modules', '$ vite preview --port 4000'], branch: 'main', lang: 'React' },
+            proj1: { title: 'Roadnix', summary: 'Trafik işaretleri, quiz ve dikkat testleri sunan React + Vite arayüzü; eğitim odaklı tek sayfa uygulaması.', comment: '// Trafik eğitim platformu', name: '"Roadnix"', desc: '"Trafik işaretleri, quizler ve dikkat testleri içeren interaktif trafik eğitim platformu. React ve Vite ile geliştirildi."', tech: ['React', 'Vite'], githubUrl: 'https://github.com/arincakyildiz/roadnix', demoUrl: 'https://roadnix.arincakyildiz.com.tr/', terminal: ['$ npm run build', '✓ Built in 1.2s — 47 modules', '$ vite preview --port 4000'], branch: 'main', lang: 'React' },
             proj2: { title: 'Eventify-TRNC', summary: 'Belediye etkinlik oluşturma ve bildirim akışları için Node.js tabanlı web uygulaması (canlı demo kapalı).', comment: '// Belediye etkinlik yönetimi', name: '"Eventify-TRNC"', desc: '"Belediyeler için etkinlik oluşturma, yönetim ve bildirim sistemi sunan web platformu."', tech: ['JavaScript', 'Node.js'], githubUrl: 'https://github.com/arincakyildiz/Eventify-TRNC', demoUrl: '', terminal: ['$ node server.js', '✓ Server listening on :3000', '$ npm test — 12 passed'], branch: 'develop', lang: 'JavaScript' },
             proj3: { title: 'Keyco', summary: 'Oyun kodu ve hesap satışı için filtreleme ve ödeme entegrasyonları içeren e-ticaret projesi.', comment: '// Oyun kodu & hesap satış platformu', name: '"Keyco"', desc: '"Oyun kodları ve hesap satışları için filtreleme ve güvenli alışveriş süreçleri sunan e-ticaret platformu."', tech: ['JavaScript', 'Node.js'], githubUrl: 'https://github.com/arincakyildiz/keyco', demoUrl: '', terminal: ['$ npm start', '✓ E-commerce server ready', '$ stripe webhooks listen'], branch: 'main', lang: 'JavaScript' },
             proj4: { title: 'Emu Rebook', summary: 'Öğrencilerin kitap takasını yöneten Flutter mobil uygulama; mağaza yayını için web demosu yok.', comment: '// Kitap takas mobil uygulama', name: '"Emu Rebook"', desc: '"Öğrencilerin kitaplarını takas etmesine olanak tanıyan mobil uygulama. Flutter ile geliştirildi."', tech: ['Flutter', 'Dart'], githubUrl: 'https://github.com/arincakyildiz/emurebook', demoUrl: '', terminal: ['$ flutter run', '✓ Running on Android SDK', '$ flutter build apk --release'], branch: 'feature/swap', lang: 'Dart' },
@@ -75,6 +78,7 @@ const translations = {
             loaderTitle: 'Welcome screen',
             loaderDesc: 'Press Enter, click the center of the screen, or use the skip button to continue.',
             projectTabs: 'Project tabs',
+            projectViewSwitch: 'Project view switcher',
             langGroup: 'Language selection',
             themeToggle: 'Toggle dark and light theme',
             menuToggle: 'Open or close menu'
@@ -120,9 +124,11 @@ const translations = {
         projects: {
             title: 'Projects',
             currentLabel: 'Summary',
+            viewGlass: 'Glass',
+            viewCode: 'Code',
             demoCta: 'Live demo',
             sourceCta: 'Source code (GitHub)',
-            proj1: { title: 'Roadnix', summary: 'React + Vite UI for traffic signs, quizzes, and attention tests—an education-focused SPA.', comment: '// Interactive traffic education platform', name: '"Roadnix"', desc: '"A modern traffic education platform including traffic signs, quizzes, and attention tests. Developed using React and Vite."', tech: ['React', 'Vite'], githubUrl: 'https://github.com/arincakyildiz/roadnix', demoUrl: 'https://arincakyildiz.github.io/roadnix/', terminal: ['$ npm run build', '✓ Built in 1.2s — 47 modules', '$ vite preview --port 4000'], branch: 'main', lang: 'React' },
+            proj1: { title: 'Roadnix', summary: 'React + Vite UI for traffic signs, quizzes, and attention tests—an education-focused SPA.', comment: '// Interactive traffic education platform', name: '"Roadnix"', desc: '"A modern traffic education platform including traffic signs, quizzes, and attention tests. Developed using React and Vite."', tech: ['React', 'Vite'], githubUrl: 'https://github.com/arincakyildiz/roadnix', demoUrl: 'https://roadnix.arincakyildiz.com.tr/', terminal: ['$ npm run build', '✓ Built in 1.2s — 47 modules', '$ vite preview --port 4000'], branch: 'main', lang: 'React' },
             proj2: { title: 'Eventify-TRNC', summary: 'Node.js web app for municipal events and notifications (no public demo hosted).', comment: '// Municipal event management system', name: '"Eventify-TRNC"', desc: '"A web platform that provides event creation, management, and notification systems for municipalities."', tech: ['JavaScript', 'Node.js'], githubUrl: 'https://github.com/arincakyildiz/Eventify-TRNC', demoUrl: '', terminal: ['$ node server.js', '✓ Server listening on :3000', '$ npm test — 12 passed'], branch: 'develop', lang: 'JavaScript' },
             proj3: { title: 'Keyco', summary: 'E-commerce style project with catalog filtering and payment-related flows for digital goods.', comment: '// Digital game code & account sales platform', name: '"Keyco"', desc: '"An e-commerce platform offering filtering and secure purchasing processes for game codes and account sales."', tech: ['JavaScript', 'Node.js'], githubUrl: 'https://github.com/arincakyildiz/keyco', demoUrl: '', terminal: ['$ npm start', '✓ E-commerce server ready', '$ stripe webhooks listen'], branch: 'main', lang: 'JavaScript' },
             proj4: { title: 'Emu Rebook', summary: 'Flutter mobile app for student book exchange; no web storefront demo.', comment: '// Book exchange mobile app', name: '"Emu Rebook"', desc: '"A mobile application that allows students to exchange books. Developed using Flutter."', tech: ['Flutter', 'Dart'], githubUrl: 'https://github.com/arincakyildiz/emurebook', demoUrl: '', terminal: ['$ flutter run', '✓ Running on Android SDK', '$ flutter build apk --release'], branch: 'feature/swap', lang: 'Dart' },

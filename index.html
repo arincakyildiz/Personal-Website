@@ -96,9 +96,9 @@
         </ul>
         <div class="nav-controls">
             <button type="button" class="lang-toggle" data-i18n-aria="a11y.langGroup" aria-label="Dil seçimi" title="TR / EN">
-                <span class="lang-option active" data-lang="tr">TR</span>
+                <span class="lang-option active" data-lang="tr"><span class="lang-flag lang-flag-tr" aria-hidden="true"></span>TR</span>
                 <span class="lang-sep">/</span>
-                <span class="lang-option" data-lang="en">EN</span>
+                <span class="lang-option" data-lang="en"><span class="lang-flag lang-flag-en" aria-hidden="true"></span>EN</span>
             </button>
             <button type="button" class="theme-toggle" data-i18n-aria="a11y.themeToggle" aria-label="Tema değiştir" title="Dark / Light">
                 <span class="theme-icon sun" aria-hidden="true">☀</span>
@@ -255,6 +255,10 @@
             <div class="code-block project-code-block">
                 <div class="project-panel">
                     <p class="project-panel-label"><span data-i18n="projects.currentLabel">Seçili proje</span></p>
+                    <div class="project-view-switch" role="group" data-i18n-aria="a11y.projectViewSwitch" aria-label="Proje görünüm seçici">
+                        <button type="button" class="project-view-btn active" id="viewGlassBtn" data-view="glass" data-i18n="projects.viewGlass">Glass</button>
+                        <button type="button" class="project-view-btn" id="viewCodeBtn" data-view="code" data-i18n="projects.viewCode">Code</button>
+                    </div>
                     <p class="project-panel-summary" id="projectSummary"></p>
                 </div>
                 <div class="code-header">
