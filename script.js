@@ -113,6 +113,7 @@ function init() {
     initProjectView();
 
     const isMobileProjects = () => window.matchMedia('(max-width: 768px)').matches;
+    const drawerHintKey = 'projectDrawerHintSeen';
     const closeProjectDrawer = () => {
         if (!projectBlock) return;
         projectBlock.classList.remove('tabs-open');
@@ -122,7 +123,9 @@ function init() {
         if (!projectBlock) return;
         projectBlock.classList.add('tabs-opening');
         projectBlock.classList.add('tabs-open');
+        projectBlock.classList.remove('drawer-hint-active');
         projectDrawerToggle?.setAttribute('aria-expanded', 'true');
+        localStorage.setItem(drawerHintKey, '1');
         setTimeout(() => projectBlock.classList.remove('tabs-opening'), 320);
     };
     const syncProjectDrawerMetrics = () => {
@@ -171,6 +174,9 @@ function init() {
     });
     syncProjectDrawerMetrics();
     filterProjectTabs('');
+    if (isMobileProjects() && !localStorage.getItem(drawerHintKey)) {
+        projectBlock?.classList.add('drawer-hint-active');
+    }
 
     const skillsCard = document.getElementById('skillsCard');
     if (skillsCard) {
