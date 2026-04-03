@@ -6,7 +6,7 @@ Yazılım mühendisliği öğrencisi için kişisel portfolio web sitesi.
 
 - **Hero** – İsim, unvan, CV ve Projeler butonları
 - **Hakkımda** – Tanıtım metni ve istatistikler
-- **CV İndir** – DOCX formatında CV indirme
+- **CV İndir** – Türkçe ve İngilizce PDF CV indirme
 - **Projeler** – Etkileşimli kod formatında proje listesi (sekmelerle geçiş)
 - **Dark / Light mod** – Tema değiştirici
 - **TR / EN** – Dil desteği
@@ -20,8 +20,8 @@ personalwebsite/
 ├── script.js
 ├── i18n.js
 └── assets/
-    ├── cv_tr.pdf   (Türkçe CV)
-    └── cv_en.pdf   (İngilizce CV)
+    ├── Ahmet Arınç Akyıldız CV.pdf           (Türkçe CV)
+    └── Ahmet Arınç Akyıldız CV English.pdf   (İngilizce CV)
 ```
 
 ## Çalıştırma
@@ -32,3 +32,7 @@ python -m http.server 3000
 ```
 
 Ardından http://localhost:3000 adresine gidin.
+
+Canlı sitede görmek için:
+
+- Prod: https://www.arincakyildiz.com.tr/
