@@ -124,8 +124,8 @@ const translations = {
             title: 'Resume',
             desc: 'Download my CV to learn more about my education, experience, and skills.',
             btn: 'Download CV (PDF)',
-            file: 'assets/cv_en.pdf',
-            filename: 'Ahmet_Arinc_Akyildiz_CV_EN.pdf'
+            file: 'assets/Ahmet Arınç Akyıldız CV English.pdf',
+            filename: 'Ahmet Arınç Akyıldız CV English.pdf'
         },
         projects: {
             title: 'Projects',
