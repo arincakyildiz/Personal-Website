@@ -36,3 +36,7 @@ Ardından http://localhost:3000 adresine gidin.
 Canlı sitede görmek için:
 
 - Prod: https://www.arincakyildiz.com.tr/
+
+## Lisans
+
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.

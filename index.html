@@ -112,6 +112,18 @@
 
     <main id="icerik" tabindex="-1">
         <section class="hero">
+            <div class="hero-particles" aria-hidden="true">
+                <span class="code-particle" style="--p-left:5%;--p-delay:0s;--p-dur:22s">const res = await fetch(url)</span>
+                <span class="code-particle" style="--p-left:18%;--p-delay:4s;--p-dur:19s">git push origin main</span>
+                <span class="code-particle" style="--p-left:30%;--p-delay:9s;--p-dur:25s">O(log n)</span>
+                <span class="code-particle" style="--p-left:50%;--p-delay:2s;--p-dur:20s">npm run build</span>
+                <span class="code-particle" style="--p-left:65%;--p-delay:7s;--p-dur:23s">{ ...spread }</span>
+                <span class="code-particle" style="--p-left:78%;--p-delay:13s;--p-dur:18s">useState([])</span>
+                <span class="code-particle" style="--p-left:88%;--p-delay:1s;--p-dur:21s">async / await</span>
+                <span class="code-particle" style="--p-left:40%;--p-delay:16s;--p-dur:17s">docker build .</span>
+                <span class="code-particle" style="--p-left:12%;--p-delay:11s;--p-dur:24s">@Override</span>
+                <span class="code-particle" style="--p-left:72%;--p-delay:5s;--p-dur:26s">SELECT * FROM</span>
+            </div>
             <div class="hero-content">
                 <p class="hero-badge animate-fade-in" data-i18n="hero.badge">Yazılım Mühendisliği Öğrencisi</p>
                 <h1 class="hero-name animate-fade-in animate-delay-2"><span class="hero-greeting" data-i18n="hero.greeting">Merhaba, ben</span> <span class="gradient-text" data-i18n="hero.name">Ahmet Arınç Akyıldız</span></h1>
@@ -123,20 +135,26 @@
             </div>
             <div class="hero-visual animate-fade-in animate-delay-2">
                 <div class="hero-typing">
-                    <span class="typing-text" data-i18n="hero.typingWelcome">Kodluyorum. Öğreniyorum.</span>
-                    <span class="typing-cursor">|</span>
+                    <span class="typing-text"></span>
+                    <span class="typing-cursor"></span>
                 </div>
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-                        <span class="code-filename">developer.js</span>
+                        <span class="code-filename">engineer.ts</span>
                     </div>
                     <div class="code-body">
-                        <span class="code-line"><span class="keyword">const</span> developer = {</span>
-                        <span class="code-line">  passion: <span class="string">"coding"</span>,</span>
-                        <span class="code-line">  status: <span class="string">"always learning"</span>,</span>
-                        <span class="code-line">  coffee: <span class="number">∞</span></span>
-                        <span class="code-line">};</span>
+                        <span class="code-line"><span class="keyword">class</span> <span class="classname">SoftwareEngineer</span> {</span>
+                        <span class="code-line">  <span class="property">name</span>: <span class="type">string</span> = <span class="string">"Ahmet Arınç"</span></span>
+                        <span class="code-line">  <span class="property">stack</span>: <span class="type">string[]</span> = [</span>
+                        <span class="code-line">    <span class="string">"React"</span>, <span class="string">"Node.js"</span>,</span>
+                        <span class="code-line">    <span class="string">"Flutter"</span>, <span class="string">"Java"</span></span>
+                        <span class="code-line">  ]</span>
+                        <span class="code-line">&nbsp;</span>
+                        <span class="code-line">  <span class="funcname">build</span>(<span class="property">idea</span>: <span class="type">Idea</span>) {</span>
+                        <span class="code-line">    <span class="keyword">return this</span>.<span class="funcname">ship</span>(idea)</span>
+                        <span class="code-line">  }</span>
+                        <span class="code-line">}</span>
                         <span class="code-line code-cursor">|</span>
                     </div>
                 </div>
@@ -221,6 +239,39 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-contrib reveal">
+                <div class="about-card about-contrib-card">
+                    <span class="about-block-label" data-i18n="about.contribLabel">GitHub Aktivitesi</span>
+                    <p class="skills-intro" data-i18n="about.contribDesc">Son 1 yıldaki commit aktivitem — her kare bir günü temsil eder.</p>
+                    <div class="contrib-container">
+                        <div class="contrib-month-row" id="contribMonths" aria-hidden="true"></div>
+                        <div class="contrib-graph-row">
+                            <div class="contrib-day-labels" aria-hidden="true">
+                                <span></span>
+                                <span>Mon</span>
+                                <span></span>
+                                <span>Wed</span>
+                                <span></span>
+                                <span>Fri</span>
+                                <span></span>
+                            </div>
+                            <div class="contrib-grid" id="contribGrid" aria-hidden="true"></div>
+                        </div>
+                    </div>
+                    <div class="contrib-meta">
+                        <span class="contrib-total" id="contribTotal"></span>
+                        <div class="contrib-legend">
+                            <span class="contrib-legend-label" data-i18n="about.contribLess">Az</span>
+                            <span class="contrib-box level-0"></span>
+                            <span class="contrib-box level-1"></span>
+                            <span class="contrib-box level-2"></span>
+                            <span class="contrib-box level-3"></span>
+                            <span class="contrib-box level-4"></span>
+                            <span class="contrib-legend-label" data-i18n="about.contribMore">Çok</span>
                         </div>
                     </div>
                 </div>

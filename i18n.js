@@ -18,12 +18,12 @@ const translations = {
         nav: { logo: 'Portföy', about: 'Hakkımda', cv: 'CV', projects: 'Projeler', contact: 'İletişim' },
         hero: {
             badge: 'Yazılım Mühendisliği Öğrencisi',
+            available: 'Fırsatlara açık',
             greeting: 'Merhaba, ben',
             name: 'Ahmet Arınç Akyıldız',
             desc: 'Yazılım mühendisliği alanında güvenilir ve sürdürülebilir çözümler üreten bir mühendis olmak için kendimi sürekli geliştiriyorum. İnovatif projelerde yer alıp, topluma fayda sağlayan çözümler geliştirmeyi hedefliyorum.',
             btnCv: 'CV İndir',
-            btnProjects: 'Projeleri Gör',
-            typingWelcome: 'Kodluyorum. Öğreniyorum.'
+            btnProjects: 'Projeleri Gör'
         },
         about: {
             title: 'Hakkımda',
@@ -40,7 +40,12 @@ const translations = {
             skillFrontend: 'Frontend',
             skillBackend: 'Backend',
             skillDb: 'Veritabanı',
-            skillTools: 'Araçlar'
+            skillTools: 'Araçlar',
+            contribLabel: 'GitHub Aktivitesi',
+            contribDesc: 'Son 1 yıldaki commit aktivitem — her kare bir günü temsil eder.',
+            contribLess: 'Az',
+            contribMore: 'Çok',
+            contribTotal: 'Son 1 yılda {n} katkı'
         },
         cv: {
             title: 'Özgeçmiş',
@@ -96,12 +101,12 @@ const translations = {
         nav: { logo: 'Portfolio', about: 'About', cv: 'CV', projects: 'Projects', contact: 'Contact' },
         hero: {
             badge: 'Software Engineering Student',
+            available: 'Open to opportunities',
             greeting: 'Hi, I\'m',
             name: 'Ahmet Arınç Akyıldız',
             desc: 'I aim to continuously improve myself in software engineering and become an engineer who produces reliable and sustainable solutions. I want to take part in innovative projects and develop impactful solutions for society.',
             btnCv: 'Download CV',
-            btnProjects: 'View Projects',
-            typingWelcome: 'I code. I learn.'
+            btnProjects: 'View Projects'
         },
         about: {
             title: 'About',
@@ -118,7 +123,12 @@ const translations = {
             skillFrontend: 'Frontend',
             skillBackend: 'Backend',
             skillDb: 'Database',
-            skillTools: 'Tools'
+            skillTools: 'Tools',
+            contribLabel: 'GitHub Activity',
+            contribDesc: 'My commit activity over the last year — each square represents a day.',
+            contribLess: 'Less',
+            contribMore: 'More',
+            contribTotal: '{n} contributions in the last year'
         },
         cv: {
             title: 'Resume',

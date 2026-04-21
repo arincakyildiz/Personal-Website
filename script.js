@@ -401,7 +401,170 @@ function init() {
             if (proj?.title) tab.textContent = proj.title;
         });
         syncProjectDrawerMetrics();
+        renderMonthLabels();
+        updateContribTotal();
     });
+
+    // ========== CONTRIBUTION HEATMAP ==========
+    let totalContribs = 0;
+
+    function updateContribTotal() {
+        const totalEl = document.getElementById('contribTotal');
+        if (!totalEl) return;
+        const lang = html.lang === 'tr' ? 'tr' : 'en';
+        const t = typeof translations !== 'undefined' ? translations[lang] : null;
+        const tpl = t?.about?.contribTotal || '';
+        totalEl.textContent = tpl.replace('{n}', totalContribs);
+    }
+
+    const CONTRIB_WEEKS = 52;
+    const CONTRIB_CELL  = 14; // 11px box + 3px gap
+
+    function renderMonthLabels() {
+        const monthsEl = document.getElementById('contribMonths');
+        if (!monthsEl) return;
+
+        const lang = html.lang === 'tr' ? 'tr' : 'en';
+        const namesEn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const namesTr = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+        const names = lang === 'en' ? namesEn : namesTr;
+
+        // Find start date (Sunday of the week 52 weeks ago)
+        const today = new Date();
+        const start = new Date(today);
+        start.setDate(today.getDate() - CONTRIB_WEEKS * 7 + 1);
+        start.setDate(start.getDate() - start.getDay()); // align to Sunday
+
+        monthsEl.innerHTML = '';
+        let prevMonth = -1;
+
+        for (let w = 0; w < CONTRIB_WEEKS; w++) {
+            const d = new Date(start);
+            d.setDate(start.getDate() + w * 7);
+            const m = d.getMonth();
+            if (m !== prevMonth) {
+                prevMonth = m;
+                const lbl = document.createElement('span');
+                lbl.className = 'contrib-month-label';
+                lbl.textContent = names[m];
+                lbl.style.left = w * CONTRIB_CELL + 'px';
+                monthsEl.appendChild(lbl);
+            }
+        }
+    }
+
+    function generateContribGrid() {
+        const grid = document.getElementById('contribGrid');
+        if (!grid) return;
+
+        // Deterministic LCG pseudo-random for consistent display
+        let seed = 20240315;
+        const rand = () => {
+            seed = (seed * 1664525 + 1013904223) & 0x7fffffff;
+            return seed / 0x7fffffff;
+        };
+
+        totalContribs = 0;
+        grid.innerHTML = '';
+
+        for (let w = 0; w < CONTRIB_WEEKS; w++) {
+            const weekEl = document.createElement('div');
+            weekEl.className = 'contrib-week';
+            const recencyBoost = (w / CONTRIB_WEEKS) * 0.25;
+
+            for (let d = 0; d < 7; d++) {
+                const dayEl = document.createElement('span');
+                const isWeekend = d === 0 || d === 6;
+                const activeProb = (isWeekend ? 0.32 : 0.62) + recencyBoost;
+                const r = rand();
+                let level = 0;
+
+                if (r < activeProb) {
+                    const intensity = rand();
+                    if (intensity < 0.12) level = 4;
+                    else if (intensity < 0.3) level = 3;
+                    else if (intensity < 0.6) level = 2;
+                    else level = 1;
+                }
+
+                dayEl.className = `contrib-box level-${level}`;
+                dayEl.setAttribute('aria-hidden', 'true');
+                if (level > 0) totalContribs += level;
+                weekEl.appendChild(dayEl);
+            }
+
+            grid.appendChild(weekEl);
+        }
+
+        renderMonthLabels();
+        updateContribTotal();
+    }
+
+    generateContribGrid();
+
+    // ========== TYPEWRITER ==========
+    (function initTypewriter() {
+        const el     = document.querySelector('.typing-text');
+        const cursor = document.querySelector('.typing-cursor');
+        if (!el) return;
+
+        const phrasesTr = [
+            'Kodluyorum. Öğreniyorum.',
+            'Tasarlıyorum. İnşa ediyorum.',
+            'Sorunları çözüyorum.',
+            'Her gün daha iyiye.'
+        ];
+        const phrasesEn = [
+            'I code. I learn.',
+            'I design. I build.',
+            'I solve problems.',
+            'Getting better every day.'
+        ];
+
+        let phraseIdx = 0;
+        let charIdx   = 0;
+        let deleting  = false;
+        let timer     = null;
+
+        const getLang    = () => html.lang === 'en' ? 'en' : 'tr';
+        const getPhrases = () => getLang() === 'en' ? phrasesEn : phrasesTr;
+
+        function tick() {
+            const phrases = getPhrases();
+            const phrase  = phrases[phraseIdx % phrases.length];
+
+            charIdx = deleting
+                ? Math.max(0, charIdx - 1)
+                : Math.min(phrase.length, charIdx + 1);
+
+            el.textContent = phrase.substring(0, charIdx);
+
+            let delay = deleting ? 42 : 82;
+
+            if (!deleting && charIdx === phrase.length) {
+                delay    = 2000;
+                deleting = true;
+            } else if (deleting && charIdx === 0) {
+                deleting = false;
+                phraseIdx++;
+                delay = 380;
+            }
+
+            timer = setTimeout(tick, delay);
+        }
+
+        // Start after a short delay so loader doesn't mask the animation
+        timer = setTimeout(tick, 700);
+
+        document.addEventListener('langchange', () => {
+            clearTimeout(timer);
+            el.textContent = '';
+            charIdx  = 0;
+            deleting = false;
+            phraseIdx = 0;
+            timer = setTimeout(tick, 200);
+        });
+    })();
 }
 
 if (document.readyState === 'loading') {
