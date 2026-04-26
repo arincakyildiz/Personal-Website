@@ -229,4 +229,6 @@
   if (loaderSkipBtn) loaderSkipBtn.addEventListener("click", function() {
     triggerEnter();
   });
+
+  setTimeout(triggerEnter, 3000);
 })();
