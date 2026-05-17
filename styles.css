@@ -1545,6 +1545,7 @@ body {
     display: flex;
     min-height: 240px;
     position: relative;
+    overflow-x: auto;
 }
 
 .editor-lines {
@@ -1553,19 +1554,24 @@ body {
     color: var(--text-muted);
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
-    line-height: 1.7;
+    line-height: 1.65;
     opacity: 0.35;
     user-select: none;
     flex-shrink: 0;
     min-width: 2.5rem;
     white-space: pre;
     border-right: 1px solid var(--border);
+    position: sticky;
+    left: 0;
+    background: inherit;
+    z-index: 1;
 }
 
 .project-code-body {
     flex: 1;
     min-height: 0;
-    padding: 1.25rem 1rem 1.25rem 0.75rem;
+    padding: 1.25rem 1.5rem 1.25rem 0.75rem;
+    min-width: 0;
 }
 
 .code-line {
@@ -1575,6 +1581,7 @@ body {
     border-radius: 3px;
     transition: background 0.15s, border-color 0.15s, opacity 0.25s;
     line-height: 1.65;
+    white-space: nowrap;
 }
 
 .code-line:hover {

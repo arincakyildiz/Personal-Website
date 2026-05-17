@@ -272,14 +272,16 @@ function init() {
         const name = (proj.name || '').replace(/"/g, '');
         const desc = (proj.desc || '').replace(/"/g, '');
 
+        const shortDesc = desc.length > 52 ? desc.slice(0, 52) + '…"' : desc + '"';
         const lines = [
             `<span class="comment">${proj.comment || '// Project'}</span>`,
             ``,
             `<span class="keyword">const</span> project = {`,
             `  name: <span class="string">"${name}"</span>,`,
-            `  description: <span class="string">"${desc}"</span>,`,
+            `  desc: <span class="string">"${shortDesc}</span>,`,
             `  tech: [${(proj.tech || []).map(t => `<span class="string">"${t}"</span>`).join(', ')}],`,
-            `  repo: <span class="string">"github.com/arincakyildiz"</span>`,
+            `  repo: <span class="string">"github.com/arincakyildiz"</span>,`,
+            `  status: <span class="string">"${proj.branch || 'main'}"</span>`,
             `};`,
             ``,
             `<span class="keyword">export default</span> project;`,
