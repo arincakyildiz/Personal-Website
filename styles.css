@@ -1545,7 +1545,7 @@ body {
     display: flex;
     min-height: 240px;
     position: relative;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 .editor-lines {
@@ -1561,17 +1561,15 @@ body {
     min-width: 2.5rem;
     white-space: pre;
     border-right: 1px solid var(--border);
-    position: sticky;
-    left: 0;
-    background: inherit;
-    z-index: 1;
 }
 
 .project-code-body {
     flex: 1;
     min-height: 0;
     padding: 1.25rem 1.5rem 1.25rem 0.75rem;
-    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
 }
 
 .code-line {
