@@ -701,6 +701,10 @@ function init() {
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
         });
+        card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--mouse-x', `-999px`);
+            card.style.setProperty('--mouse-y', `-999px`);
+        });
     });
 
     const add3DTilt = (selector) => {

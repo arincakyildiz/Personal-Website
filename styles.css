@@ -2604,29 +2604,25 @@ footer {
 
 /* 3. Mouse-tracking Border Glow Effect */
 .card-glow {
-    position: relative;
+    border: 1px solid transparent !important;
+    background: 
+        linear-gradient(rgba(12, 12, 16, 0.6), rgba(12, 12, 16, 0.6)) padding-box,
+        radial-gradient(
+            350px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+            var(--accent, #00d4aa),
+            rgba(255, 255, 255, 0.08) 50%
+        ) border-box !important;
+    transition: background 0.15s ease, border-color 0.15s ease;
 }
-.card-glow::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px; /* border thickness */
-    background: radial-gradient(
-        350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-        var(--accent, #00d4aa),
-        transparent 50%
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 3;
-}
-.card-glow:hover::after {
-    opacity: 0.65;
+
+[data-theme="light"] .card-glow {
+    background: 
+        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)) padding-box,
+        radial-gradient(
+            350px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+            var(--accent, #00a884),
+            rgba(0, 0, 0, 0.08) 50%
+        ) border-box !important;
 }
 
 /* 4. 3D Tilt */
@@ -2636,6 +2632,9 @@ footer {
 }
 
 /* 5. Circular Theme Transition Ripple */
+html {
+    view-transition-name: root;
+}
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation: none;
