@@ -730,6 +730,119 @@ function init() {
         });
     };
     add3DTilt('.tilt-3d');
+
+    // ========== MAGNETIC BUTTONS ==========
+    const makeMagnetic = (selector) => {
+        document.querySelectorAll(selector).forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - (rect.width / 2);
+                const y = e.clientY - rect.top - (rect.height / 2);
+                btn.style.transition = 'none';
+                btn.style.transform = `translate3d(${x * 0.35}px, ${y * 0.35}px, 0)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transition = 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                btn.style.transform = 'translate3d(0, 0, 0)';
+            });
+        });
+    };
+    makeMagnetic('.hero-buttons .btn');
+
+    // ========== INTERACTIVE MOCK TERMINAL ANIMATION ==========
+    let termAnimationTimeout = null;
+    const runTerminalAnimation = (lines) => {
+        const terminalEl = document.getElementById('editorTerminal');
+        if (!terminalEl) return;
+
+        // Clear existing timeouts
+        if (termAnimationTimeout) clearTimeout(termAnimationTimeout);
+        terminalEl.innerHTML = '';
+
+        let lineIdx = 0;
+        const printNextLine = () => {
+            if (lineIdx >= lines.length) return;
+            const line = lines[lineIdx];
+            
+            const lineEl = document.createElement('span');
+            lineEl.className = 'terminal-line';
+            
+            if (line.startsWith('$')) {
+                lineEl.innerHTML = `<span class="term-prompt">$</span>`;
+                terminalEl.appendChild(lineEl);
+                
+                const cmdText = line.slice(1);
+                let charIdx = 0;
+                const typeChar = () => {
+                    if (charIdx < cmdText.length) {
+                        lineEl.innerHTML += cmdText[charIdx++];
+                        termAnimationTimeout = setTimeout(typeChar, 35);
+                    } else {
+                        lineEl.classList.add('typed');
+                        lineIdx++;
+                        termAnimationTimeout = setTimeout(printNextLine, 200);
+                    }
+                };
+                typeChar();
+            } else {
+                lineEl.innerHTML = `<span class="term-success">${line}</span>`;
+                terminalEl.appendChild(lineEl);
+                setTimeout(() => lineEl.classList.add('typed'), 40);
+                lineIdx++;
+                termAnimationTimeout = setTimeout(printNextLine, 150);
+            }
+        };
+        printNextLine();
+    };
+
+    // Attach click listeners to terminal quick-run buttons
+    document.getElementById('btnTerminalRun')?.addEventListener('click', () => {
+        const lang = html.lang === 'tr' ? 'tr' : 'en';
+        const t = typeof translations !== 'undefined' ? translations[lang] : null;
+        const proj = t?.projects?.['proj' + currentProjectId];
+        if (proj?.terminal) {
+            runTerminalAnimation(proj.terminal);
+        }
+    });
+
+    document.getElementById('btnTerminalTest')?.addEventListener('click', () => {
+        const isTr = html.lang === 'tr';
+        const testLines = isTr 
+            ? [
+                '$ npm run test',
+                '🔍 Test dosyaları taranıyor...',
+                'RUNS  src/index.test.js',
+                '✓  src/index.test.js — 12 test başarıyla tamamlandı (0.84s)',
+                'PASS  Tüm testler başarıyla koşuldu!'
+              ]
+            : [
+                '$ npm run test',
+                '🔍 Searching for test suites...',
+                'RUNS  src/index.test.js',
+                '✓  src/index.test.js — 12 tests passed successfully (0.84s)',
+                'PASS  All test suites passed!'
+              ];
+        runTerminalAnimation(testLines);
+    });
+
+    document.getElementById('btnTerminalBuild')?.addEventListener('click', () => {
+        const isTr = html.lang === 'tr';
+        const buildLines = isTr
+            ? [
+                '$ npm run build',
+                '📦 Paketleyici başlatılıyor (Vite)...',
+                '✓ Dosyalar optimize ediliyor...',
+                '✓ Build başarıyla tamamlandı! (dist/ klasörü hazır - 1.25s)'
+              ]
+            : [
+                '$ npm run build',
+                '📦 Initializing bundler (Vite)...',
+                '✓ Optimizing build assets...',
+                '✓ Production build generated successfully! (dist/ folder ready - 1.25s)'
+              ];
+        runTerminalAnimation(buildLines);
+    });
 }
 
 if (document.readyState === 'loading') {
