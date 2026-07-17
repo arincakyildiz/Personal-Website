@@ -10,11 +10,40 @@ function init() {
         const theme = saved || (systemDark ? 'dark' : 'light');
         html.setAttribute('data-theme', theme);
     };
-    themeToggle?.addEventListener('click', () => {
+    themeToggle?.addEventListener('click', (e) => {
         const current = html.getAttribute('data-theme');
         const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+
+        if (document.startViewTransition) {
+            const x = e.clientX ?? window.innerWidth / 2;
+            const y = e.clientY ?? window.innerHeight / 2;
+            const endRadius = Math.hypot(
+                Math.max(x, window.innerWidth - x),
+                Math.max(y, window.innerHeight - y)
+            );
+
+            const transition = document.startViewTransition(() => {
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+
+            transition.ready.then(() => {
+                document.documentElement.animate(
+                    [
+                        { clipPath: `circle(0px at ${x}px ${y}px)` },
+                        { clipPath: `circle(${endRadius}px at ${x}px ${y}px)` }
+                    ],
+                    {
+                        duration: 550,
+                        easing: 'ease-in-out',
+                        pseudoElement: '::view-transition-new(root)'
+                    }
+                );
+            });
+        } else {
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
     });
     initTheme();
 
@@ -662,6 +691,41 @@ function init() {
             timer = setTimeout(tick, 200);
         });
     })();
+
+    // ========== CARD GLOW & 3D TILT EFFECT ==========
+    document.querySelectorAll('.card-glow').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    const add3DTilt = (selector) => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.addEventListener('mousemove', e => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+
+                const angleX = -(y - yc) / yc * 8;
+                const angleY = (x - xc) / xc * 8;
+
+                el.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-5px)`;
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+    };
+    add3DTilt('.tilt-3d');
 }
 
 if (document.readyState === 'loading') {

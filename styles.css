@@ -2557,3 +2557,93 @@ footer {
         transform: none;
     }
 }
+
+/* ========== VISUAL ENHANCEMENTS ========== */
+
+/* 1. Skill Chips Brand Glow */
+.skill-chip {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.skill-chip[data-skill="java"] { --glow-color: rgba(226, 90, 30, 0.25); }
+.skill-chip[data-skill="javascript"] { --glow-color: rgba(247, 223, 30, 0.25); }
+.skill-chip[data-skill="dart"] { --glow-color: rgba(0, 180, 216, 0.25); }
+.skill-chip[data-skill="python"] { --glow-color: rgba(55, 118, 171, 0.25); }
+.skill-chip[data-skill="react"] { --glow-color: rgba(97, 218, 251, 0.25); }
+.skill-chip[data-skill="html"] { --glow-color: rgba(227, 79, 38, 0.25); }
+.skill-chip[data-skill="css"] { --glow-color: rgba(21, 114, 182, 0.25); }
+.skill-chip[data-skill="nodejs"] { --glow-color: rgba(60, 135, 58, 0.25); }
+.skill-chip[data-skill="express"] { --glow-color: rgba(255, 255, 255, 0.15); }
+.skill-chip[data-skill="mysql"] { --glow-color: rgba(0, 117, 143, 0.25); }
+.skill-chip[data-skill="postgresql"] { --glow-color: rgba(51, 103, 145, 0.25); }
+.skill-chip[data-skill="firebase"] { --glow-color: rgba(255, 202, 40, 0.25); }
+.skill-chip[data-skill="git"] { --glow-color: rgba(240, 80, 50, 0.25); }
+.skill-chip[data-skill="github"] { --glow-color: rgba(255, 255, 255, 0.15); }
+.skill-chip[data-skill="vscode"] { --glow-color: rgba(0, 122, 204, 0.25); }
+.skill-chip[data-skill="vite"] { --glow-color: rgba(100, 108, 255, 0.25); }
+
+.skill-chip:hover {
+    border-color: var(--glow-color, var(--accent)) !important;
+    box-shadow: 0 0 16px var(--glow-color, var(--accent)) !important;
+}
+
+/* 2. Enhanced Glassmorphism */
+.about-card, .cv-card, .contact-card, .project-code-block {
+    background: rgba(12, 12, 16, 0.6) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="light"] .about-card, 
+[data-theme="light"] .cv-card, 
+[data-theme="light"] .contact-card, 
+[data-theme="light"] .project-code-block {
+    background: rgba(255, 255, 255, 0.65) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 3. Mouse-tracking Border Glow Effect */
+.card-glow {
+    position: relative;
+}
+.card-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px; /* border thickness */
+    background: radial-gradient(
+        350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        var(--accent, #00d4aa),
+        transparent 50%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 3;
+}
+.card-glow:hover::after {
+    opacity: 0.65;
+}
+
+/* 4. 3D Tilt */
+.tilt-3d {
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+/* 5. Circular Theme Transition Ripple */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+    z-index: 1;
+}
+::view-transition-new(root) {
+    z-index: 9999;
+}
