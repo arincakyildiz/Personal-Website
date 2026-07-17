@@ -857,6 +857,9 @@ body {
     gap: 1.5rem;
     align-items: start;
 }
+.about-grid > * {
+    min-width: 0;
+}
 
 @media (max-width: 900px) {
     .about-grid {
