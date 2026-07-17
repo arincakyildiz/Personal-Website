@@ -403,12 +403,31 @@ function init() {
             if (proj?.title) tab.textContent = proj.title;
         });
         syncProjectDrawerMetrics();
-        renderMonthLabels();
+        renderMonthLabels(cachedContribWeeks);
         updateContribTotal();
+
+        // Update tooltips dynamically on language change
+        if (cachedContribWeeks) {
+            const boxes = document.querySelectorAll('#contribGrid .contrib-box');
+            let idx = 0;
+            cachedContribWeeks.forEach(week => {
+                week.forEach(day => {
+                    const dayEl = boxes[idx++];
+                    if (dayEl) {
+                        const count = day.contributionCount;
+                        const dateStr = day.date;
+                        dayEl.title = html.lang === 'en'
+                            ? `${count} contribution${count === 1 ? '' : 's'} on ${dateStr}`
+                            : `${dateStr} tarihinde ${count} katkı`;
+                    }
+                });
+            });
+        }
     });
 
     // ========== CONTRIBUTION HEATMAP ==========
     let totalContribs = 0;
+    let cachedContribWeeks = null;
 
     function updateContribTotal() {
         const totalEl = document.getElementById('contribTotal');
@@ -422,7 +441,7 @@ function init() {
     const CONTRIB_WEEKS = 52;
     const CONTRIB_CELL  = 14; // 11px box + 3px gap
 
-    function renderMonthLabels() {
+    function renderMonthLabels(weeksData) {
         const monthsEl = document.getElementById('contribMonths');
         if (!monthsEl) return;
 
@@ -431,31 +450,107 @@ function init() {
         const namesTr = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
         const names = lang === 'en' ? namesEn : namesTr;
 
-        // Find start date (Sunday of the week 52 weeks ago)
-        const today = new Date();
-        const start = new Date(today);
-        start.setDate(today.getDate() - CONTRIB_WEEKS * 7 + 1);
-        start.setDate(start.getDate() - start.getDay()); // align to Sunday
-
         monthsEl.innerHTML = '';
         let prevMonth = -1;
 
-        for (let w = 0; w < CONTRIB_WEEKS; w++) {
-            const d = new Date(start);
-            d.setDate(start.getDate() + w * 7);
-            const m = d.getMonth();
-            if (m !== prevMonth) {
-                prevMonth = m;
-                const lbl = document.createElement('span');
-                lbl.className = 'contrib-month-label';
-                lbl.textContent = names[m];
-                lbl.style.left = w * CONTRIB_CELL + 'px';
-                monthsEl.appendChild(lbl);
+        if (weeksData && Array.isArray(weeksData)) {
+            weeksData.forEach((week, w) => {
+                const firstDay = week.find(d => d.date);
+                if (!firstDay) return;
+                const d = new Date(firstDay.date);
+                const m = d.getMonth();
+                if (m !== prevMonth) {
+                    prevMonth = m;
+                    const lbl = document.createElement('span');
+                    lbl.className = 'contrib-month-label';
+                    lbl.textContent = names[m];
+                    lbl.style.left = w * CONTRIB_CELL + 'px';
+                    monthsEl.appendChild(lbl);
+                }
+            });
+        } else {
+            // Fallback: LCG logic
+            const today = new Date();
+            const start = new Date(today);
+            start.setDate(today.getDate() - CONTRIB_WEEKS * 7 + 1);
+            start.setDate(start.getDate() - start.getDay()); // align to Sunday
+
+            for (let w = 0; w < CONTRIB_WEEKS; w++) {
+                const d = new Date(start);
+                d.setDate(start.getDate() + w * 7);
+                const m = d.getMonth();
+                if (m !== prevMonth) {
+                    prevMonth = m;
+                    const lbl = document.createElement('span');
+                    lbl.className = 'contrib-month-label';
+                    lbl.textContent = names[m];
+                    lbl.style.left = w * CONTRIB_CELL + 'px';
+                    monthsEl.appendChild(lbl);
+                }
             }
         }
     }
 
-    function generateContribGrid() {
+    async function generateContribGrid() {
+        const grid = document.getElementById('contribGrid');
+        if (!grid) return;
+
+        try {
+            // Try to fetch real data from community proxy API
+            const res = await fetch('https://github-contributions-api.deno.dev/arincakyildiz.json');
+            if (!res.ok) throw new Error('API request failed');
+            const data = await res.json();
+            if (!data || !Array.isArray(data.contributions)) throw new Error('Invalid data format');
+
+            // Cache data for language change rendering
+            cachedContribWeeks = data.contributions;
+
+            totalContribs = 0;
+            grid.innerHTML = '';
+
+            cachedContribWeeks.forEach(week => {
+                const weekEl = document.createElement('div');
+                weekEl.className = 'contrib-week';
+
+                week.forEach(day => {
+                    const dayEl = document.createElement('span');
+                    let level = 0;
+                    switch (day.contributionLevel) {
+                        case 'FIRST_QUARTILE': level = 1; break;
+                        case 'SECOND_QUARTILE': level = 2; break;
+                        case 'THIRD_QUARTILE': level = 3; break;
+                        case 'FOURTH_QUARTILE': level = 4; break;
+                        default: level = 0;
+                    }
+
+                    dayEl.className = `contrib-box level-${level}`;
+                    dayEl.setAttribute('aria-hidden', 'true');
+
+                    const count = day.contributionCount;
+                    const dateStr = day.date;
+                    const tooltipText = html.lang === 'en' 
+                        ? `${count} contribution${count === 1 ? '' : 's'} on ${dateStr}`
+                        : `${dateStr} tarihinde ${count} katkı`;
+                    dayEl.title = tooltipText;
+
+                    totalContribs += count;
+                    weekEl.appendChild(dayEl);
+                });
+
+                grid.appendChild(weekEl);
+            });
+
+            renderMonthLabels(cachedContribWeeks);
+            updateContribTotal();
+
+        } catch (error) {
+            console.warn('Failed to fetch GitHub contributions, falling back to LCG:', error);
+            cachedContribWeeks = null;
+            generateFallbackContribGrid();
+        }
+    }
+
+    function generateFallbackContribGrid() {
         const grid = document.getElementById('contribGrid');
         if (!grid) return;
 
@@ -498,7 +593,7 @@ function init() {
             grid.appendChild(weekEl);
         }
 
-        renderMonthLabels();
+        renderMonthLabels(null);
         updateContribTotal();
     }
 
