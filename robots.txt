@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://arincakyildiz.com.tr/sitemap.xml
-
+Sitemap: https://www.arincakyildiz.com.tr/sitemap.xml
