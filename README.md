@@ -12,7 +12,6 @@ Yazılım mühendisliği öğrencisi için kişisel portfolio web sitesi.
 - **TR / EN** – Dil desteği
 
 ## Dosya Yapısı
-
 ```
 personalwebsite/
 ├── index.html
