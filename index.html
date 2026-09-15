@@ -82,7 +82,7 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=18">
 <link rel="apple-touch-icon" href="/assets/logo.png?v=18">
 <link rel="stylesheet" href="assets/fonts/manrope.css">
-<link rel="stylesheet" href="styles.css?v=35">
+<link rel="stylesheet" href="styles.css?v=36">
 <script>try { document.documentElement.dataset.theme = localStorage.getItem("theme") === "dark" ? "dark" : "light"; } catch {}</script>
 </head>
 <body>
@@ -167,10 +167,10 @@
 <div class="project-actions">
 <button class="button primary" data-open-project="kanyolda" aria-haspopup="dialog">
 <span data-i18n="project.explore">Detayları incele</span>
-<span aria-hidden="true">↗</span>
+<span class="ui-icon ui-icon-external" aria-hidden="true"></span>
 </button>
 <a class="text-link" href="https://www.kanyolda.com.tr/" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </div>
@@ -216,10 +216,10 @@
 <div class="project-actions">
 <button class="button primary" data-open-project="sinaru" aria-haspopup="dialog">
 <span data-i18n="project.explore">Detayları incele</span>
-<span aria-hidden="true">↗</span>
+<span class="ui-icon ui-icon-external" aria-hidden="true"></span>
 </button>
 <a class="text-link" href="https://github.com/arincakyildiz/RAG-Application-with-Foundry-Local" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </div>
@@ -238,10 +238,10 @@
 <div class="project-actions">
 <button class="button primary" data-open-project="roadnix" aria-haspopup="dialog">
 <span data-i18n="project.explore">Detayları incele</span>
-<span aria-hidden="true">↗</span>
+<span class="ui-icon ui-icon-external" aria-hidden="true"></span>
 </button>
 <a class="text-link" href="https://roadnix.arincakyildiz.com.tr/" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </div>
@@ -260,10 +260,10 @@
 <div class="project-actions">
 <button class="button primary" data-open-project="keyco" aria-haspopup="dialog">
 <span data-i18n="project.explore">Detayları incele</span>
-<span aria-hidden="true">↗</span>
+<span class="ui-icon ui-icon-external" aria-hidden="true"></span>
 </button>
 <a class="text-link" href="https://keyco.vercel.app" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </div>
@@ -282,8 +282,8 @@
 </span>
 </div>
 <div class="gallery-arrows">
-<button id="previous-project" aria-label="Önceki proje" data-i18n-attr="aria-label:project.previous">←</button>
-<button id="next-project" aria-label="Sonraki proje" data-i18n-attr="aria-label:project.next">→</button>
+<button id="previous-project" aria-label="Önceki proje" data-i18n-attr="aria-label:project.previous"><span class="ui-icon ui-icon-left" aria-hidden="true"></span></button>
+<button id="next-project" aria-label="Sonraki proje" data-i18n-attr="aria-label:project.next"><span class="ui-icon ui-icon-right" aria-hidden="true"></span></button>
 </div>
 </div>
 </div>
@@ -315,7 +315,7 @@
 <p data-i18n="p.kanyolda">Kan bağışı ihtiyacı olanları uygun donörlerle eşleştiren mobil ve web platformu; acil ilan paylaşımı, şehir bazlı otomatik eşleştirme, anlık bildirim, sohbet ve harita. Yönetim paneli ile ilan/kullanıcı yönetimi.</p>
 <div class="project-links">
 <a class="text-link" href="https://www.kanyolda.com.tr/" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -330,7 +330,7 @@
 <p data-i18n="p.sinaru">Tamamen çevrimdışı çalışan belge soru-cevap asistanı. Foundry Local üzerinde yerel dil modeli ve embedding ile belgeleri parçalayıp indeksliyor, kosinüs benzerliğiyle semantik arama yapıp yanıtı kaynak parçalarıyla birlikte akıtıyor. TR/EN dil farkındalıklı getirme.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/RAG-Application-with-Foundry-Local" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -358,9 +358,9 @@
 <p data-i18n="p.kargo">Kargo şirketi operasyonları için Angular SPA: gönderi takibi, kurye CRUD'u, kapasiteye göre bölge bazlı atama, teslim kanıtı ve iade yönetimi. Durum makinesiyle gönderi akışı, rol bazlı yetki, denetim logu, KPI panosu ve TR/EN destek.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/kargo-project" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 <a class="text-link" href="https://kargotakip.arincakyildiz.com.tr/" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -388,7 +388,7 @@
 <p data-i18n="p.wavent">Çok depolu stok yönetimi için WMS kontrol paneli: lot/seri takibi, dalga toplama, paketleme ve sevkiyat akışları. Rol bazlı yetkilendirme, FEFO/FIFO tahsis motoru ve TR/EN dil desteği.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/wavent" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -403,9 +403,9 @@
 <p data-i18n="p.roadnix">Trafik işaretleri, quiz ve dikkat testleri sunan eğitim odaklı tek sayfa uygulaması.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/roadnix" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 <a class="text-link" href="https://roadnix.arincakyildiz.com.tr/" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -420,9 +420,9 @@
 <p data-i18n="p.eventify">Belediye etkinlik oluşturma ve bildirim akışları için Node.js tabanlı web uygulaması.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/Eventify-TRNC" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 <a class="text-link" href="https://eventify-trnc.vercel.app" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -437,9 +437,9 @@
 <p data-i18n="p.keyco">Oyun kodu ve hesap satışı için filtreleme ve ödeme entegrasyonları içeren e-ticaret projesi.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/keyco" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 <a class="text-link" href="https://keyco.vercel.app" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -454,7 +454,7 @@
 <p data-i18n="p.emurebook">Öğrencilerin kitap takasını yöneten Flutter tabanlı mobil uygulama.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/emurebook" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -469,9 +469,9 @@
 <p data-i18n="p.kofteci">Menü ve iletişim bilgilerini sunan statik tanıtım sitesi; GitHub Pages üzerinde yayında.</p>
 <div class="project-links">
 <a class="text-link" href="https://github.com/arincakyildiz/tarihi-sanayi-koftecisi" target="_blank" rel="noopener">
-<span data-i18n="project.code">Kaynak kodu</span> ↗</a>
+<span data-i18n="project.code">Kaynak kodu</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 <a class="text-link" href="https://tarihisanayikoftecisi.arincakyildiz.com.tr/" target="_blank" rel="noopener">
-<span data-i18n="project.live">Canlı site</span> ↗</a>
+<span data-i18n="project.live">Canlı site</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </details>
@@ -561,12 +561,12 @@
 <h2 data-i18n="contact.heading">Konuşalım.</h2>
 <p data-i18n="contact.note">Projeler, staj fırsatları veya bir merhaba için.</p>
 <a class="button primary" href="mailto:ahmetarincakyildiz@gmail.com">
-<span data-i18n="contact.write">Bana yaz</span> ↗</a>
+<span data-i18n="contact.write">Bana yaz</span><span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 <div class="contact-links"><button id="copy-email" class="text-link" data-i18n="contact.copy">E-posta adresini kopyala</button><p id="copy-status" role="status"></p>
-<a href="mailto:ahmetarincakyildiz@gmail.com">ahmetarincakyildiz@gmail.com ↗</a>
-<a href="https://github.com/arincakyildiz" target="_blank" rel="noopener">GitHub ↗</a>
-<a href="https://www.linkedin.com/in/ahmetarincakyildiz" target="_blank" rel="noopener">LinkedIn ↗</a>
+<a href="mailto:ahmetarincakyildiz@gmail.com">ahmetarincakyildiz@gmail.com<span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
+<a href="https://github.com/arincakyildiz" target="_blank" rel="noopener">GitHub<span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
+<a href="https://www.linkedin.com/in/ahmetarincakyildiz" target="_blank" rel="noopener">LinkedIn<span class="ui-icon ui-icon-external" aria-hidden="true"></span></a>
 </div>
 </div>
 </section>
@@ -602,20 +602,20 @@
 </div>
 <div class="dialog-footer">
 <button id="dialog-prev" class="text-link">
-<span aria-hidden="true">←</span>
+<span class="ui-icon ui-icon-left" aria-hidden="true"></span>
 <span data-i18n="project.previous">Önceki proje</span>
 </button>
 <span id="dialog-count">
 </span>
 <button id="dialog-next" class="text-link">
 <span data-i18n="project.next">Sonraki proje</span>
-<span aria-hidden="true">→</span>
+<span class="ui-icon ui-icon-right" aria-hidden="true"></span>
 </button>
 </div>
 </dialog>
 <script src="i18n.js?v=32">
 </script>
-<script src="script.js?v=35">
+<script src="script.js?v=36">
 </script>
 </body>
 </html>

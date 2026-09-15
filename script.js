@@ -8,7 +8,10 @@ let lang = storage.get('lang') === 'en' ? 'en' : 'tr';
 let theme = storage.get('theme') === 'dark' ? 'dark' : 'light';
 let paused = storage.get('motion') === 'paused';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-const desktopGallery = matchMedia('(min-width: 901px) and (min-height: 620px)');
+// Keep the cinematic project sequence on phones too when the viewport is tall
+// enough to present a complete card. Short landscape screens use the readable
+// vertical fallback.
+const animatedGallery = matchMedia('(min-height: 620px)');
 const languageButton = document.getElementById('language');
 const themeButton = document.getElementById('theme');
 const motionButton = document.getElementById('motion');
@@ -110,11 +113,13 @@ languageButton.addEventListener('click', () => { lang = lang === 'tr' ? 'en' : '
 themeButton.addEventListener('click', () => { theme = theme === 'light' ? 'dark' : 'light'; storage.set('theme', theme); applyTheme(); });
 motionButton.addEventListener('click', () => { paused = !paused; storage.set('motion', paused ? 'paused' : 'running'); applyMotion(); });
 reducedMotion.addEventListener('change', applyMotion);
-desktopGallery.addEventListener('change', configureGallery);
+animatedGallery.addEventListener('change', configureGallery);
 
 /* Native vertical scrolling drives a pinned horizontal track. No wheel interception. */
 function configureGallery() {
-  horizontal = desktopGallery.matches && motionEnabled();
+  const headerHeight = header.offsetHeight;
+  root.style.setProperty('--header-height', `${headerHeight}px`);
+  horizontal = animatedGallery.matches && motionEnabled();
   showcase.classList.toggle('is-horizontal', horizontal);
   travel = horizontal ? showcase.clientWidth * (slides.length - 1) : 0;
   showcase.style.setProperty('--travel', `${travel}px`);

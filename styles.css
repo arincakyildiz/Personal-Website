@@ -8,7 +8,7 @@
 .hero{text-align:center;padding:67px 0 0;overflow:hidden}.hero-intro{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:22px}h1{font-size:clamp(65px,7.9vw,112px);font-weight:750;line-height:1.05;letter-spacing:-6px}h1>span{display:block}.hero-description{max-width:510px;margin:24px auto 0;font-size:15px;color:var(--muted);line-height:1.8}.hero-actions{display:flex;justify-content:center;gap:12px;margin-top:27px}.hero-preview{display:grid;grid-template-columns:.75fr 1.7fr .75fr;gap:22px;align-items:center;margin:55px -45px 0;transform:translateY(var(--hero-shift,0px));will-change:transform}.hero-preview>div{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--surface);box-shadow:0 15px 40px #1518120c}.preview-side{opacity:.7;transform:translateY(28px)}.preview-side img{height:225px;width:100%;object-fit:cover;object-position:top left}.preview-main{z-index:1}.preview-main img{width:100%;height:300px;object-fit:cover;object-position:top}.preview-bar{display:flex;justify-content:space-between;padding:10px 16px;font-size:9px;color:var(--muted);background:var(--bg);border-bottom:1px solid var(--line)}.preview-bar span:first-child{font-weight:700;color:var(--text)}.hero-caption{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:36px;padding:24px 0 40px;position:relative;background:var(--bg)}
 /* Scroll-driven project showcase; vertical by default, progressively enhanced. */
 .showcase{background:var(--surface);border-block:1px solid var(--line);position:relative}.showcase-sticky{padding:50px 0 28px}.showcase-heading{display:flex;align-items:end;justify-content:space-between;padding-bottom:30px;gap:30px}.showcase-hint{color:var(--muted);font-size:12px}.showcase-track{display:flex;flex-direction:column}.project-slide{min-width:0;padding:20px 0 50px}.slide-inner{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:65px;align-items:center;height:100%}.project-visual{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--bg);box-shadow:0 16px 38px #1518120c}.project-visual>img{width:100%;height:auto;object-fit:contain}.project-copy{padding-right:5px}.project-category{font-size:11px;font-weight:650;color:var(--accent)}.project-copy h3{font-size:clamp(36px,4.2vw,59px);font-weight:750;letter-spacing:-2px;line-height:1.15;margin:16px 0 19px}.project-summary{font-size:19px;font-weight:550;letter-spacing:-.45px;line-height:1.5;max-width:350px}.project-short{font-size:13px;line-height:1.85;color:var(--muted);margin-top:17px;max-width:380px}.tech{font-size:10px;color:var(--muted);line-height:1.8}.project-copy .tech{border-top:1px solid var(--line);padding-top:20px;margin-top:22px}.project-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:25px}.showcase-footer{display:none;align-items:center;justify-content:space-between;gap:30px;padding-top:20px}.project-pagination{display:flex;gap:8px}.project-pagination button{width:36px;height:36px;border:0;border-radius:6px;background:transparent;color:var(--muted);font-size:11px;font-weight:650}.project-pagination button[aria-pressed=true]{background:var(--text);color:var(--bg)}.gallery-progress{height:2px;max-width:250px;flex:1;background:var(--line);overflow:hidden}.gallery-progress>span{display:block;height:100%;background:var(--accent);width:100%;transform-origin:left;transform:scaleX(.25)}.gallery-arrows{display:flex;gap:10px}.gallery-arrows button{width:40px;height:40px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:18px}.gallery-arrows button:not(:disabled):hover{border-color:var(--accent);color:var(--accent)}
-.showcase.is-horizontal{height:calc(100svh - 76px + var(--travel,0px))}.is-horizontal .showcase-sticky{position:sticky;top:76px;height:calc(100svh - 76px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding-top:30px;padding-bottom:22px}.is-horizontal .showcase-heading{padding-bottom:20px}.is-horizontal .showcase-heading h2{font-size:38px;margin-top:7px}.is-horizontal .showcase-viewport{overflow:hidden;min-height:0}.is-horizontal .showcase-track{flex-direction:row;height:100%;will-change:transform}.is-horizontal .project-slide{flex:0 0 100%;padding:10px 0 15px;height:100%}.is-horizontal .slide-inner{gap:55px}.is-horizontal .project-visual{max-height:100%;width:100%}.is-horizontal .project-visual>img{max-height:calc(100svh - 295px);width:100%;object-fit:contain}.is-horizontal .showcase-footer{display:flex}.is-horizontal .project-copy{max-height:100%;overflow:auto;scrollbar-width:thin}
+.showcase.is-horizontal{height:calc(100svh - var(--header-height,76px) + var(--travel,0px))}.is-horizontal .showcase-sticky{position:sticky;top:var(--header-height,76px);height:calc(100svh - var(--header-height,76px));display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding-top:30px;padding-bottom:22px}.is-horizontal .showcase-heading{padding-bottom:20px}.is-horizontal .showcase-heading h2{font-size:38px;margin-top:7px}.is-horizontal .showcase-viewport{overflow:hidden;min-height:0}.is-horizontal .showcase-track{flex-direction:row;height:100%;will-change:transform}.is-horizontal .project-slide{flex:0 0 100%;padding:10px 0 15px;height:100%}.is-horizontal .slide-inner{gap:55px}.is-horizontal .project-visual{max-height:100%;width:100%}.is-horizontal .project-visual>img{max-height:calc(100svh - 295px);width:100%;object-fit:contain}.is-horizontal .showcase-footer{display:flex}.is-horizontal .project-copy{max-height:100%;overflow:auto;scrollbar-width:thin}
 /* Sinaru is an explanatory flow, not an invented product screenshot. */
 .rag-art{padding:35px 55px;background:var(--tint);display:flex;flex-direction:column;align-items:center;min-height:350px;justify-content:center}.flow-label{font-size:9px;font-weight:700;letter-spacing:1.4px;color:var(--muted);margin-bottom:25px}.flow-step{display:flex;gap:20px;align-items:center;padding:14px 22px;border:1px solid var(--line);border-radius:10px;background:var(--bg);width:min(310px,100%);box-shadow:0 5px 16px #15181205}.flow-step>span{display:grid;place-items:center;width:31px;height:31px;border-radius:6px;background:var(--tint);color:var(--accent);font-size:10px;font-weight:700;flex-shrink:0}.flow-step strong{display:block;font-size:12px;font-weight:650}.flow-step small{display:block;font-size:9px;color:var(--muted);margin-top:3px}.flow-connector{height:20px;width:1px;background:var(--accent);opacity:.5}
 /* Complete archive */
@@ -78,3 +78,45 @@ html[data-motion=paused] .project-visual,html[data-motion=paused] .project-copy>
 .archive-search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--tint)}
 @media(prefers-reduced-motion:reduce){.contact-links a:hover{padding-left:0}.controls button:hover,.gallery-arrows button:hover,.button:active{transform:none}}
 html[data-motion=paused] .contact-links a:hover{padding-left:0}
+
+/* Vector UI arrows render consistently on mobile instead of falling back to emoji glyphs. */
+.ui-icon{position:relative;display:inline-block;width:14px;height:14px;flex:0 0 14px;color:currentColor}
+.ui-icon-external::before{content:'';position:absolute;top:1px;right:1px;width:7px;height:7px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+.ui-icon-external::after{content:'';position:absolute;top:6.5px;left:2px;width:10px;height:1.5px;background:currentColor;transform:rotate(-45deg);transform-origin:center;border-radius:2px}
+.ui-icon-left::before,.ui-icon-right::before{content:'';position:absolute;top:4px;width:7px;height:7px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+.ui-icon-left::before{left:4px;transform:rotate(-135deg)}
+.ui-icon-right::before{right:4px;transform:rotate(45deg)}
+.contact-links a{display:flex;align-items:center;justify-content:space-between;gap:14px}
+
+/* On portrait phones the featured work keeps the same scroll-driven sequence as desktop. */
+@media(max-width:650px) and (min-height:620px){
+  .is-horizontal .showcase-sticky{padding:12px 0 10px;grid-template-rows:auto minmax(0,1fr) auto}
+  .is-horizontal .showcase-heading{padding-bottom:9px;align-items:center}
+  .is-horizontal .showcase-heading .eyebrow{display:none}
+  .is-horizontal .showcase-heading h2{font-size:23px;letter-spacing:-.8px;margin:0}
+  .is-horizontal .project-slide{padding:2px 0 7px}
+  .is-horizontal .slide-inner{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:16px}
+  .is-horizontal .project-visual{display:flex;align-items:center;min-height:0;max-height:none}
+  .is-horizontal .project-visual>img{height:clamp(150px,25svh,215px);max-height:none;object-fit:cover}
+  .is-horizontal .rag-art{width:100%;min-height:0;height:clamp(185px,27svh,230px);padding:10px 14px}
+  .is-horizontal .flow-label{margin-bottom:8px}
+  .is-horizontal .flow-step{width:250px;padding:6px 10px;gap:10px;border-radius:7px}
+  .is-horizontal .flow-step>span{width:25px;height:25px}
+  .is-horizontal .flow-step strong{font-size:10px}
+  .is-horizontal .flow-step small{font-size:8px;margin-top:0}
+  .is-horizontal .flow-connector{height:7px}
+  .is-horizontal .project-copy{padding:0;overflow:visible}
+  .is-horizontal .project-copy h3{font-size:29px;letter-spacing:-1.2px;margin:5px 0 6px}
+  .is-horizontal .project-summary{font-size:14px;line-height:1.35}
+  .is-horizontal .project-short{display:none}
+  .is-horizontal .project-copy .tech{padding-top:8px;margin-top:9px;line-height:1.45}
+  .is-horizontal .project-actions{margin-top:10px;gap:14px}
+  .is-horizontal .project-actions .button{min-height:39px;padding:9px 14px}
+  .is-horizontal .project-actions .text-link{padding:7px 0}
+  .is-horizontal .showcase-footer{gap:12px;padding-top:6px}
+  .is-horizontal .project-pagination{gap:2px}
+  .is-horizontal .project-pagination button{width:29px;height:29px;font-size:9px}
+  .is-horizontal .gallery-progress{display:none}
+  .is-horizontal .gallery-arrows{gap:6px}
+  .is-horizontal .gallery-arrows button{width:34px;height:34px}
+}
