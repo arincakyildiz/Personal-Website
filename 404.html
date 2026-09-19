@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Sayfa Bulunamadı | Ahmet Arınç Akyıldız</title>
+<meta name="robots" content="noindex, follow">
+<link rel="shortcut icon" href="favicon.ico?v=18">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon.png?v=18">
+<link rel="stylesheet" href="assets/fonts/manrope.css">
+<link rel="stylesheet" href="styles.css?v=36">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem("theme") === "dark" ? "dark" : "light"; } catch {}</script>
+<style>
+  .error-page {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .error-code {
+    font-size: clamp(80px, 14vw, 160px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -6px;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .error-title {
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 750;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .error-desc {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 440px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .error-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+  <div class="error-page wrap">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Sayfa Bulunamadı / Page Not Found</h1>
+    <p class="error-desc">
+      Aradığınız sayfa taşınmış, silinmiş veya hiç var olmamış olabilir.<br>
+      The page you are looking for might have been moved, removed, or never existed.
+    </p>
+    <div class="error-actions">
+      <a class="button primary" href="/">Ana Sayfa / Home →</a>
+    </div>
+  </div>
+</body>
+</html>

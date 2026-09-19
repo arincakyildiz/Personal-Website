@@ -4,14 +4,18 @@ const storage = {
   set(key, value) { try { localStorage.setItem(key, value); } catch {} }
 };
 const root = document.documentElement;
-let lang = storage.get('lang') === 'en' ? 'en' : 'tr';
+let langParam = null;
+try {
+  const urlParams = new URLSearchParams(window.location.search || '');
+  langParam = urlParams.get('lang');
+} catch {}
+let lang = (langParam === 'en' || langParam === 'tr') ? langParam : (storage.get('lang') === 'en' ? 'en' : 'tr');
 let theme = storage.get('theme') === 'dark' ? 'dark' : 'light';
 let paused = storage.get('motion') === 'paused';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-// Keep the cinematic project sequence on phones too when the viewport is tall
-// enough to present a complete card. Short landscape screens use the readable
-// vertical fallback.
-const animatedGallery = matchMedia('(min-height: 620px)');
+// Desktop screens with sufficient height use the cinematic horizontal sequence.
+// Mobile and tablet screens use the readable, native vertical layout.
+const animatedGallery = matchMedia('(min-width: 901px) and (min-height: 620px)');
 const languageButton = document.getElementById('language');
 const themeButton = document.getElementById('theme');
 const motionButton = document.getElementById('motion');
@@ -75,6 +79,8 @@ function motionEnabled() { return !paused && !reducedMotion.matches; }
 function applyTheme() {
   root.dataset.theme = theme;
   themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
+  const themeColor = theme === 'dark' ? '#191b18' : '#faf9f6';
+  document.querySelectorAll('meta[name="theme-color"]').forEach(el => el.setAttribute('content', themeColor));
 }
 function updateCount() {
   const count = document.querySelectorAll('.project-row:not([hidden])').length;
@@ -98,7 +104,13 @@ function applyLanguage() {
   document.title = t('meta.title');
   document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-    el.dataset.i18nAttr.split(',').forEach(pair => { const [attribute, key] = pair.split(':'); el.setAttribute(attribute, t(key)); });
+    const attrVal = el.getAttribute('data-i18n-attr') || el.dataset?.i18nAttr || '';
+    if (attrVal) {
+      attrVal.split(',').forEach(pair => {
+        const [attribute, key] = pair.split(':');
+        if (attribute && key) el.setAttribute(attribute, t(key));
+      });
+    }
   });
   ['meta[name="description"]', 'meta[property="og:description"]', 'meta[name="twitter:description"]'].forEach(selector => document.querySelector(selector)?.setAttribute('content', t('meta.description')));
   ['meta[property="og:title"]', 'meta[name="twitter:title"]'].forEach(selector => document.querySelector(selector)?.setAttribute('content', t('meta.title')));
@@ -106,6 +118,15 @@ function applyLanguage() {
   document.querySelector('meta[property="og:locale:alternate"]').content = lang === 'tr' ? 'en_US' : 'tr_TR';
   languageButton.textContent = lang === 'tr' ? 'EN' : 'TR';
   languageButton.setAttribute('aria-label', lang === 'tr' ? 'Switch to English' : 'Türkçeye geç');
+  try {
+    const url = new URL(window.location.href || window.location);
+    if (lang === 'en') {
+      url.searchParams.set('lang', 'en');
+    } else {
+      url.searchParams.delete('lang');
+    }
+    window.history.replaceState({}, '', url);
+  } catch {}
   filterProjects(); applyMotion();
   if (activeProject) renderProject(activeProject);
 }
@@ -172,7 +193,10 @@ function updateScroll() {
     if (!galleryFrame) galleryFrame = requestAnimationFrame(animateGallery);
   }
   let current = '';
-  navLinks.forEach(link => { if (document.querySelector(link.hash).getBoundingClientRect().top <= 200) current = link.hash; });
+  navLinks.forEach(link => {
+    const target = link.hash ? document.querySelector(link.hash) : null;
+    if (target && target.getBoundingClientRect().top <= 200) current = link.hash;
+  });
   navLinks.forEach(link => { if (link.hash === current) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); });
   updateNavIndicator();
   header.classList.toggle('is-scrolled', scrollY > 20);
@@ -226,13 +250,19 @@ function renderProject(key) {
   const visual = slide.querySelector('.project-visual').firstElementChild.cloneNode(true);
   if (visual.tagName === 'IMG') visual.loading = 'eager';
   document.getElementById('dialog-visual').replaceChildren(visual);
-  const links = [...archive.querySelectorAll('.project-links a')].map((link,i) => {
+  const rawLinks = [...archive.querySelectorAll('.project-links a')];
+  rawLinks.sort((a, b) => {
+    const aLive = a.querySelector('[data-i18n="project.live"]') ? 1 : 0;
+    const bLive = b.querySelector('[data-i18n="project.live"]') ? 1 : 0;
+    return bLive - aLive;
+  });
+  const links = rawLinks.map((link,i) => {
     const clone = link.cloneNode(true); clone.className = i === 0 ? 'button primary' : 'button secondary'; return clone;
   });
   document.getElementById('dialog-links').replaceChildren(...links);
   resetZoom();
   const index = slides.indexOf(slide);
-  document.getElementById('dialog-count').textContent = `${String(index+1).padStart(2,'0')} / 04`;
+  document.getElementById('dialog-count').textContent = `${String(index+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
   document.getElementById('dialog-prev').disabled = index === 0;
   document.getElementById('dialog-next').disabled = index === slides.length - 1;
 }
@@ -366,14 +396,16 @@ window.addEventListener('resize',settleAccordions,{passive:true});
 let selectedFilter = 'all';
 const projectSearch = document.getElementById('project-search');
 function normalizeSearch(value) {
-  return value.toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
+  if (!value) return '';
+  return String(value).toLocaleLowerCase('tr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i');
 }
 function filterProjects() {
   settleAccordions();
   let entranceIndex = 0;
-  const terms = normalizeSearch(projectSearch.value).trim().split(/\s+/).filter(Boolean);
+  const terms = normalizeSearch(projectSearch ? projectSearch.value : '').trim().split(/\s+/).filter(Boolean);
   document.querySelectorAll('.project-row').forEach(row => {
-    const categoryMatches = selectedFilter === 'all' || row.dataset.category === selectedFilter;
+    const categories = (row.dataset.category || '').split(/\s+/);
+    const categoryMatches = selectedFilter === 'all' || categories.includes(selectedFilter);
     const searchText = normalizeSearch(row.textContent);
     const wasHidden = row.hidden;
     row.hidden = !categoryMatches || !terms.every(term => searchText.includes(term));
@@ -407,12 +439,15 @@ zoomButton.addEventListener('click', () => {
   zoomButton.setAttribute('aria-pressed', String(zoomed));
   zoomButton.textContent = t(zoomed ? 'dialog.restore' : 'dialog.zoom');
 });
+let copyTimeout = null;
 document.getElementById('copy-email').addEventListener('click', async () => {
   const status = document.getElementById('copy-status');
+  clearTimeout(copyTimeout);
   try {
     await navigator.clipboard.writeText('ahmetarincakyildiz@gmail.com');
     status.textContent = t('contact.copied');
   } catch { status.textContent = t('contact.copyFailed'); }
+  copyTimeout = setTimeout(() => { status.textContent = ''; }, 3500);
 });
 const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) {
@@ -442,6 +477,7 @@ const projectEntranceObserver = new IntersectionObserver(entries => {
   });
 }, {threshold:.15});
 slides.forEach(slide => projectEntranceObserver.observe(slide));
+
 document.getElementById('year').textContent = new Date().getFullYear();
 applyTheme(); applyLanguage(); setSlide(0);
 document.fonts.ready.then(() => { configureGallery(); updateNavIndicator(); });
@@ -450,7 +486,7 @@ document.fonts.ready.then(() => { configureGallery(); updateNavIndicator(); });
   animateElement(element,[{opacity:0,transform:'translateY(-7px)'},{opacity:1,transform:'translateY(0)'}],
     {duration:350,delay:index*35,fill:'backwards',easing:'ease-out'});
 });
-document.querySelectorAll('.hero-intro,.hero h1>span,.hero-description,.hero-actions,.hero-preview').forEach((element,index) => {
+document.querySelectorAll('.hero-intro,.hero h1>span,.hero-description,.hero-actions').forEach((element,index) => {
   animateElement(element,[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}],
     {duration:620,delay:80+index*65,fill:'backwards',easing:'cubic-bezier(.2,.75,.2,1)'});
 });
