@@ -52,12 +52,12 @@ const CASE_STUDIES={
   perfiai:{
     title:'PerfiAI',image:'assets/projects/perfiai.png',alt:{tr:'PerfiAI marka görseli',en:'PerfiAI brand visual'},
     category:{tr:'Anlamsal arama · Öneri sistemi',en:'Semantic search · Recommendation system'},
-    summary:{tr:'Kullanıcının doğal dille tarif ettiği kokuyu 3.592 parfümlük katalogda anlamsal benzerlik üzerinden arayan öneri sistemi.',en:'A recommendation system that searches a 3,592-fragrance catalogue through semantic similarity to a natural-language description.'},
-    facts:{tr:[['Rol','Full-stack ve AI entegrasyonu'],['Yıl','2026'],['Katalog','3.592 parfüm'],['Altyapı','Next.js · FastAPI · SentenceTransformers']],en:[['Role','Full-stack and AI integration'],['Year','2026'],['Catalogue','3,592 fragrances'],['Stack','Next.js · FastAPI · SentenceTransformers']]},
-    problem:{tr:'Parfüm filtreleri genellikle marka, fiyat veya nota göre çalışıyor. Kullanıcı ise çoğu zaman “odunsu, sıcak ve geceye uygun” gibi doğal bir tarifle arama yapıyor.',en:'Fragrance filters usually operate by brand, price or notes, while users often search with descriptions such as “woody, warm and suitable for evenings”.'},
-    approach:{tr:'Parfümlerin nota piramitlerini ve açıklamalarını ortak bir metin temsiline dönüştürüp embedding ürettim. Kullanıcı sorgusunu aynı uzaya taşıyarak benzerlik puanı, eşleşme gerekçesi ve alternatif sonuçlar oluşturdum.',en:'I converted fragrance note pyramids and descriptions into a shared text representation, generated embeddings and mapped each query into the same space to produce scored matches and explanations.'},
-    result:{tr:'Doğal dil araması, iki öneri modu, açıklanabilir eşleşme, üyelik, favori, puan ve yorum akışlarını birleştiren parfüm keşif ürünü ortaya çıktı.',en:'The result combines natural-language search, two recommendation modes, explainable matches, accounts, favourites, ratings and reviews.'},
-    decisions:{tr:['3.592 ürünlük katalog için önceden hesaplanan embeddingler','Hızlı sezgisel arama ve daha derin anlamsal arama seçenekleri','Sonuç puanının yanında eşleşme gerekçesi gösterimi','Web uygulaması ile Python öneri servisinin ayrılması'],en:['Precomputed embeddings for a 3,592-item catalogue','Fast heuristic and deeper semantic search modes','Explanations shown beside similarity scores','Separation of the web application and Python recommendation service']},
+    summary:{tr:'Kullanıcının doğal dille tarif ettiği kokuyu 26.000 parfümlük katalogda arayan; sonucu skor, gerekçe ve etiketlerle açıklayan öneri sistemi.',en:'A recommendation system that searches a 26,000-fragrance catalogue from a natural-language description and explains each result with a score, reason and tags.'},
+    facts:{tr:[['Rol','Full-stack ve AI entegrasyonu'],['Yıl','2026'],['Katalog','26.000 parfüm'],['Altyapı','Next.js · Express · FastAPI · SentenceTransformers']],en:[['Role','Full-stack and AI integration'],['Year','2026'],['Catalogue','26,000 fragrances'],['Stack','Next.js · Express · FastAPI · SentenceTransformers']]},
+    problem:{tr:'Klasik parfüm filtreleri marka veya nota göre çalışıyor; kullanıcı ise çoğu zaman “ferah narenciye, yazın ofise uygun” gibi doğal bir tarifle arama yapıyor. 26.000 ürün içinde bu niyeti doğru yorumlamak ve sonucu nedenleriyle açıklamak gerekiyordu.',en:'Traditional fragrance filters operate by brand or note, while people often search with phrases such as “fresh citrus for a summer office”. The product needed to interpret that intent across 26,000 items and explain every match.'},
+    approach:{tr:'Nota piramitleri, akorlar, mevsim, cinsiyet ve açıklamaları ortak bir arama temsiline dönüştürdüm. Sistem ücretsiz sezgisel modda her ortamda çalışıyor; yerel SentenceTransformers servisi açıldığında float16 embedding indeksi üzerinden kosinüs benzerliğine geçiyor. Servis ulaşılamazsa otomatik olarak sezgisel moda dönüyor.',en:'I combined note pyramids, accords, season, gender and descriptions into one search representation. A free heuristic mode works everywhere; when the local SentenceTransformers service is available, search switches to cosine similarity over a compact float16 embedding index and falls back automatically if the service is unavailable.'},
+    result:{tr:'Doğal dil araması, cinsiyet ve mevsim filtreleri, açıklanabilir skorlar, üyelik, e-posta doğrulama, favoriler, puanlar ve yorumları birleştiren iki dilli parfüm keşif ürünü ortaya çıktı. Katalog; Sephora ve açık veri kaynaklarından tekrar üretilebilir biçimde genişletiliyor.',en:'The result is a bilingual fragrance-discovery product combining natural-language search, gender and season filters, explainable scores, accounts, email verification, favourites, ratings and comments. The catalogue can be reproducibly expanded from Sephora and open datasets.'},
+    decisions:{tr:['26.000 kayıt için katalog sırasını ve hash değerini doğrulayan float16 embedding indeksi','SentenceTransformers servisi yoksa otomatik sezgisel arama yedeği','Her sonuçta skor, eşleşme gerekçesi ve açıklayıcı etiketler','MongoDB veya atomik JSON kalıcılığı arasında çalışma zamanı seçimi','Görselleri küçük tutmak için 10×10 WebP atlasları ve markalı fallback kartları','Sephora, Fragrantica ve açık kataloglar için tekrar çalıştırılabilir veri hattı'],en:['Float16 embedding index with catalogue-order and hash validation for 26,000 records','Automatic heuristic fallback when the SentenceTransformers service is unavailable','Score, matching reason and explanatory tags on every result','Runtime choice between MongoDB and atomic JSON persistence','10×10 WebP atlases and branded fallback cards for compact image delivery','Reproducible data pipeline for Sephora, Fragrantica and open catalogues']},
     links:[{type:'profile',href:'https://github.com/arincakyildiz'}]
   },
   keyco:{
@@ -106,7 +106,16 @@ function applyMotion(){
   root.dataset.motion=motionEnabled()?'running':'paused';
   motionButton.disabled=reducedMotion.matches;
   updateSettingsLabels();
-  if(!motionEnabled())document.querySelectorAll('.reveal').forEach(element=>element.classList.add('is-visible'));
+  if(!motionEnabled()){
+    document.querySelectorAll('.reveal').forEach(element=>element.classList.add('is-visible'));
+    document.querySelectorAll('.index-row').forEach(element=>element.classList.add('row-visible'));
+    document.querySelectorAll('.featured-project').forEach(section=>{
+      ['--copy-y','--media-y','--image-y','--index-y','--label-x'].forEach(property=>section.style.setProperty(property,'0px'));
+      section.querySelector('.project-media')?.style.setProperty('--tilt-x','0deg');
+      section.querySelector('.project-media')?.style.setProperty('--tilt-y','0deg');
+    });
+  }
+  else updateScroll();
 }
 
 languageButton.addEventListener('click',()=>{lang=lang==='tr'?'en':'tr';storage.set('lang',lang);applyLanguage()});
@@ -119,6 +128,10 @@ settingsToggle.addEventListener('click',event=>{
   event.stopPropagation();
   settingsPanel.hidden=!settingsPanel.hidden;
   settingsToggle.setAttribute('aria-expanded',String(!settingsPanel.hidden));
+  if(!settingsPanel.hidden&&motionEnabled())settingsPanel.animate([
+    {opacity:0,transform:'translateY(-8px) scale(.97)',transformOrigin:'top right'},
+    {opacity:1,transform:'translateY(0) scale(1)',transformOrigin:'top right'}
+  ],{duration:260,easing:'cubic-bezier(.16,1,.3,1)'});
 });
 settingsPanel.addEventListener('click',event=>event.stopPropagation());
 document.addEventListener('click',closeSettings);
@@ -129,6 +142,25 @@ function updateScroll(){
   const range=root.scrollHeight-innerHeight;
   progress.style.transform=`scaleX(${range>0?scrollY/range:0})`;
   header.classList.toggle('is-scrolled',scrollY>14);
+  if(motionEnabled()){
+    const hero=document.querySelector('.hero');
+    const heroProgress=Math.max(0,Math.min(1,scrollY/Math.max(hero.offsetHeight,1)));
+    const collageCards=[...document.querySelectorAll('.collage-card')];
+    const collageSpeeds=[-18,-34,-25];
+    collageCards.forEach((card,index)=>card.style.setProperty('--hero-image-y',`${heroProgress*collageSpeeds[index]}px`));
+    document.querySelectorAll('.featured-project').forEach(section=>{
+      const rect=section.getBoundingClientRect();
+      const progress=Math.max(0,Math.min(1,(innerHeight-rect.top)/(innerHeight+rect.height)));
+      const relative=(rect.top+rect.height/2-innerHeight/2)/innerHeight;
+      section.style.setProperty('--copy-y',`${relative*18}px`);
+      section.style.setProperty('--media-y',`${relative*-22}px`);
+      section.style.setProperty('--image-y',`${relative*18}px`);
+      section.style.setProperty('--index-y',`${relative*72}px`);
+      section.style.setProperty('--orb-x',`${-20+progress*16}vw`);
+      section.style.setProperty('--orb-y',`${8+progress*15}%`);
+      section.style.setProperty('--label-x',`${(progress-.5)*28}px`);
+    });
+  }
   let current='';
   navLinks.forEach(link=>{const section=document.querySelector(link.hash);if(section&&section.getBoundingClientRect().top<innerHeight*.34)current=link.hash});
   navLinks.forEach(link=>link.toggleAttribute('aria-current',link.hash===current));
@@ -141,11 +173,54 @@ const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
   entry.target.classList.add('is-visible');
   revealObserver.unobserve(entry.target);
 }),{threshold:.1,rootMargin:'0px 0px -5%'});
-document.querySelectorAll('.section-intro,.project-copy,.project-media,.index-list,.index-preview,.about-statement,.about-detail,.experience-list article,.toolkit,.contact-grid>div').forEach((element,index)=>{
+document.querySelectorAll('.section-intro,.index-list,.index-preview,.about-statement,.about-detail,.experience-list article,.toolkit,.contact-grid>div').forEach((element,index)=>{
   element.classList.add('reveal');
   element.style.transitionDelay=`${Math.min(index%3,2)*55}ms`;
   revealObserver.observe(element);
 });
+
+const projectObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(!entry.isIntersecting||entry.target.dataset.animated)return;
+  const section=entry.target;
+  section.dataset.animated='true';
+  if(!motionEnabled())return;
+  const media=section.querySelector('.project-media');
+  media.animate([
+    {opacity:0,clipPath:'inset(12% 10% 88% 0 round 2px)',transform:'translateY(65px) scale(.94)'},
+    {opacity:1,clipPath:'inset(0 0 0 0 round 0)',transform:'translateY(0) scale(1)'}
+  ],{duration:1050,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'});
+  section.querySelectorAll('.project-copy>*').forEach((element,index)=>element.animate([
+    {opacity:0,transform:'translateY(34px)',filter:'blur(6px)'},
+    {opacity:1,transform:'translateY(0)',filter:'blur(0)'}
+  ],{duration:720,delay:100+index*75,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
+}),{threshold:.16});
+document.querySelectorAll('.featured-project').forEach(section=>projectObserver.observe(section));
+
+const indexObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(!entry.isIntersecting)return;
+  entry.target.querySelectorAll('.index-row').forEach((row,index)=>setTimeout(()=>row.classList.add('row-visible'),motionEnabled()?index*48:0));
+  indexObserver.unobserve(entry.target);
+}),{threshold:.12});
+indexObserver.observe(document.querySelector('.index-list'));
+
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.querySelectorAll('.project-media').forEach(media=>{
+    media.addEventListener('pointermove',event=>{
+      if(!motionEnabled())return;
+      const rect=media.getBoundingClientRect();
+      const x=(event.clientX-rect.left)/rect.width;
+      const y=(event.clientY-rect.top)/rect.height;
+      media.style.setProperty('--tilt-x',`${(.5-y)*4}deg`);
+      media.style.setProperty('--tilt-y',`${(x-.5)*5}deg`);
+      media.style.setProperty('--pointer-x',`${x*100}%`);
+      media.style.setProperty('--pointer-y',`${y*100}%`);
+    });
+    media.addEventListener('pointerleave',()=>{
+      media.style.setProperty('--tilt-x','0deg');
+      media.style.setProperty('--tilt-y','0deg');
+    });
+  });
+}
 
 const previewFrame=document.querySelector('.preview-frame');
 const previewImage=document.getElementById('archive-preview-image');
@@ -198,10 +273,31 @@ function renderCase(key){
   document.getElementById('case-next').disabled=index===caseOrder.length-1;
 }
 
+function animateCase(direction=1){
+  if(!motionEnabled())return;
+  const staged=[
+    document.getElementById('case-category'),
+    document.getElementById('case-title'),
+    document.getElementById('case-summary')
+  ];
+  staged.forEach((element,index)=>element.animate([
+    {opacity:0,transform:`translateY(${24+index*8}px)`,filter:'blur(5px)'},
+    {opacity:1,transform:'translateY(0)',filter:'blur(0)'}
+  ],{duration:650,delay:80+index*65,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
+  document.querySelector('.case-visual').animate([
+    {opacity:0,clipPath:`inset(0 ${direction>0?'100%':'0'} 0 ${direction>0?'0':'100%'})`,transform:`translateX(${direction*32}px) scale(.97)`},
+    {opacity:1,clipPath:'inset(0 0 0 0)',transform:'translateX(0) scale(1)'}
+  ],{duration:850,delay:170,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'});
+  document.querySelectorAll('#case-facts>div').forEach((element,index)=>element.animate([
+    {opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}
+  ],{duration:470,delay:260+index*55,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
+}
+
 function openCase(key,trigger){
   activeCase=key;caseTrigger=trigger;renderCase(key);
   dialog.classList.remove('is-closing');dialog.classList.add('is-opening');
   dialog.showModal();document.body.classList.add('dialog-open');dialog.scrollTop=0;
+  requestAnimationFrame(()=>animateCase(1));
   setTimeout(()=>dialog.classList.remove('is-opening'),600);
 }
 
@@ -219,10 +315,10 @@ document.querySelectorAll('[data-open-project]').forEach(trigger=>trigger.addEve
 dialog.querySelector('.case-close').addEventListener('click',closeCase);
 dialog.addEventListener('cancel',event=>{event.preventDefault();closeCase()});
 document.getElementById('case-prev').addEventListener('click',()=>{
-  const next=caseOrder[caseOrder.indexOf(activeCase)-1];if(next){activeCase=next;renderCase(next);dialog.scrollTo({top:0,behavior:motionEnabled()?'smooth':'auto'})}
+  const next=caseOrder[caseOrder.indexOf(activeCase)-1];if(next){activeCase=next;renderCase(next);dialog.scrollTo({top:0,behavior:'auto'});requestAnimationFrame(()=>animateCase(-1))}
 });
 document.getElementById('case-next').addEventListener('click',()=>{
-  const next=caseOrder[caseOrder.indexOf(activeCase)+1];if(next){activeCase=next;renderCase(next);dialog.scrollTo({top:0,behavior:motionEnabled()?'smooth':'auto'})}
+  const next=caseOrder[caseOrder.indexOf(activeCase)+1];if(next){activeCase=next;renderCase(next);dialog.scrollTo({top:0,behavior:'auto'});requestAnimationFrame(()=>animateCase(1))}
 });
 
 const copyStatus=document.getElementById('copy-status');
@@ -235,8 +331,12 @@ document.getElementById('year').textContent=new Date().getFullYear();
 applyTheme();applyLanguage();applyMotion();updateScroll();
 
 if(motionEnabled()){
-  const intro=[...document.querySelectorAll('.status-line,.hero h1,.hero-description,.hero-actions,.hero-note,.hero-collage')];
+  const intro=[...document.querySelectorAll('.status-line,.hero h1,.hero-description,.hero-actions,.hero-note')];
   intro.forEach((element,index)=>element.animate([
     {opacity:0,transform:'translateY(28px)'},{opacity:1,transform:'translateY(0)'}
   ],{duration:760,delay:80+index*75,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
+  document.querySelectorAll('.collage-card').forEach((element,index)=>element.animate([
+    {opacity:0,clipPath:'inset(100% 0 0 0)',transform:`translateY(${45+index*15}px) rotate(${index===1?1.2:-.7}deg)`},
+    {opacity:1,clipPath:'inset(0 0 0 0)',transform:'translateY(0) rotate(0)'}
+  ],{duration:980,delay:420+index*110,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
 }
