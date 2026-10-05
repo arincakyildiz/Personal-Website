@@ -16,11 +16,13 @@ const CASE_STUDIES={
   keyco:{title:'Keyco',image:'assets/projects/keyco.jpg',alt:{tr:'Keyco e-ticaret ürün ekranı',en:'Keyco e-commerce product screen'},category:{tr:'E-ticaret · Web uygulaması',en:'E-commerce · Web application'},summary:{tr:'Oyun kodları ve dijital ürünler için keşif, kategori, hesap ve satın alma akışlarını bir araya getiren e-ticaret uygulaması.',en:'An e-commerce application bringing together discovery, category, account and purchase flows for game keys and digital products.'},facts:{tr:[['Rol','Full-stack geliştirme'],['Yıl','2025'],['Platform','Web'],['Altyapı','React · Node.js · Firebase']],en:[['Role','Full-stack development'],['Year','2025'],['Platform','Web'],['Stack','React · Node.js · Firebase']]},problem:{tr:'Farklı oyun platformlarındaki dijital ürünlerin hızlı bulunması, kategori ve platforma göre filtrelenmesi ve güvenli bir satın alma akışına taşınması gerekiyordu.',en:'Digital products across gaming platforms needed to be easy to discover, filter by category and platform, and move through a clear purchase flow.'},approach:{tr:'Kataloğu platform ve kategori etrafında düzenledim; arama, filtreleme, üyelik ve ödeme adımlarını tek kullanıcı yolculuğu içinde kurdum.',en:'I structured the catalogue around platforms and categories, then connected search, filtering, accounts and payment into one user journey.'},result:{tr:'Dijital ürün keşfi, hesap yönetimi ve ödeme entegrasyonlarını destekleyen, iki dilli ve farklı ekranlara uyumlu bir mağaza deneyimi oluştu.',en:'The result is a responsive, bilingual store experience supporting digital product discovery, account management and payment integrations.'},decisions:{tr:['Platform ve kategori bazlı ürün taksonomisi','Arama ve filtre durumunun tek ürün listesinde birleşmesi','Üyelik ve sipariş akışlarında Firebase','Kalıcı TR/EN dil ve tema tercihi'],en:['Platform and category product taxonomy','Combined search and filter state','Firebase for accounts and orders','Persistent TR/EN language and theme preference']},links:[{type:'live',href:'https://keyco.vercel.app'},{type:'code',href:'https://github.com/arincakyildiz/keyco'}]}
 };
 
-const PROJECT_TECH={
-  kanyolda:['React Native','Next.js','Firebase'],
-  sinaru:['Foundry Local','Node.js','SQLite','RAG'],
-  perfiai:['Next.js','FastAPI','SentenceTransformers'],
-  keyco:['React','Node.js','Firebase']
+const OTHER_PROJECTS={
+  kargo:{title:'Kargo Takip',year:'2026',category:{tr:'Operasyon · Web uygulaması',en:'Operations · Web application'},description:{tr:'Kargo hareketleri ve operasyon adımlarını izlemek için geliştirilen Angular tabanlı takip arayüzü.',en:'An Angular-based tracking interface for following cargo movements and operational steps.'},tech:['Angular','TypeScript','RxJS'],type:'code',href:'https://github.com/arincakyildiz/kargo-project'},
+  wavent:{title:'Wavent',year:'2026',category:{tr:'Depo yönetimi · Web uygulaması',en:'Warehouse management · Web application'},description:{tr:'Envanter ve depo operasyonlarını yönetmek için tasarlanan modüler kullanıcı arayüzü.',en:'A modular interface designed to manage inventory and warehouse operations.'},tech:['Angular','TypeScript','WMS'],type:'code',href:'https://github.com/arincakyildiz/wavent'},
+  roadnix:{title:'Roadnix',year:'2025',category:{tr:'Eğitim · Web platformu',en:'Education · Web platform'},description:{tr:'Trafik güvenliğini etkileşimli içerikler, testler ve görsel anlatımla öğreten eğitim platformu.',en:'An educational platform teaching road safety through interactive content, tests and visual explanations.'},tech:['React','Vite','JavaScript'],type:'live',href:'https://roadnix.arincakyildiz.com.tr/'},
+  eventify:{title:'Eventify TRNC',year:'2025',category:{tr:'Etkinlik · Keşif platformu',en:'Events · Discovery platform'},description:{tr:'Kuzey Kıbrıs’taki etkinlikleri tek yerde keşfetmek ve takip etmek için geliştirilen web uygulaması.',en:'A web application for discovering and following events across Northern Cyprus.'},tech:['Node.js','JavaScript','Web'],type:'live',href:'https://eventify-trnc.vercel.app'},
+  emurebook:{title:'Emu Rebook',year:'2024',category:{tr:'Mobil · Kampüs uygulaması',en:'Mobile · Campus application'},description:{tr:'Flutter ve Dart ile geliştirilen, öğrenciler için mobil kampüs ve kitap deneyimi.',en:'A mobile campus and book experience for students, built with Flutter and Dart.'},tech:['Flutter','Dart','Mobile'],type:'code',href:'https://github.com/arincakyildiz/emurebook'},
+  kofteci:{title:'Tarihi Sanayi Köftecisi',year:'2024',category:{tr:'Web sitesi · Yerel işletme',en:'Website · Local business'},description:{tr:'Restoranın hikâyesini, menüsünü ve iletişim bilgilerini yalın bir deneyimde sunan web sitesi.',en:'A website presenting the restaurant’s story, menu and contact details in a clear experience.'},tech:['HTML','CSS','JavaScript'],type:'live',href:'https://tarihisanayikoftecisi.arincakyildiz.com.tr/'}
 };
 
 const t=key=>window.TRANSLATIONS[lang]?.[key]??key;
@@ -124,38 +126,37 @@ function layoutCarousel(position=carouselIndex){
 }
 
 function renderCarouselInfo(animate=true){
-  const key=carouselKeys[carouselIndex],data=CASE_STUDIES[key],info=document.getElementById('active-project-info');
+  const key=carouselKeys[carouselIndex],data=OTHER_PROJECTS[key],info=document.getElementById('active-project-info');
   document.getElementById('active-project-number').textContent=String(carouselIndex+1).padStart(2,'0');
-  document.getElementById('active-project-category').textContent=data.category[lang];
+  document.getElementById('active-project-category').textContent=`${data.category[lang]} · ${data.year}`;
   document.getElementById('active-project-title').textContent=data.title;
-  document.getElementById('active-project-description').textContent=t(`short.${key}`);
-  document.getElementById('active-project-tech').replaceChildren(...PROJECT_TECH[key].map(value=>{const chip=document.createElement('span');chip.textContent=value;return chip}));
-  const caseButton=document.createElement('button');caseButton.className='pill pill-dark';caseButton.textContent=t('case.label');caseButton.addEventListener('click',()=>openCase(key,caseButton));
-  const links=data.links.map(link=>{const anchor=document.createElement('a');anchor.className='pill pill-outline';anchor.href=link.href;anchor.target='_blank';anchor.rel='noopener';anchor.textContent=linkLabel(link.type);return anchor});
-  document.getElementById('active-project-actions').replaceChildren(caseButton,...links);
+  document.getElementById('active-project-description').textContent=data.description[lang];
+  document.getElementById('active-project-tech').replaceChildren(...data.tech.map(value=>{const chip=document.createElement('span');chip.textContent=value;return chip}));
+  const anchor=document.createElement('a');anchor.className='pill pill-dark';anchor.href=data.href;anchor.target='_blank';anchor.rel='noopener';anchor.textContent=linkLabel(data.type);
+  document.getElementById('active-project-actions').replaceChildren(anchor);
   if(animate&&!reducedMotion.matches){info.classList.remove('is-changing');void info.offsetWidth;info.classList.add('is-changing');setTimeout(()=>info.classList.remove('is-changing'),450)}
 }
 
 function setCarouselIndex(index,animate=true){
   carouselIndex=(index+carouselSlides.length)%carouselSlides.length;
-  carouselSlides.forEach((slide,i)=>{const active=i===carouselIndex;slide.classList.toggle('is-active',active);slide.toggleAttribute('aria-current',active);slide.querySelector('.project-poster').setAttribute('aria-label',active?`${CASE_STUDIES[carouselKeys[i]].title} — ${t('case.label')}`:`${CASE_STUDIES[carouselKeys[i]].title}`)});
+  carouselSlides.forEach((slide,i)=>{const active=i===carouselIndex;slide.classList.toggle('is-active',active);slide.toggleAttribute('aria-current',active);slide.querySelector('.project-poster').setAttribute('aria-label',active?`${OTHER_PROJECTS[carouselKeys[i]].title} — ${linkLabel(OTHER_PROJECTS[carouselKeys[i]].type)}`:OTHER_PROJECTS[carouselKeys[i]].title)});
   carouselDots.forEach((dot,i)=>dot.classList.toggle('active',i===carouselIndex));
   document.getElementById('carousel-counter').textContent=`${String(carouselIndex+1).padStart(2,'0')} / ${String(carouselSlides.length).padStart(2,'0')}`;
   layoutCarousel();renderCarouselInfo(animate);
 }
 
-carouselSlides.forEach((slide,index)=>slide.querySelector('.project-poster').addEventListener('click',()=>{if(suppressPosterClick)return;if(index===carouselIndex)openCase(carouselKeys[index],slide.querySelector('.project-poster'));else setCarouselIndex(index)}));
+carouselSlides.forEach((slide,index)=>slide.querySelector('.project-poster').addEventListener('click',()=>{if(suppressPosterClick)return;if(index===carouselIndex)window.open(OTHER_PROJECTS[carouselKeys[index]].href,'_blank','noopener');else setCarouselIndex(index)}));
 carouselDots.forEach((dot,index)=>dot.addEventListener('click',()=>setCarouselIndex(index)));
 document.getElementById('carousel-prev').addEventListener('click',()=>setCarouselIndex(carouselIndex-1));
 document.getElementById('carousel-next').addEventListener('click',()=>setCarouselIndex(carouselIndex+1));
-carousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();setCarouselIndex(carouselIndex-1)}else if(event.key==='ArrowRight'){event.preventDefault();setCarouselIndex(carouselIndex+1)}else if((event.key==='Enter'||event.key===' ')&&event.target===carousel){event.preventDefault();openCase(carouselKeys[carouselIndex],carousel)}});
+carousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();setCarouselIndex(carouselIndex-1)}else if(event.key==='ArrowRight'){event.preventDefault();setCarouselIndex(carouselIndex+1)}else if((event.key==='Enter'||event.key===' ')&&event.target===carousel){event.preventDefault();window.open(OTHER_PROJECTS[carouselKeys[carouselIndex]].href,'_blank','noopener')}});
 carousel.addEventListener('pointerdown',event=>{if(event.button!==0||!event.target.closest('.carousel-stage'))return;dragging=true;dragStartX=event.clientX;dragDelta=0;pointerSlideIndex=carouselSlides.findIndex(slide=>slide.contains(event.target));carousel.classList.add('is-dragging');carousel.setPointerCapture(event.pointerId)});
 carousel.addEventListener('pointermove',event=>{if(!dragging)return;dragDelta=event.clientX-dragStartX;layoutCarousel(carouselIndex-dragDelta/carouselSpacing())});
-function finishDrag(event){if(!dragging)return;dragging=false;carousel.classList.remove('is-dragging');if(carousel.hasPointerCapture(event.pointerId))carousel.releasePointerCapture(event.pointerId);suppressPosterClick=true;setTimeout(()=>suppressPosterClick=false,0);if(event.type==='pointercancel'){layoutCarousel();return}if(Math.abs(dragDelta)>Math.min(72,carouselSpacing()*.22))setCarouselIndex(carouselIndex+(dragDelta<0?1:-1));else if(pointerSlideIndex>=0){if(pointerSlideIndex===carouselIndex)openCase(carouselKeys[pointerSlideIndex],carouselSlides[pointerSlideIndex].querySelector('.project-poster'));else setCarouselIndex(pointerSlideIndex)}else layoutCarousel()}
+function finishDrag(event){if(!dragging)return;dragging=false;carousel.classList.remove('is-dragging');if(carousel.hasPointerCapture(event.pointerId))carousel.releasePointerCapture(event.pointerId);suppressPosterClick=true;setTimeout(()=>suppressPosterClick=false,0);if(event.type==='pointercancel'){layoutCarousel();return}if(Math.abs(dragDelta)>Math.min(72,carouselSpacing()*.22))setCarouselIndex(carouselIndex+(dragDelta<0?1:-1));else if(pointerSlideIndex>=0){if(pointerSlideIndex===carouselIndex)window.open(OTHER_PROJECTS[carouselKeys[pointerSlideIndex]].href,'_blank','noopener');else setCarouselIndex(pointerSlideIndex)}else layoutCarousel()}
 carousel.addEventListener('pointerup',finishDrag);carousel.addEventListener('pointercancel',finishDrag);
 carousel.addEventListener('wheel',event=>{const horizontal=Math.abs(event.deltaX)>Math.abs(event.deltaY)||event.shiftKey;if(!horizontal)return;event.preventDefault();if(wheelLocked||Math.abs(event.deltaX||event.deltaY)<8)return;wheelLocked=true;setCarouselIndex(carouselIndex+((event.deltaX||event.deltaY)>0?1:-1));setTimeout(()=>wheelLocked=false,520)},{passive:false});
 addEventListener('resize',()=>layoutCarousel());
-setCarouselIndex(0,false);
+setCarouselIndex(2,false);
 
 let statsDone=false;
 const statsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting||statsDone)return;statsDone=true;document.querySelectorAll('[data-count]').forEach((el,index)=>{const target=Number(el.dataset.count),decimal=Number(el.dataset.decimal||0),suffix=el.dataset.suffix||'',start=performance.now()+index*90;function count(now){const p=Math.max(0,Math.min(1,(now-start)/1000));const eased=1-(1-p)**3;const raw=target*eased;el.textContent=decimal?(raw/100).toFixed(decimal):`${Math.round(raw)}${suffix}`;if(p<1)requestAnimationFrame(count)}requestAnimationFrame(count)})}),{threshold:.35});statsObserver.observe(document.querySelector('.stats-panel'));
