@@ -16,6 +16,13 @@ const CASE_STUDIES={
   keyco:{title:'Keyco',image:'assets/projects/keyco.jpg',alt:{tr:'Keyco e-ticaret ürün ekranı',en:'Keyco e-commerce product screen'},category:{tr:'E-ticaret · Web uygulaması',en:'E-commerce · Web application'},summary:{tr:'Oyun kodları ve dijital ürünler için keşif, kategori, hesap ve satın alma akışlarını bir araya getiren e-ticaret uygulaması.',en:'An e-commerce application bringing together discovery, category, account and purchase flows for game keys and digital products.'},facts:{tr:[['Rol','Full-stack geliştirme'],['Yıl','2025'],['Platform','Web'],['Altyapı','React · Node.js · Firebase']],en:[['Role','Full-stack development'],['Year','2025'],['Platform','Web'],['Stack','React · Node.js · Firebase']]},problem:{tr:'Farklı oyun platformlarındaki dijital ürünlerin hızlı bulunması, kategori ve platforma göre filtrelenmesi ve güvenli bir satın alma akışına taşınması gerekiyordu.',en:'Digital products across gaming platforms needed to be easy to discover, filter by category and platform, and move through a clear purchase flow.'},approach:{tr:'Kataloğu platform ve kategori etrafında düzenledim; arama, filtreleme, üyelik ve ödeme adımlarını tek kullanıcı yolculuğu içinde kurdum.',en:'I structured the catalogue around platforms and categories, then connected search, filtering, accounts and payment into one user journey.'},result:{tr:'Dijital ürün keşfi, hesap yönetimi ve ödeme entegrasyonlarını destekleyen, iki dilli ve farklı ekranlara uyumlu bir mağaza deneyimi oluştu.',en:'The result is a responsive, bilingual store experience supporting digital product discovery, account management and payment integrations.'},decisions:{tr:['Platform ve kategori bazlı ürün taksonomisi','Arama ve filtre durumunun tek ürün listesinde birleşmesi','Üyelik ve sipariş akışlarında Firebase','Kalıcı TR/EN dil ve tema tercihi'],en:['Platform and category product taxonomy','Combined search and filter state','Firebase for accounts and orders','Persistent TR/EN language and theme preference']},links:[{type:'live',href:'https://keyco.vercel.app'},{type:'code',href:'https://github.com/arincakyildiz/keyco'}]}
 };
 
+const PROJECT_TECH={
+  kanyolda:['React Native','Next.js','Firebase'],
+  sinaru:['Foundry Local','Node.js','SQLite','RAG'],
+  perfiai:['Next.js','FastAPI','SentenceTransformers'],
+  keyco:['React','Node.js','Firebase']
+};
+
 const t=key=>window.TRANSLATIONS[lang]?.[key]??key;
 const lineElements=()=>[...document.querySelectorAll('[data-i18n-lines]')];
 function buildLine(element,lines){element.replaceChildren(...lines.map(text=>{const outer=document.createElement('span');const inner=document.createElement('i');inner.textContent=text;outer.append(inner);return outer}))}
@@ -27,7 +34,7 @@ function applyLanguage(){
   document.querySelectorAll('.word-reveal[data-i18n]').forEach(el=>buildWords(el,t(el.dataset.i18n)));
   languageButton.textContent=lang==='tr'?'EN':'TR';languageButton.setAttribute('aria-label',lang==='tr'?'Switch to English':'Türkçeye geç');
   document.title=lang==='tr'?'Ahmet Arınç Akyıldız — Yazılım Mühendisi':'Ahmet Arınç Akyıldız — Software Engineer';
-  if(activeCase)renderCase(activeCase);renderHeroCard(false);
+  if(activeCase)renderCase(activeCase);renderHeroCard(false);renderCarouselInfo(false);
 }
 
 function applyAdaptiveGrid(){const size=16-(16*(((1920-innerWidth)/1920)*100*.6666))/100;if(size>16)root.style.fontSize=`${size}px`;else root.style.removeProperty('font-size')}
@@ -85,6 +92,70 @@ function setupLiquidReveal(){
   function stamp(x,y){brushCtx.clearRect(0,0,diameter,diameter);const gradient=brushCtx.createRadialGradient(radius,radius,0,radius,radius,radius);gradient.addColorStop(0,'#fff');gradient.addColorStop(.55,'rgba(255,255,255,.82)');gradient.addColorStop(1,'rgba(255,255,255,0)');brushCtx.globalCompositeOperation='source-over';brushCtx.fillStyle=gradient;brushCtx.fillRect(0,0,diameter,diameter);brushCtx.globalCompositeOperation='source-in';brushCtx.drawImage(cover,x-radius,y-radius,diameter,diameter,0,0,diameter,diameter);ctx.globalCompositeOperation='source-over';ctx.drawImage(brush,x-radius,y-radius)}
   function tick(){const drawing=points.length>0;if(drawing)idle=0;else idle++;if(idle<=120){ctx.globalCompositeOperation='destination-out';ctx.fillStyle=`rgba(0,0,0,${drawing?.016:Math.min(.016+idle*.004,.5)})`;ctx.fillRect(0,0,canvas.width,canvas.height);if(drawing){points.splice(0).forEach(point=>stamp(point.x,point.y))}else if(idle===120)ctx.clearRect(0,0,canvas.width,canvas.height)}requestAnimationFrame(tick)}requestAnimationFrame(tick)
 }
+
+const carousel=document.getElementById('project-carousel');
+const carouselSlides=[...carousel.querySelectorAll('.carousel-slide')];
+const carouselKeys=carouselSlides.map(slide=>slide.dataset.project);
+const carouselDots=[...carousel.querySelectorAll('.carousel-dots button')];
+let carouselIndex=0;
+let dragStartX=0;
+let dragDelta=0;
+let dragging=false;
+let wheelLocked=false;
+let pointerSlideIndex=-1;
+let suppressPosterClick=false;
+
+function carouselSpacing(){return innerWidth<=640?innerWidth*.62:innerWidth<=1024?innerWidth*.22:Math.min(innerWidth*.17,16.5*parseFloat(getComputedStyle(root).fontSize))}
+function carouselOffset(index,position){let value=index-position;const half=carouselSlides.length/2;while(value>half)value-=carouselSlides.length;while(value<-half)value+=carouselSlides.length;return value}
+function layoutCarousel(position=carouselIndex){
+  const spacing=carouselSpacing();
+  carouselSlides.forEach((slide,index)=>{
+    const offset=carouselOffset(index,position),distance=Math.min(Math.abs(offset),2.4);
+    const scale=1.055-distance*.095;
+    const x=offset*spacing;
+    const y=distance*1.05*parseFloat(getComputedStyle(root).fontSize);
+    const rotateY=offset*-5.5;
+    const rotateZ=offset*1.4;
+    slide.style.transform=`translate3d(calc(-50% + ${x}px),${y}px,${distance*-38}px) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale})`;
+    slide.style.opacity=String(Math.max(.38,1-distance*.2));
+    slide.style.filter=`saturate(${Math.max(.58,1-distance*.14)})`;
+    slide.style.zIndex=String(20-Math.round(distance*4));
+  });
+}
+
+function renderCarouselInfo(animate=true){
+  const key=carouselKeys[carouselIndex],data=CASE_STUDIES[key],info=document.getElementById('active-project-info');
+  document.getElementById('active-project-number').textContent=String(carouselIndex+1).padStart(2,'0');
+  document.getElementById('active-project-category').textContent=data.category[lang];
+  document.getElementById('active-project-title').textContent=data.title;
+  document.getElementById('active-project-description').textContent=t(`short.${key}`);
+  document.getElementById('active-project-tech').replaceChildren(...PROJECT_TECH[key].map(value=>{const chip=document.createElement('span');chip.textContent=value;return chip}));
+  const caseButton=document.createElement('button');caseButton.className='pill pill-dark';caseButton.textContent=t('case.label');caseButton.addEventListener('click',()=>openCase(key,caseButton));
+  const links=data.links.map(link=>{const anchor=document.createElement('a');anchor.className='pill pill-outline';anchor.href=link.href;anchor.target='_blank';anchor.rel='noopener';anchor.textContent=linkLabel(link.type);return anchor});
+  document.getElementById('active-project-actions').replaceChildren(caseButton,...links);
+  if(animate&&!reducedMotion.matches){info.classList.remove('is-changing');void info.offsetWidth;info.classList.add('is-changing');setTimeout(()=>info.classList.remove('is-changing'),450)}
+}
+
+function setCarouselIndex(index,animate=true){
+  carouselIndex=(index+carouselSlides.length)%carouselSlides.length;
+  carouselSlides.forEach((slide,i)=>{const active=i===carouselIndex;slide.classList.toggle('is-active',active);slide.toggleAttribute('aria-current',active);slide.querySelector('.project-poster').setAttribute('aria-label',active?`${CASE_STUDIES[carouselKeys[i]].title} — ${t('case.label')}`:`${CASE_STUDIES[carouselKeys[i]].title}`)});
+  carouselDots.forEach((dot,i)=>dot.classList.toggle('active',i===carouselIndex));
+  document.getElementById('carousel-counter').textContent=`${String(carouselIndex+1).padStart(2,'0')} / ${String(carouselSlides.length).padStart(2,'0')}`;
+  layoutCarousel();renderCarouselInfo(animate);
+}
+
+carouselSlides.forEach((slide,index)=>slide.querySelector('.project-poster').addEventListener('click',()=>{if(suppressPosterClick)return;if(index===carouselIndex)openCase(carouselKeys[index],slide.querySelector('.project-poster'));else setCarouselIndex(index)}));
+carouselDots.forEach((dot,index)=>dot.addEventListener('click',()=>setCarouselIndex(index)));
+document.getElementById('carousel-prev').addEventListener('click',()=>setCarouselIndex(carouselIndex-1));
+document.getElementById('carousel-next').addEventListener('click',()=>setCarouselIndex(carouselIndex+1));
+carousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();setCarouselIndex(carouselIndex-1)}else if(event.key==='ArrowRight'){event.preventDefault();setCarouselIndex(carouselIndex+1)}else if((event.key==='Enter'||event.key===' ')&&event.target===carousel){event.preventDefault();openCase(carouselKeys[carouselIndex],carousel)}});
+carousel.addEventListener('pointerdown',event=>{if(event.button!==0||!event.target.closest('.carousel-stage'))return;dragging=true;dragStartX=event.clientX;dragDelta=0;pointerSlideIndex=carouselSlides.findIndex(slide=>slide.contains(event.target));carousel.classList.add('is-dragging');carousel.setPointerCapture(event.pointerId)});
+carousel.addEventListener('pointermove',event=>{if(!dragging)return;dragDelta=event.clientX-dragStartX;layoutCarousel(carouselIndex-dragDelta/carouselSpacing())});
+function finishDrag(event){if(!dragging)return;dragging=false;carousel.classList.remove('is-dragging');if(carousel.hasPointerCapture(event.pointerId))carousel.releasePointerCapture(event.pointerId);suppressPosterClick=true;setTimeout(()=>suppressPosterClick=false,0);if(event.type==='pointercancel'){layoutCarousel();return}if(Math.abs(dragDelta)>Math.min(72,carouselSpacing()*.22))setCarouselIndex(carouselIndex+(dragDelta<0?1:-1));else if(pointerSlideIndex>=0){if(pointerSlideIndex===carouselIndex)openCase(carouselKeys[pointerSlideIndex],carouselSlides[pointerSlideIndex].querySelector('.project-poster'));else setCarouselIndex(pointerSlideIndex)}else layoutCarousel()}
+carousel.addEventListener('pointerup',finishDrag);carousel.addEventListener('pointercancel',finishDrag);
+carousel.addEventListener('wheel',event=>{const horizontal=Math.abs(event.deltaX)>Math.abs(event.deltaY)||event.shiftKey;if(!horizontal)return;event.preventDefault();if(wheelLocked||Math.abs(event.deltaX||event.deltaY)<8)return;wheelLocked=true;setCarouselIndex(carouselIndex+((event.deltaX||event.deltaY)>0?1:-1));setTimeout(()=>wheelLocked=false,520)},{passive:false});
+addEventListener('resize',()=>layoutCarousel());
+setCarouselIndex(0,false);
 
 let statsDone=false;
 const statsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting||statsDone)return;statsDone=true;document.querySelectorAll('[data-count]').forEach((el,index)=>{const target=Number(el.dataset.count),decimal=Number(el.dataset.decimal||0),suffix=el.dataset.suffix||'',start=performance.now()+index*90;function count(now){const p=Math.max(0,Math.min(1,(now-start)/1000));const eased=1-(1-p)**3;const raw=target*eased;el.textContent=decimal?(raw/100).toFixed(decimal):`${Math.round(raw)}${suffix}`;if(p<1)requestAnimationFrame(count)}requestAnimationFrame(count)})}),{threshold:.35});statsObserver.observe(document.querySelector('.stats-panel'));
