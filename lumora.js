@@ -89,10 +89,10 @@ function setupPortraitReveal(){
   function updateParallax(){const progress=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/hero.offsetHeight));host.style.setProperty('--hero-shift',`${progress*Math.min(innerHeight*.075,76)}px`)}
   addEventListener('scroll',updateParallax,{passive:true});updateParallax();
   if(reducedMotion.matches)return;
-  const first=host.querySelector('.portrait-alt'),spots=[first];for(let i=0;i<3;i++){const clone=first.cloneNode();clone.removeAttribute('fetchpriority');host.append(clone);spots.push(clone)}
+  const first=host.querySelector('.portrait-alt'),spots=[first];for(let i=0;i<1;i++){const clone=first.cloneNode();clone.removeAttribute('fetchpriority');host.append(clone);spots.push(clone)}
   let spotIndex=0,lastStamp=0;
   function hide(){spots.forEach(spot=>{clearTimeout(spot.hideTimer);spot.style.setProperty('--portrait-radius','0px')})}
-  function reveal(event){const rect=host.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom){hide();return}const now=performance.now();if(event.type==='pointermove'&&now-lastStamp<42)return;lastStamp=now;const spot=spots[spotIndex++%spots.length];spot.style.setProperty('--portrait-x',`${event.clientX-rect.left}px`);spot.style.setProperty('--portrait-y',`${event.clientY-rect.top}px`);spot.style.setProperty('--portrait-radius',innerWidth<=640?'10rem':'13rem');clearTimeout(spot.hideTimer);spot.hideTimer=setTimeout(()=>spot.style.setProperty('--portrait-radius','0px'),540)}
+  function reveal(event){const rect=host.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom){hide();return}const now=performance.now();if(event.type==='pointermove'&&now-lastStamp<38)return;lastStamp=now;const spot=spots[spotIndex++%spots.length];spot.style.setProperty('--portrait-x',`${event.clientX-rect.left}px`);spot.style.setProperty('--portrait-y',`${event.clientY-rect.top}px`);spot.style.setProperty('--portrait-radius',innerWidth<=640?'8rem':'11rem');clearTimeout(spot.hideTimer);spot.hideTimer=setTimeout(()=>spot.style.setProperty('--portrait-radius','0px'),260)}
   addEventListener('pointermove',reveal,{passive:true});hero.addEventListener('pointerdown',reveal,{passive:true});hero.addEventListener('pointerleave',hide);
 }
 
