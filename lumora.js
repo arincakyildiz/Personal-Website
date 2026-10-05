@@ -88,14 +88,11 @@ function setupPortraitReveal(){
   const host=document.querySelector('.liquid-reveal'),hero=host.closest('.hero');
   function updateParallax(){const progress=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/hero.offsetHeight));host.style.setProperty('--hero-shift',`${progress*Math.min(innerHeight*.075,76)}px`)}
   addEventListener('scroll',updateParallax,{passive:true});updateParallax();
-  const mobile=innerWidth<=640,mode=mobile?host.dataset.mobileMode:host.dataset.desktopMode;
-  hero.dataset.portraitMode=mode;root.dataset.heroPortraitMode=mode;
-  if(reducedMotion.matches||mode!=='cursor')return;
-  const trail=Math.max(1,Number(host.dataset.revealTrail)||2),radius=Math.max(48,Number(host.dataset.revealRadius)||176),linger=Math.max(80,Number(host.dataset.revealLinger)||260);
-  const first=host.querySelector('.portrait-alt'),spots=[first];for(let i=1;i<trail;i++){const clone=first.cloneNode();clone.removeAttribute('fetchpriority');host.append(clone);spots.push(clone)}
+  if(reducedMotion.matches)return;
+  const first=host.querySelector('.portrait-alt'),spots=[first];for(let i=0;i<1;i++){const clone=first.cloneNode();clone.removeAttribute('fetchpriority');host.append(clone);spots.push(clone)}
   let spotIndex=0,lastStamp=0;
   function hide(){spots.forEach(spot=>{clearTimeout(spot.hideTimer);spot.style.setProperty('--portrait-radius','0px')})}
-  function reveal(event){const rect=host.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom){hide();return}const now=performance.now();if(event.type==='pointermove'&&now-lastStamp<38)return;lastStamp=now;const spot=spots[spotIndex++%spots.length];spot.style.setProperty('--portrait-x',`${event.clientX-rect.left}px`);spot.style.setProperty('--portrait-y',`${event.clientY-rect.top}px`);spot.style.setProperty('--portrait-radius',`${radius}px`);clearTimeout(spot.hideTimer);spot.hideTimer=setTimeout(()=>spot.style.setProperty('--portrait-radius','0px'),linger)}
+  function reveal(event){const rect=host.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom){hide();return}const now=performance.now();if(event.type==='pointermove'&&now-lastStamp<38)return;lastStamp=now;const spot=spots[spotIndex++%spots.length];spot.style.setProperty('--portrait-x',`${event.clientX-rect.left}px`);spot.style.setProperty('--portrait-y',`${event.clientY-rect.top}px`);spot.style.setProperty('--portrait-radius',innerWidth<=640?'8rem':'11rem');clearTimeout(spot.hideTimer);spot.hideTimer=setTimeout(()=>spot.style.setProperty('--portrait-radius','0px'),260)}
   addEventListener('pointermove',reveal,{passive:true});hero.addEventListener('pointerdown',reveal,{passive:true});hero.addEventListener('pointerleave',hide);
 }
 
