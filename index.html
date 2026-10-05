@@ -1,323 +1,51 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="tr"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ahmet Arınç Akyıldız — Yazılım Mühendisi</title>
-  <meta name="description" content="Ahmet Arınç Akyıldız'ın web, mobil ve yerel yapay zekâ projelerini içeren yazılım mühendisliği portfolyosu.">
-  <meta name="author" content="Ahmet Arınç Akyıldız">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="https://www.arincakyildiz.com.tr/">
-  <link rel="alternate" hreflang="tr" href="https://www.arincakyildiz.com.tr/">
-  <link rel="alternate" hreflang="en" href="https://www.arincakyildiz.com.tr/?lang=en">
-  <meta name="theme-color" content="#f3f0e8">
-  <meta property="og:type" content="profile">
-  <meta property="og:title" content="Ahmet Arınç Akyıldız — Yazılım Mühendisi">
-  <meta property="og:description" content="Web, mobil ve yerel yapay zekâ projeleri.">
-  <meta property="og:url" content="https://www.arincakyildiz.com.tr/">
-  <meta property="og:image" content="https://www.arincakyildiz.com.tr/assets/og-preview.png">
-  <meta property="og:locale" content="tr_TR">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://www.arincakyildiz.com.tr/assets/og-preview.png">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Ahmet Arınç Akyıldız","url":"https://www.arincakyildiz.com.tr/","email":"mailto:ahmetarincakyildiz@gmail.com","jobTitle":"Software Engineering Student","sameAs":["https://github.com/arincakyildiz","https://www.linkedin.com/in/ahmetarincakyildiz"]}
-  </script>
-  <link rel="shortcut icon" href="favicon.ico?v=18">
-  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png?v=18">
-  <link rel="apple-touch-icon" href="assets/logo.png?v=18">
-  <link rel="preload" href="assets/fonts/manrope-0.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="assets/fonts/manrope.css">
-  <link rel="stylesheet" href="styles.css?v=41">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}</script>
-</head>
-<body>
+  <meta name="description" content="Ahmet Arınç Akyıldız'ın web, mobil ve yerel yapay zekâ projelerini içeren yazılım mühendisliği portfolyosu."><meta name="theme-color" content="#0a0a0a">
+  <meta property="og:type" content="profile"><meta property="og:title" content="Ahmet Arınç Akyıldız — Yazılım Mühendisi"><meta property="og:description" content="Web, mobil ve yerel yapay zekâ projeleri."><meta property="og:image" content="https://www.arincakyildiz.com.tr/assets/og-preview.png">
+  <link rel="canonical" href="https://www.arincakyildiz.com.tr/"><link rel="icon" type="image/png" href="favicon.png?v=18"><link rel="preload" href="assets/fonts/manrope-0.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="assets/fonts/manrope.css"><link rel="stylesheet" href="styles.css?v=50">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ahmet Arınç Akyıldız","url":"https://www.arincakyildiz.com.tr/","email":"mailto:ahmetarincakyildiz@gmail.com","jobTitle":"Software Engineering Student","sameAs":["https://github.com/arincakyildiz","https://www.linkedin.com/in/ahmetarincakyildiz"]}</script>
+</head><body>
   <a class="skip-link" href="#main" data-i18n="skip">İçeriğe geç</a>
+  <div class="page-loader" aria-hidden="true"><div class="loader-center"><div class="loader-brand"><svg viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg><span>Arınç Akyıldız</span></div><p data-i18n="loader.note">Fikirden çalışan ürüne, sakin bir mühendislikle.</p></div><div class="loader-progress"><i><b></b></i><div><span>Loading</span><strong>000</strong></div></div></div>
 
-  <header class="site-header">
-    <div class="header-inner page-shell">
-      <a class="brand" href="#main" aria-label="Ahmet Arınç Akyıldız — Ana sayfa">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Arınç Akyıldız</span>
-      </a>
-      <nav aria-label="Ana menü" data-i18n-attr="aria-label:menu">
-        <a href="#projects" data-i18n="nav.projects">Projeler</a>
-        <a href="#about" data-i18n="nav.about">Hakkımda</a>
-        <a href="#contact" data-i18n="nav.contact">İletişim</a>
-      </nav>
-      <div class="header-tools">
-        <button id="language" class="plain-control" aria-label="Switch to English">EN</button>
-        <button id="settings-toggle" class="icon-control" aria-expanded="false" aria-controls="settings-panel" data-i18n-attr="aria-label:settings.open">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6"/></svg>
-        </button>
-        <div id="settings-panel" class="settings-panel" hidden>
-          <button id="theme"><span data-i18n="settings.theme">Tema</span><span class="setting-value" id="theme-value">Açık</span></button>
-          <button id="motion"><span data-i18n="settings.motion">Hareket</span><span class="setting-value" id="motion-value">Açık</span></button>
-        </div>
-      </div>
-    </div>
-    <div class="scroll-line" aria-hidden="true"><span></span></div>
-  </header>
+  <header class="site-header"><div class="shell header-inner">
+    <a class="brand hover-lift" href="#home" aria-label="Arınç Akyıldız — Ana sayfa"><svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg><span>Arınç Akyıldız</span></a>
+    <nav class="desktop-nav" aria-label="Ana menü"><a href="#home" data-i18n="nav.home">Ana sayfa</a><a href="#works" data-i18n="nav.work">Projeler</a><a href="#experience" data-i18n="nav.experience">Deneyim</a><a href="#about" data-i18n="nav.about">Hakkımda</a><button data-contact data-i18n="nav.contact">İletişim</button></nav>
+    <div class="header-actions"><div class="clock-chip"><span data-i18n="clock.label">Yerel saat</span><b id="clock-time">9:41</b><i></i><b id="clock-date">12 Mart 2026</b></div><button id="language" class="language-button" aria-label="Switch to English">EN</button><button id="menu-open" class="menu-button" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span data-i18n="menu.open">Menü</span></button></div>
+  </div></header>
 
   <main id="main">
-    <section class="hero page-shell" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="status-line"><span aria-hidden="true"></span><span data-i18n="hero.status">Yeni fırsatlara ve projelere açık</span></p>
-          <h1 id="hero-title" data-i18n-html="hero.statement">Ürün çıkaran bir<br><em>yazılım mühendisiyim.</em></h1>
-          <p class="hero-description" data-i18n="hero.description">Web ve mobil ürünler geliştiriyorum. Son dönemde çevrimdışı yapay zekâ, harita tabanlı eşleştirme ve operasyon uygulamaları üzerinde çalışıyorum.</p>
-          <div class="hero-actions">
-            <a class="action-link action-link-solid" href="#projects"><span data-i18n="hero.cta">Seçili projeler</span><span class="arrow" aria-hidden="true"></span></a>
-            <a class="action-link" href="assets/cv-tr.pdf" id="hero-cv-link" target="_blank"><span data-i18n="hero.cv">CV'yi aç</span><span class="arrow" aria-hidden="true"></span></a>
-          </div>
-        </div>
-        <aside class="hero-note">
-          <p data-i18n="hero.note">Fikri arayüzden veritabanına kadar çalışan bir ürüne dönüştürmeyi seviyorum.</p>
-          <dl>
-            <div><dt data-i18n="hero.locationLabel">Konum</dt><dd data-i18n="hero.location">Ankara, Türkiye</dd></div>
-            <div><dt data-i18n="hero.focusLabel">Şu an</dt><dd data-i18n="hero.focus">Yerel AI ve ürün mühendisliği</dd></div>
-          </dl>
-        </aside>
-      </div>
-
-      <div class="hero-collage" aria-label="Seçili proje ekranları" data-i18n-attr="aria-label:hero.gallery">
-        <a class="collage-card collage-main" href="#project-kanyolda">
-          <img src="assets/projects/kanyolda.jpg" alt="KanYolda web ve mobil uygulaması" width="1440" height="1000">
-          <span><b>KanYolda</b><small data-i18n="hero.collage.kanyolda">Mobil &amp; web ürün</small></span>
-        </a>
-        <a class="collage-card collage-top" href="#project-sinaru">
-          <img src="assets/projects/sinaru.jpg" alt="Sinaru yerel bilgi asistanı" width="1440" height="1000">
-          <span><b>Sinaru</b><small data-i18n="hero.collage.sinaru">Çevrimdışı RAG</small></span>
-        </a>
-        <a class="collage-card collage-bottom" href="#project-keyco">
-          <img src="assets/projects/keyco.jpg" alt="Keyco e-ticaret uygulaması" width="1440" height="1000">
-          <span><b>Keyco</b><small data-i18n="hero.collage.keyco">E-ticaret</small></span>
-        </a>
-      </div>
-      <div class="hero-footnote"><span>2022 — 2026</span><span data-i18n="hero.footnote">Yazılım mühendisliği · ürün geliştirme</span></div>
+    <section id="home" class="hero"><div class="liquid-reveal" aria-hidden="true"><img src="assets/projects/kanyolda.jpg" alt="" fetchpriority="high"><canvas></canvas></div><div class="hero-vignette" aria-hidden="true"></div><div class="hero-watermark" aria-hidden="true">ARINÇ</div>
+      <div class="shell hero-grid"><div class="hero-copy"><p class="eyebrow hero-ready"><span></span><b data-i18n="hero.eyebrow">Yazılım mühendisi</b></p><h1 id="hero-title" class="line-reveal hero-ready" data-i18n-lines="hero.lines"><span>Fikirleri,</span><span>çalışan ürünlere</span><span>dönüştürüyorum.</span></h1><div class="hero-proof hero-ready"><div class="stars" aria-hidden="true">★★★★★</div><p data-i18n="hero.proof">10+ ürün ve deney tamamlandı</p></div><div class="hero-ctas hero-ready"><button class="pill pill-dark" data-contact><span data-i18n="hero.talk">Konuşalım</span><i class="round-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></button><a class="pill pill-outline" href="#works"><span data-i18n="hero.view">Projeleri gör</span></a></div></div>
+        <aside class="hero-side"><div class="hero-card hero-ready"><button id="hero-card-next" class="hero-card-main"><span class="hero-card-mark"><svg viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg></span><span class="hero-card-copy"><small id="hero-card-caption">Mobil ürün</small><strong id="hero-card-title">Gerçek ihtiyaca çözüm.</strong><span class="hero-card-controls"><span class="card-dots"><i class="active"></i><i></i><i></i></span><span class="mini-arrows"><b id="hero-card-prev" role="button" aria-label="Önceki">‹</b><b role="presentation">›</b></span></span></span></button></div><div class="tool-cloud hero-ready"><p data-i18n="hero.tools">Çalıştığım teknolojiler</p><div><span>Next.js</span><span>Angular</span><span>Node.js</span><span>Python</span><span>Flutter</span><span>Firebase</span><span>RAG</span></div></div></aside>
+      </div><div class="shell hero-status hero-ready"><span data-i18n="hero.since">2022'den beri geliştiriyorum</span><span data-i18n="hero.location">Ankara · Gazimağusa</span><span data-i18n="hero.scroll">Keşfetmek için kaydır</span></div>
     </section>
 
-    <section id="projects" class="featured-work" aria-labelledby="work-title">
-      <div class="section-intro page-shell">
-        <p class="section-number">01</p>
-        <div><h2 id="work-title" data-i18n="work.title">Seçili işler</h2><p data-i18n="work.intro">Dört farklı problem, dört farklı ürün yaklaşımı.</p></div>
-      </div>
+    <section id="about" class="about section-pad"><div class="shell about-grid"><div class="about-symbol"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5"/></svg><p class="eyebrow reveal"><span></span><b data-i18n="about.eyebrow">Hakkımda</b></p><div class="about-location reveal"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5"/></svg><span data-i18n="about.location">Ankara ve Gazimağusa arasında ürün geliştiriyorum.</span></div></div><div class="about-content"><h2 class="word-reveal" data-i18n="about.statement">Ürünün yalnızca çalışmasına değil, anlaşılır, hızlı ve gerçekten kullanılabilir olmasına önem veriyorum.</h2><p class="about-detail reveal" data-i18n="about.detail">Doğu Akdeniz Üniversitesi'nde yazılım mühendisliği okuyorum. Microsoft'ta yerel yapay zekâ ve belge arama, Bilicisoft'ta depo yönetimi üzerinde çalıştım.</p><div class="about-meta reveal"><dl><div><dt data-i18n="about.education">Eğitim</dt><dd data-i18n="about.educationValue">Doğu Akdeniz Üniversitesi · Yazılım Mühendisliği</dd></div><div><dt data-i18n="about.languages">Diller</dt><dd data-i18n="about.languagesValue">Türkçe · İngilizce B2</dd></div></dl><div class="cv-buttons"><a class="pill pill-outline" href="assets/cv-tr.pdf" target="_blank">CV — TR</a><a class="pill pill-outline" href="assets/cv-en.pdf" target="_blank">CV — EN</a></div></div></div></div></section>
 
-      <article id="project-kanyolda" class="featured-project project-red" data-project="kanyolda" data-index="01">
-        <div class="project-layout page-shell">
-          <div class="project-copy">
-            <p class="project-kicker"><span>01</span><span data-i18n="category.kanyolda">Mobil ürün · Web platformu</span></p>
-            <h3>KanYolda</h3>
-            <p class="project-lead" data-i18n="feature.kanyolda">Kan ihtiyacını doğru donörle, doğru zamanda buluşturan ürün.</p>
-            <p class="project-body" data-i18n="short.kanyolda">Konum bazlı eşleştirme, acil ilanlar, bildirimler, sohbet ve yönetim paneli tek sistemde çalışıyor.</p>
-            <dl class="project-facts">
-              <div><dt data-i18n="fact.role">Rol</dt><dd data-i18n="role.fullProduct">Ürün ve yazılım geliştirme</dd></div>
-              <div><dt data-i18n="fact.stack">Altyapı</dt><dd>Next.js · React Native · Firebase</dd></div>
-            </dl>
-            <div class="project-actions">
-              <button class="action-link action-link-solid" data-open-project="kanyolda"><span data-i18n="project.case">Vaka çalışması</span><span class="arrow" aria-hidden="true"></span></button>
-              <a class="action-link" href="https://www.kanyolda.com.tr/" target="_blank" rel="noopener"><span data-i18n="project.live">Canlı site</span><span class="arrow" aria-hidden="true"></span></a>
-            </div>
-          </div>
-          <button class="project-media" data-open-project="kanyolda" aria-label="KanYolda vaka çalışmasını aç">
-            <span class="media-label">kanyolda.com.tr</span>
-            <img src="assets/projects/kanyolda.jpg" alt="KanYolda ürün ekranı" width="1440" height="1000" loading="lazy">
-          </button>
-        </div>
-      </article>
+    <section class="build-band" aria-label="Fikirden ürüne"><ul class="shell"><li class="tile tile-light reveal" data-i18n="band.idea">Fikir</li><li class="tile tile-accent reveal" data-i18n="band.code">Kod</li><li class="tile tile-dark reveal"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li><li class="tile tile-ghost reveal" data-i18n="band.product">Ürün</li></ul></section>
 
-      <article id="project-sinaru" class="featured-project project-blue" data-project="sinaru" data-index="02">
-        <div class="project-layout page-shell">
-          <div class="project-copy">
-            <p class="project-kicker"><span>02</span><span data-i18n="category.sinaru">Yerel yapay zekâ · RAG</span></p>
-            <h3>Sinaru</h3>
-            <p class="project-lead" data-i18n="feature.sinaru">Belgelerini bilgisayarından çıkarmadan okuyup kaynaklarıyla cevaplayan asistan.</p>
-            <p class="project-body" data-i18n="short.sinaru">Yerel model, semantik arama, SQLite vektör deposu ve gerçek zamanlı yanıt akışı birlikte çalışıyor.</p>
-            <dl class="project-facts">
-              <div><dt data-i18n="fact.role">Rol</dt><dd data-i18n="role.engineering">Mimari, backend ve arayüz</dd></div>
-              <div><dt data-i18n="fact.stack">Altyapı</dt><dd>Node.js · Foundry Local · SQLite</dd></div>
-            </dl>
-            <div class="project-actions">
-              <button class="action-link action-link-solid" data-open-project="sinaru"><span data-i18n="project.case">Vaka çalışması</span><span class="arrow" aria-hidden="true"></span></button>
-              <a class="action-link" href="https://github.com/arincakyildiz/RAG-Application-with-Foundry-Local" target="_blank" rel="noopener"><span data-i18n="project.code">Kaynak kodu</span><span class="arrow" aria-hidden="true"></span></a>
-            </div>
-          </div>
-          <button class="project-media" data-open-project="sinaru" aria-label="Sinaru vaka çalışmasını aç">
-            <span class="media-label">%100 local / offline</span>
-            <img src="assets/projects/sinaru.jpg" alt="Sinaru yerel bilgi asistanı ekranı" width="1440" height="1000" loading="lazy">
-          </button>
-        </div>
-      </article>
+    <section id="works" class="portfolio section-pad"><div class="shell"><div class="portfolio-heading"><p class="eyebrow eyebrow-pill reveal"><span></span><b data-i18n="work.eyebrow">Portfolyo</b></p><h2 class="line-reveal" data-i18n-lines="work.lines"><span>Seçili projeler</span></h2></div><ul class="project-grid">
+      <li class="reveal"><button class="work-card" data-open-project="kanyolda"><span class="work-meta"><small data-i18n="category.kanyolda">Mobil ürün · Web platformu</small><small>2026</small></span><span class="work-orbit"><img src="assets/projects/kanyolda.jpg" alt="KanYolda ürün ekranı"></span><span class="work-bottom"><strong>KanYolda</strong><span data-i18n="short.kanyolda">Konum bazlı eşleştirme, acil ilanlar, bildirimler, sohbet ve yönetim paneli tek sistemde çalışıyor.</span><i><b>React Native</b><b>Next.js</b><b>Firebase</b></i></span><em><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></em></button></li>
+      <li class="reveal"><button class="work-card" data-open-project="sinaru"><span class="work-meta"><small data-i18n="category.sinaru">Yerel yapay zekâ · RAG</small><small>2026</small></span><span class="work-orbit"><img src="assets/projects/sinaru.jpg" alt="Sinaru ürün ekranı"></span><span class="work-bottom"><strong>Sinaru</strong><span data-i18n="short.sinaru">Yerel model, semantik arama, SQLite vektör deposu ve gerçek zamanlı yanıt akışı birlikte çalışıyor.</span><i><b>Foundry Local</b><b>Node.js</b><b>SQLite</b></i></span><em><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></em></button></li>
+      <li class="reveal"><button class="work-card" data-open-project="perfiai"><span class="work-meta"><small data-i18n="category.perfiai">Anlamsal arama · Öneri sistemi</small><small>2026</small></span><span class="work-orbit work-orbit-contain"><img src="assets/projects/perfiai.png" alt="PerfiAI marka görseli"></span><span class="work-bottom"><strong>PerfiAI</strong><span data-i18n="short.perfiai">26.000 parfümlük katalog, doğal dil ve anlam tabanlı önerilerle aranıyor.</span><i><b>FastAPI</b><b>Embeddings</b><b>Next.js</b></i></span><em><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></em></button></li>
+      <li class="reveal"><button class="work-card" data-open-project="keyco"><span class="work-meta"><small data-i18n="category.keyco">E-ticaret · Web uygulaması</small><small>2025</small></span><span class="work-orbit"><img src="assets/projects/keyco.jpg" alt="Keyco ürün ekranı"></span><span class="work-bottom"><strong>Keyco</strong><span data-i18n="short.keyco">Ürün kataloğu, hesap sistemi, filtreleme ve ödeme entegrasyonlarına odaklanan e-ticaret uygulaması.</span><i><b>React</b><b>Node.js</b><b>Firebase</b></i></span><em><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></em></button></li>
+    </ul></div></section>
 
-      <article id="project-perfiai" class="featured-project project-plum" data-project="perfiai" data-index="03">
-        <div class="project-layout page-shell">
-          <div class="project-copy">
-            <p class="project-kicker"><span>03</span><span data-i18n="category.perfiai">Anlamsal arama · Öneri sistemi</span></p>
-            <h3>PerfiAI</h3>
-            <p class="project-lead" data-i18n="feature.perfiai">Bir kokuyu kelimelerle tarif et; sistem binlerce parfüm içinde yakın eşleşmeyi bulsun.</p>
-            <p class="project-body" data-i18n="short.perfiai">26.000 parfümlük katalog; doğal dil, cinsiyet ve mevsim filtreleriyle aranıyor. Sonuçlar skor, gerekçe ve etiketlerle açıklanıyor.</p>
-            <dl class="project-facts">
-              <div><dt data-i18n="fact.role">Rol</dt><dd data-i18n="role.fullstackAi">Full-stack ve AI entegrasyonu</dd></div>
-              <div><dt data-i18n="fact.stack">Altyapı</dt><dd>Next.js · FastAPI · SentenceTransformers</dd></div>
-            </dl>
-            <div class="project-actions">
-              <button class="action-link action-link-solid" data-open-project="perfiai"><span data-i18n="project.case">Vaka çalışması</span><span class="arrow" aria-hidden="true"></span></button>
-              <a class="action-link" href="https://github.com/arincakyildiz" target="_blank" rel="noopener"><span data-i18n="project.profile">GitHub profili</span><span class="arrow" aria-hidden="true"></span></a>
-            </div>
-          </div>
-          <button class="project-media media-contain" data-open-project="perfiai" aria-label="PerfiAI vaka çalışmasını aç">
-            <span class="media-label">26,000 fragrance records</span>
-            <img src="assets/projects/perfiai.png" alt="PerfiAI marka görseli" width="1024" height="1024" loading="lazy">
-            <span class="perfume-query" aria-hidden="true"><i>“odunsu, sıcak ve geceye uygun”</i><b>semantic match</b></span>
-          </button>
-        </div>
-      </article>
+    <section id="experience" class="experience section-pad"><div class="shell"><p class="eyebrow reveal"><span></span><b data-i18n="experience.eyebrow">Deneyim</b></p><h2 class="line-reveal" data-i18n-lines="experience.lines"><span>Üretime yakın</span><span>problemler üzerinde.</span></h2><ul class="experience-list"><li class="reveal"><article><span>01</span><div><h3>Bilicisoft</h3><p data-i18n="experience.bilicisoftRole">Yazılım Mühendisi Stajyeri · 2026</p></div><p data-i18n="experience.bilicisoft">Angular tabanlı depo yönetim sisteminde envanter, lot ve seri takibi, toplama, paketleme ve sevkiyat modüllerine katkı sağladım.</p><i><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></i></article></li><li class="reveal"><article><span>02</span><div><h3>Microsoft</h3><p data-i18n="experience.microsoftRole">Yapay Zekâ Stajyeri · AI Innovators · 2026</p></div><p data-i18n="experience.microsoft">Çevrimdışı çalışan RAG asistanı geliştirdim; semantik arama, kaynak gösterimi, gerçek zamanlı yanıt ve belge yönetimi üzerinde çalıştım.</p><i><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></i></article></li></ul></div></section>
 
-      <article id="project-keyco" class="featured-project project-violet" data-project="keyco" data-index="04">
-        <div class="project-layout page-shell">
-          <div class="project-copy">
-            <p class="project-kicker"><span>04</span><span data-i18n="category.keyco">E-ticaret · Web uygulaması</span></p>
-            <h3>Keyco</h3>
-            <p class="project-lead" data-i18n="feature.keyco">Oyun kodlarını keşfetme, filtreleme ve satın alma akışlarını tek yerde toplar.</p>
-            <p class="project-body" data-i18n="short.keyco">Ürün kataloğu, hesap sistemi, filtreleme ve ödeme entegrasyonlarına odaklanan e-ticaret uygulaması.</p>
-            <dl class="project-facts">
-              <div><dt data-i18n="fact.role">Rol</dt><dd data-i18n="role.fullstack">Full-stack geliştirme</dd></div>
-              <div><dt data-i18n="fact.stack">Altyapı</dt><dd>React · Node.js · Firebase</dd></div>
-            </dl>
-            <div class="project-actions">
-              <button class="action-link action-link-solid" data-open-project="keyco"><span data-i18n="project.case">Vaka çalışması</span><span class="arrow" aria-hidden="true"></span></button>
-              <a class="action-link" href="https://keyco.vercel.app" target="_blank" rel="noopener"><span data-i18n="project.live">Canlı site</span><span class="arrow" aria-hidden="true"></span></a>
-            </div>
-          </div>
-          <button class="project-media" data-open-project="keyco" aria-label="Keyco vaka çalışmasını aç">
-            <span class="media-label">commerce / discovery</span>
-            <img src="assets/projects/keyco.jpg" alt="Keyco e-ticaret ekranı" width="1440" height="1000" loading="lazy">
-          </button>
-        </div>
-      </article>
-    </section>
-
-    <section class="project-index page-shell" aria-labelledby="archive-title">
-      <div class="section-intro compact-intro">
-        <p class="section-number">02</p>
-        <div><h2 id="archive-title" data-i18n="archive.title">Proje indeksi</h2><p data-i18n="archive.intro">Üzerine gel; seçili projenin ekranını gör.</p></div>
-      </div>
-      <div class="index-layout">
-        <div class="index-list">
-          <button class="index-row" data-open-project="kanyolda" data-preview="assets/projects/kanyolda.jpg" data-kind="Mobil + Web"><span>01</span><strong>KanYolda</strong><small>2026</small><em>React Native · Next.js</em></button>
-          <button class="index-row" data-open-project="sinaru" data-preview="assets/projects/sinaru.jpg" data-kind="Offline RAG"><span>02</span><strong>Sinaru</strong><small>2026</small><em>Foundry Local · Node.js</em></button>
-          <a class="index-row" href="https://github.com/arincakyildiz/kargo-project" target="_blank" rel="noopener" data-kind="Operasyon"><span>03</span><strong data-i18n="title.kargo">Kargo Takip</strong><small>2026</small><em>Angular · RxJS</em></a>
-          <button class="index-row" data-open-project="perfiai" data-preview="assets/projects/perfiai.png" data-kind="AI Recommendation"><span>04</span><strong>PerfiAI</strong><small>2026</small><em>FastAPI · Embeddings</em></button>
-          <a class="index-row" href="https://github.com/arincakyildiz/wavent" target="_blank" rel="noopener" data-kind="Warehouse"><span>05</span><strong>Wavent</strong><small>2026</small><em>Angular · WMS</em></a>
-          <a class="index-row" href="https://roadnix.arincakyildiz.com.tr/" target="_blank" rel="noopener" data-preview="assets/projects/roadnix.jpg" data-kind="Education"><span>06</span><strong>Roadnix</strong><small>2025</small><em>React · Vite</em></a>
-          <a class="index-row" href="https://eventify-trnc.vercel.app" target="_blank" rel="noopener" data-kind="Events"><span>07</span><strong>Eventify TRNC</strong><small>2025</small><em>Node.js · JavaScript</em></a>
-          <button class="index-row" data-open-project="keyco" data-preview="assets/projects/keyco.jpg" data-kind="E-commerce"><span>08</span><strong>Keyco</strong><small>2025</small><em>React · Firebase</em></button>
-          <a class="index-row" href="https://github.com/arincakyildiz/emurebook" target="_blank" rel="noopener" data-kind="Mobile"><span>09</span><strong>Emu Rebook</strong><small>2024</small><em>Flutter · Dart</em></a>
-          <a class="index-row" href="https://tarihisanayikoftecisi.arincakyildiz.com.tr/" target="_blank" rel="noopener" data-kind="Website"><span>10</span><strong data-i18n="title.kofteci">Tarihi Sanayi Köftecisi</strong><small>2024</small><em>HTML · CSS</em></a>
-        </div>
-        <aside class="index-preview" aria-hidden="true">
-          <div class="preview-frame"><img id="archive-preview-image" src="assets/projects/kanyolda.jpg" alt=""><span id="archive-preview-kind">Mobil + Web</span></div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="about" class="about-section">
-      <div class="page-shell">
-        <div class="section-intro inverse-intro">
-          <p class="section-number">03</p>
-          <div><h2 data-i18n="about.title">Arayüzden veritabanına.</h2><p data-i18n="about.subtitle">Ürünün tamamını anlamaya çalışan bir geliştirici.</p></div>
-        </div>
-        <div class="about-grid">
-          <div class="about-statement">
-            <p data-i18n-html="about.statement">Ben Arınç. Doğu Akdeniz Üniversitesi'nde yazılım mühendisliği okuyorum. Bir projenin yalnızca <em>çalışmasına</em> değil, anlaşılır ve kullanılabilir olmasına da önem veriyorum.</p>
-          </div>
-          <div class="about-detail">
-            <p data-i18n="about.current">Microsoft'ta yerel yapay zekâ ve belge arama, Bilicisoft'ta depo yönetimi üzerine çalıştım. Kendi projelerimde kan bağışı, parfüm önerileri, eğitim ve e-ticaret gibi farklı problemleri ürünleştiriyorum.</p>
-            <dl class="plain-facts">
-              <div><dt data-i18n="about.education">Eğitim</dt><dd data-i18n="about.educationValue">Doğu Akdeniz Üniversitesi · Yazılım Mühendisliği</dd></div>
-              <div><dt data-i18n="about.academic">Akademik</dt><dd data-i18n="about.academicValue">3.33 / 4.00 · 2 Yüksek Şeref, 3 Şeref</dd></div>
-              <div><dt data-i18n="about.languages">Diller</dt><dd data-i18n="about.languagesValue">Türkçe · Ana dil / İngilizce · B2</dd></div>
-            </dl>
-            <div class="cv-links">
-              <a href="assets/cv-tr.pdf" target="_blank">CV — Türkçe <span class="arrow" aria-hidden="true"></span></a>
-              <a href="assets/cv-en.pdf" target="_blank">CV — English <span class="arrow" aria-hidden="true"></span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="experience-section page-shell" aria-labelledby="experience-title">
-      <div class="section-intro compact-intro">
-        <p class="section-number">04</p>
-        <div><h2 id="experience-title" data-i18n="experience.title">Deneyim</h2><p data-i18n="experience.subtitle">Üretim ortamına yakın problemler üzerinde çalışma.</p></div>
-      </div>
-      <div class="experience-list">
-        <article><time>07 — 08 / 2026</time><div><h3>Bilicisoft</h3><p class="role" data-i18n="role.bilicisoft">Yazılım Mühendisi Stajyeri · Ankara</p></div><p data-i18n="experience.bilicisoft">Angular tabanlı ileri depo yönetim sisteminde envanter, lot/seri takibi, toplama, paketleme ve sevkiyat modüllerinin geliştirilmesine katkı sağladım.</p></article>
-        <article><time>06 — 07 / 2026</time><div><h3>Microsoft</h3><p class="role" data-i18n="role.microsoft">Yapay Zekâ Stajyeri · AI Innovators</p></div><p data-i18n="experience.microsoft">Çevrimdışı çalışan RAG tabanlı bir asistan geliştirdim; semantik arama, kaynak gösterimi, gerçek zamanlı yanıt ve belge yönetimi üzerinde çalıştım.</p></article>
-      </div>
-      <div class="toolkit">
-        <h3 data-i18n="tools.title">Çalışma alanları</h3>
-        <dl>
-          <div><dt data-i18n="tools.languagesLabel">Diller</dt><dd>Java, JavaScript, TypeScript, Python, Dart</dd></div>
-          <div><dt data-i18n="tools.product">Ürün</dt><dd>React, Next.js, Angular, React Native, Flutter</dd></div>
-          <div><dt data-i18n="tools.systems">Sistemler</dt><dd>Node.js, Express, FastAPI, Firebase, PostgreSQL, SQLite</dd></div>
-          <div><dt data-i18n="tools.ai">Yerel AI</dt><dd>Foundry Local, RAG, embeddings, semantic retrieval</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <section id="contact" class="contact-section">
-      <div class="page-shell contact-grid">
-        <p class="section-number">05</p>
-        <div>
-          <h2 data-i18n-html="contact.title">Bir ürün, staj ya da<br><em>iyi bir fikir</em> üzerine konuşalım.</h2>
-          <a class="contact-mail" href="mailto:ahmetarincakyildiz@gmail.com">ahmetarincakyildiz@gmail.com <span class="arrow" aria-hidden="true"></span></a>
-        </div>
-        <div class="contact-socials">
-          <a href="https://github.com/arincakyildiz" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true"></span></a>
-          <a href="https://www.linkedin.com/in/ahmetarincakyildiz" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true"></span></a>
-          <button id="copy-email" data-i18n="contact.copy">E-postayı kopyala</button>
-          <p id="copy-status" role="status"></p>
-        </div>
-      </div>
-    </section>
+    <section class="stats-wrap"><div class="shell"><div class="stats-panel reveal"><p class="eyebrow eyebrow-light"><span></span><b data-i18n="stats.eyebrow">Rakamlarla</b></p><h2 class="line-reveal" data-i18n-lines="stats.lines"><span>İşin içinden gelen</span><span>somut ilerleme.</span></h2><ul><li class="reveal"><strong data-count="10" data-suffix="+">0+</strong><span data-i18n="stats.projects">Geliştirilen proje</span></li><li class="reveal"><strong data-count="333" data-decimal="2">0.00</strong><span data-i18n="stats.gpa">4.00 üzerinden GPA</span></li><li class="reveal"><strong data-count="2">0</strong><span data-i18n="stats.honors">Yüksek şeref</span></li><li class="reveal"><strong data-count="2">0</strong><span data-i18n="stats.internships">Teknik staj</span></li></ul></div></div></section>
   </main>
 
-  <footer class="page-shell">
-    <span>© <span id="year">2026</span> Ahmet Arınç Akyıldız</span>
-    <span data-i18n="footer.note">Tasarladı ve geliştirdi.</span>
-    <a href="#main"><span data-i18n="footer.top">Yukarı dön</span> <span class="nav-arrow nav-arrow-up" aria-hidden="true"></span></a>
-  </footer>
+  <footer id="contact" class="site-footer"><div class="shell footer-inner"><div class="footer-cta"><h2 class="line-reveal" data-i18n-lines="contact.lines"><span>Bir ürün ya da iyi bir fikir mi var?</span><span>Birlikte konuşalım.</span></h2><button class="pill pill-light" data-contact><span data-i18n="contact.cta">İletişime geç</span><i class="round-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></i></button></div><div class="footer-columns"><div class="footer-brand"><a class="brand" href="#home"><svg class="brand-mark" viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg><span>Arınç Akyıldız</span></a><p data-i18n="footer.tagline">Web, mobil ve yerel yapay zekâ ürünlerini uçtan uca geliştiriyorum.</p></div><div><h3 data-i18n="footer.pages">Sayfalar</h3><a href="#about" data-i18n="nav.about">Hakkımda</a><a href="#works" data-i18n="nav.work">Projeler</a><a href="#experience" data-i18n="nav.experience">Deneyim</a></div><div><h3>CV</h3><a href="assets/cv-tr.pdf" target="_blank">Türkçe</a><a href="assets/cv-en.pdf" target="_blank">English</a></div><div><h3 data-i18n="footer.social">Sosyal</h3><a href="https://github.com/arincakyildiz" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/ahmetarincakyildiz" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:ahmetarincakyildiz@gmail.com">E-posta</a></div></div><div class="footer-legal"><span>© <b id="year">2026</b> Ahmet Arınç Akyıldız</span><a href="#home" data-i18n="footer.top">Yukarı dön</a></div></div><div class="footer-watermark" aria-hidden="true">ARINÇ</div></footer>
 
-  <dialog id="case-dialog" aria-labelledby="case-title">
-    <div class="case-toolbar">
-      <span id="case-counter">01 / 04</span>
-      <span data-i18n="project.caseStudy">Vaka çalışması</span>
-      <button class="case-close"><span data-i18n="dialog.close">Kapat</span><span aria-hidden="true">×</span></button>
-    </div>
-    <article class="case-page">
-      <header class="case-hero">
-        <p id="case-category"></p>
-        <h2 id="case-title"></h2>
-        <p id="case-summary"></p>
-      </header>
-      <figure class="case-visual"><img id="case-image" alt=""></figure>
-      <dl class="case-facts" id="case-facts"></dl>
-      <div class="case-narrative">
-        <section><p class="case-section-number">01</p><div><h3 data-i18n="case.problem">Problem</h3><p id="case-problem"></p></div></section>
-        <section><p class="case-section-number">02</p><div><h3 data-i18n="case.approach">Yaklaşım</h3><p id="case-approach"></p></div></section>
-        <section><p class="case-section-number">03</p><div><h3 data-i18n="case.result">Ortaya çıkan ürün</h3><p id="case-result"></p></div></section>
-      </div>
-      <div class="case-decisions"><h3 data-i18n="case.decisions">Öne çıkan teknik kararlar</h3><ul id="case-decisions"></ul></div>
-      <div class="case-actions" id="case-actions"></div>
-      <nav class="case-navigation">
-        <button id="case-prev"><span class="nav-arrow nav-arrow-left" aria-hidden="true"></span><span data-i18n="project.previous">Önceki proje</span></button>
-        <button id="case-next"><span data-i18n="project.next">Sonraki proje</span><span class="nav-arrow nav-arrow-right" aria-hidden="true"></span></button>
-      </nav>
-    </article>
-  </dialog>
+  <div id="nav-menu" class="nav-menu" hidden><div class="shell overlay-top"><span class="brand"><svg class="brand-mark" viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg><span>Arınç Akyıldız</span></span><button id="menu-close"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></svg><span data-i18n="menu.close">Kapat</span></button></div><nav class="shell overlay-nav"><button data-target="home"><small>01</small><span data-i18n="nav.home">Ana sayfa</span></button><button data-target="works"><small>02</small><span data-i18n="nav.work">Projeler</span></button><button data-target="experience"><small>03</small><span data-i18n="nav.experience">Deneyim</span></button><button data-target="about"><small>04</small><span data-i18n="nav.about">Hakkımda</span></button><button data-contact><small>05</small><span data-i18n="nav.contact">İletişim</span></button></nav><div class="shell overlay-bottom"><span><span data-i18n="clock.label">Yerel saat</span> — <b id="menu-clock">9:41</b></span><button data-contact data-i18n="contact.cta">İletişime geç</button></div></div>
 
-  <script src="i18n.js?v=41"></script>
-  <script src="script.js?v=41"></script>
-</body>
-</html>
+  <div id="contact-modal" class="contact-modal" hidden role="dialog" aria-modal="true" aria-labelledby="contact-title"><div class="contact-panel"><button id="contact-close" class="modal-close" aria-label="Kapat"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></svg></button><p class="eyebrow"><span></span><b data-i18n="contact.eyebrow">İletişim</b></p><h2 id="contact-title" data-i18n="contact.title">Ne geliştirdiğini anlat.</h2><p data-i18n="contact.note">Mesajın varsayılan e-posta uygulamanda hazırlanacak.</p><form id="contact-form"><label><span data-i18n="form.name">Adın</span><input name="name" required autocomplete="name" placeholder="Adın"></label><label><span data-i18n="form.email">E-posta</span><input name="email" type="email" required autocomplete="email" placeholder="sen@eposta.com"></label><label><span data-i18n="form.message">Mesaj</span><textarea name="message" rows="5" required placeholder="Proje, staj veya fikrin hakkında birkaç cümle."></textarea></label><button class="pill pill-dark" type="submit"><span data-i18n="form.send">Mesajı hazırla</span><i class="round-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></i></button></form><div class="direct-contact"><a href="mailto:ahmetarincakyildiz@gmail.com">ahmetarincakyildiz@gmail.com</a><button id="copy-email" data-i18n="contact.copy">Kopyala</button><span id="copy-status" role="status"></span></div></div></div>
+
+  <dialog id="case-dialog" aria-labelledby="case-title"><div class="case-toolbar"><span id="case-counter">01 / 04</span><span data-i18n="case.label">Vaka çalışması</span><button class="case-close"><span data-i18n="menu.close">Kapat</span><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></svg></button></div><article class="case-page"><header class="case-hero"><p id="case-category"></p><h2 id="case-title"></h2><p id="case-summary"></p></header><figure class="case-visual"><img id="case-image" alt=""></figure><dl class="case-facts" id="case-facts"></dl><div class="case-narrative"><section><span>01</span><div><h3 data-i18n="case.problem">Problem</h3><p id="case-problem"></p></div></section><section><span>02</span><div><h3 data-i18n="case.approach">Yaklaşım</h3><p id="case-approach"></p></div></section><section><span>03</span><div><h3 data-i18n="case.result">Ortaya çıkan ürün</h3><p id="case-result"></p></div></section></div><div class="case-decisions"><h3 data-i18n="case.decisions">Öne çıkan teknik kararlar</h3><ul id="case-decisions"></ul></div><div class="case-actions" id="case-actions"></div><nav class="case-navigation"><button id="case-prev"><span data-i18n="case.previous">Önceki proje</span></button><button id="case-next"><span data-i18n="case.next">Sonraki proje</span></button></nav></article></dialog>
+
+  <script src="i18n.js?v=50"></script><script src="lumora.js?v=50"></script>
+</body></html>
