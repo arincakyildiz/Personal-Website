@@ -84,18 +84,15 @@ document.getElementById('contact-form').addEventListener('submit',event=>{event.
 document.getElementById('copy-email').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('ahmetarincakyildiz@gmail.com');document.getElementById('copy-status').textContent=t('contact.copied')}catch{document.getElementById('copy-status').textContent='ahmetarincakyildiz@gmail.com'}});
 document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;if(contactModal.classList.contains('open'))closeContact();else if(menu.classList.contains('open'))closeMenu()});
 
-function setupLiquidReveal(){
-  if(reducedMotion.matches)return;
-  const host=document.querySelector('.liquid-reveal');const canvas=host.querySelector('canvas');const ctx=canvas.getContext('2d');const source=new Image();source.src='assets/hero/portrait-glasses.webp';const cover=document.createElement('canvas');const coverCtx=cover.getContext('2d');const brush=document.createElement('canvas');const brushCtx=brush.getContext('2d');let dpr=1,radius=143,diameter=286,points=[],last=null,idle=121,ready=false,ambientRunning=false;
-  function resize(){const rect=host.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);canvas.style.width=`${rect.width}px`;canvas.style.height=`${rect.height}px`;cover.width=canvas.width;cover.height=canvas.height;radius=143*dpr;diameter=Math.ceil(radius*2);brush.width=brush.height=diameter;if(source.complete&&source.naturalWidth){const scale=Math.max(cover.width/source.naturalWidth,cover.height/source.naturalHeight);const w=source.naturalWidth*scale,h=source.naturalHeight*scale,positionX=innerWidth<=640?.32:.5;coverCtx.clearRect(0,0,cover.width,cover.height);coverCtx.drawImage(source,(cover.width-w)*positionX,(cover.height-h)*.44,w,h);ready=true}}
-  function ambientReveal(){if(!ready||ambientRunning||idle<120||scrollY>innerHeight*.85||document.hidden)return;ambientRunning=true;const steps=34,y=canvas.height*(innerWidth<=640?.42:.4);for(let i=0;i<steps;i++)setTimeout(()=>{points.push({x:canvas.width*(.25+.5*i/(steps-1)),y:y+Math.sin(i*.45)*radius*.16});if(i===steps-1)ambientRunning=false},i*22)}
-  source.onload=()=>{resize();setTimeout(ambientReveal,2400);setInterval(ambientReveal,9000)};new ResizeObserver(resize).observe(host);resize();
-  function updateParallax(){const hero=host.closest('.hero'),progress=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/hero.offsetHeight));host.style.setProperty('--hero-shift',`${progress*Math.min(innerHeight*.075,76)}px`)}
+function setupPortraitReveal(){
+  const host=document.querySelector('.liquid-reveal'),hero=host.closest('.hero');
+  function updateParallax(){const progress=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/hero.offsetHeight));host.style.setProperty('--hero-shift',`${progress*Math.min(innerHeight*.075,76)}px`)}
   addEventListener('scroll',updateParallax,{passive:true});updateParallax();
-  addEventListener('pointermove',event=>{if(!ready)return;const rect=host.getBoundingClientRect();const x=(event.clientX-rect.left)*dpr,y=(event.clientY-rect.top)*dpr;if(x<-radius||y<-radius||x>canvas.width+radius||y>canvas.height+radius){last=null;return}if(last){const dx=x-last.x,dy=y-last.y,dist=Math.hypot(dx,dy),count=Math.min(Math.ceil(dist/Math.max(radius*.3,1)),60);for(let i=1;i<=count;i++)points.push({x:last.x+dx*i/count,y:last.y+dy*i/count})}else points.push({x,y});last={x,y};idle=0},{passive:true});
-  addEventListener('pointerleave',()=>{last=null});
-  function stamp(x,y){brushCtx.clearRect(0,0,diameter,diameter);const gradient=brushCtx.createRadialGradient(radius,radius,0,radius,radius,radius);gradient.addColorStop(0,'#fff');gradient.addColorStop(.55,'rgba(255,255,255,.82)');gradient.addColorStop(1,'rgba(255,255,255,0)');brushCtx.globalCompositeOperation='source-over';brushCtx.fillStyle=gradient;brushCtx.fillRect(0,0,diameter,diameter);brushCtx.globalCompositeOperation='source-in';brushCtx.drawImage(cover,x-radius,y-radius,diameter,diameter,0,0,diameter,diameter);ctx.globalCompositeOperation='source-over';ctx.drawImage(brush,x-radius,y-radius)}
-  function tick(){const drawing=points.length>0;if(drawing)idle=0;else idle++;if(idle<=120){ctx.globalCompositeOperation='destination-out';ctx.fillStyle=`rgba(0,0,0,${drawing?.016:Math.min(.016+idle*.004,.5)})`;ctx.fillRect(0,0,canvas.width,canvas.height);if(drawing){points.splice(0).forEach(point=>stamp(point.x,point.y))}else if(idle===120)ctx.clearRect(0,0,canvas.width,canvas.height)}requestAnimationFrame(tick)}requestAnimationFrame(tick)
+  if(reducedMotion.matches)return;
+  let hideTimer;
+  function hide(){clearTimeout(hideTimer);host.style.setProperty('--portrait-radius','0px')}
+  function reveal(event){const rect=host.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom){hide();return}host.style.setProperty('--portrait-x',`${event.clientX-rect.left}px`);host.style.setProperty('--portrait-y',`${event.clientY-rect.top}px`);host.style.setProperty('--portrait-radius',innerWidth<=640?'11rem':'15rem');clearTimeout(hideTimer);hideTimer=setTimeout(hide,1100)}
+  addEventListener('pointermove',reveal,{passive:true});hero.addEventListener('pointerdown',reveal,{passive:true});hero.addEventListener('pointerleave',hide);
 }
 
 const carousel=document.getElementById('project-carousel');
@@ -173,4 +170,4 @@ function closeCase(){if(!dialog.open)return;dialog.close();activeCase=null;unloc
 document.querySelectorAll('[data-open-project]').forEach(button=>button.addEventListener('click',()=>openCase(button.dataset.openProject,button)));dialog.querySelector('.case-close').addEventListener('click',closeCase);dialog.addEventListener('cancel',event=>{event.preventDefault();closeCase()});document.getElementById('case-prev').addEventListener('click',()=>{const key=caseOrder[caseOrder.indexOf(activeCase)-1];if(key){activeCase=key;renderCase(key);dialog.scrollTop=0;requestAnimationFrame(()=>animateCase(-1))}});document.getElementById('case-next').addEventListener('click',()=>{const key=caseOrder[caseOrder.indexOf(activeCase)+1];if(key){activeCase=key;renderCase(key);dialog.scrollTop=0;requestAnimationFrame(()=>animateCase(1))}});
 
 document.getElementById('year').textContent=new Date().getFullYear();
-applyLanguage();setupLiquidReveal();startLoader();
+applyLanguage();setupPortraitReveal();startLoader();
